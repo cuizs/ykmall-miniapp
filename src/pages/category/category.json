@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品分类",
+  "usingComponents": {
+    "z-icon": "../../components/common/icon/index",
+    "z-adapter": "../../components/adapter-view/index",
+    "z-search-bar": "../../components/search-bar/index",
+    "z-form-button": "../../components/form-button/index"
+  }
+}

@@ -1,0 +1,7 @@
+<movable-area class="customer-service-movable-area" wx:if="{{!hidden}}">
+  <movable-view class="customer-service-movable-view" direction="all">
+    <button bindtap="handleService" class="customer-service">
+      <image class="serviceImg" src="{{currentChannel =='hkk' ? '../../assets/icon/home/hkk-customer-service.png' :'../../assets/icon/home/customer-service.png'}}" />
+    </button>
+  </movable-view>
+</movable-area>

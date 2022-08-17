@@ -1,0 +1,46 @@
+@import '../../../style/page.common.css/common.mixins.less';
+.container {
+  width:100vw;
+  height:80rpx;
+  background: #E23F34;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  display: flex;
+  .cell{
+    display: inline-block;
+    min-width:175rpx;
+    box-sizing: border-box;
+    height:100%;
+  }
+  .price{
+    display: flex;
+    align-items: center;
+    font-size:24rpx;
+    padding-left:32rpx;
+    box-sizing: border-box;
+    text{
+      font-size: 30rpx;
+      font-weight: bolder;
+    }
+  }
+  .stock{
+    
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+  }
+  .time{
+    width:240rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background:#F0A437;
+    font-size: 24rpx;
+    .down{
+      display: flex;
+      color:#ffffff;
+    }
+  }
+}

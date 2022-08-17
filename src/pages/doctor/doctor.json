@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "药师指导",
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-button": "@vant/weapp/button/index"
+  }
+}

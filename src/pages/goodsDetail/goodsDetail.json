@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "z-icon": "../../components/common/icon/index",
+    "z-modal": "../../components/modal/index",
+    "z-popup": "../../components/popup/index",
+    "z-coupon-item": "../../components/coupon-item/index",
+    "z-input-number": "../../components/input-number/index",
+    "z-buy-button-group": "../../components/business/buy-button-group/index",
+    "goods-detail-instruction":"../../components/business/goods-detail-instruction",
+    "goods-detail-suit":"../../components/business/goods-detail-suit",
+    "goods-detail-evaluate":"../../components/business/goods-detail-evaluate",
+    "goods-detail-campaign":"../../components/business/goods-detail-campaign"
+  }
+}

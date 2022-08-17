@@ -1,0 +1,37 @@
+view.bg-mask(
+  hidden="{{!visable}}"
+  catchtouchmove="_onTouchMove"
+)
+view.modal(
+  hidden="{{!visable}}"
+  style="top: {{top}}vh;"
+)
+  view.modal-content
+    view.modal-content-title(
+      wx:if="{{showTitle}}"
+    ) {{title}}
+    view.modal-content-text(
+      wx:if="{{content}}"
+    )
+      text(
+        decode
+      ) {{content}}
+    view(
+      wx:else
+      catchtouchmove="_onTouchMove"
+    )
+      slot
+    veiw.modal-content-button-group
+      z-form-button.cancel-button(
+        text="{{cancelText}}"
+        color="#fff"
+        wx:if="{{showCancel}}"
+        class="button-style"
+        bindcustomTap="_onCancelClick"
+      ) 
+      z-form-button.certain-button(
+        text="{{certainText}}"
+        color="#fff"
+        class="button-style"
+        bindcustomTap="_onCertainClick"
+      ) 

@@ -1,0 +1,39 @@
+.member {
+  display: flex;
+  flex-direction: column;
+  &-box{
+    display: flex;
+    align-items: flex-end;
+  }
+  &-name {
+    font-size: 28rpx;
+    font-weight: 400;
+    color: #ff3b30;
+    padding-right: 15rpx;
+  }
+  &-unit {
+    font-size: 22rpx;
+    color: #ff3b30;
+  }
+  &-price {
+    font-size: 30rpx;
+    font-weight: bold;
+    color: #ff3b30;
+  }
+  .price-tag {
+    font-size: 22rpx;
+    color: #ff3b30;
+    padding-right: 2rpx;
+    padding-bottom: 2.4rpx;
+  }
+  &-actualPrice {
+    margin-left: 20rpx;
+    font-size: 24rpx;
+    text-decoration: line-through;
+    color: #999999;
+    padding-bottom: 2.4rpx;
+  }
+  .ml-10 {
+    margin-left: 10rpx;
+  }
+}

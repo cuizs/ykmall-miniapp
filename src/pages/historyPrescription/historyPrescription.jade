@@ -1,0 +1,27 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.cell(
+    wx:for="{{list}}"
+    wx:key="index"
+    class!="{{index === list.length - 1 ? '' : 'cell-line'}}"
+  )
+    view.cell-header
+      view.cell-header-step {{list.length - index}}
+      view.cell-header-name {{item.orderDate}}
+      view.cell-header-btn(
+        data-list="{{item.drugList}}"
+        bindtap="onAddDemandListClick"
+      ) 续方
+    view.cell-name 诊断：{{item.diagnosis}}
+    view.cell-desc(
+      wx:for="{{item.drugList}}"
+      wx:for-item="medicine"
+      wx:for-index="inx"
+      wx:key="index"
+    ) {{medicine.drugName}} {{medicine.drugStandard}} * {{medicine.drugCount}}
+view.empty(
+  wx:if!="{{!list.length}}"
+) - 暂无数据 -
+

@@ -1,0 +1,168 @@
+<z-customer-service pagePath="pages/orderDetail/orderDetail" pageName="订单详情" />
+<z-step iconList="{{stepList}}" iconIndex="{{currentStep}}" wx:if="{{currentChannel =='hkk' && detail.inquiryStatus!=undefined  && detail.inquiryStatus != null  && detail.orderLines[0].goodsType == 2 }}" bind:onCheckClick="onCheckClick" />
+<view class="container">
+    <view class="exprise-time" wx:if="{{detail.formatExpriseTime && detail.status === 'ToBePaid'}}">
+        <view class="exprise-time-title">
+            <image src="../../assets/icon/order-to-be-paid.png"></image>
+            <text>等待付款</text>
+        </view>
+        <view class="exprise-time-text">
+            <view>剩余</view>
+            <view>
+                <van-count-down format="HH时mm分" time="{{detail.formatExpriseTime}}" />
+            </view>
+            <view>，订单自动关闭</view>
+        </view>
+    </view>
+    <view class="process" wx:if="{{ expressCompany  && currentChannel =='hkk'}}">
+        <view class="process_logistics">
+            <view class="process_logistics_detail">
+                <view style="margin-bottom:10rpx">承运公司：{{expressCompany}}</view>
+                <view class="">快递单号：{{expressNumber}}</view>
+            </view>
+            <view class="process_logistics_btn" bindtap="onLogisticsClick">查看物流</view>
+        </view>
+    </view>
+    <view class="logistics-box" wx:if="{{ expressCompany  && currentChannel !='hkk'}}">
+        <view class="logistics-box-content">
+            <view class="logistics-box-content-label">承运公司：{{expressCompany}}</view>
+        </view>
+        <view class="logistics-box-content">
+            <view class="logistics-box-content-label  express-number">
+                <text class="express-number-label">快递单号：</text>
+                <text class="express-number-text">{{expressNumber}}</text>
+            </view>
+        </view>
+        <view class="logistics-box-btn btn" bindtap="onLogisticsClick">查看物流</view>
+    </view>
+    <view class="address-box">
+        <image class="{{currentChannel=='hkk' ? 'address-box-hkk-img':'address-box-img'}}" src="{{currentChannel=='hkk' ?'../../assets/icon/hkk_address_icon.png':'../../assets/icon/address_icon.png'}}" mode="aspectFit" lazy-load="false" />
+        <view class="address-box-value">
+            <text>{{detail.orderAddress.userName}}</text>
+            <text>{{detail.orderAddress.telephone}}</text>
+        </view>
+        <view class="address-box-address">
+            <text>
+                {{detail.orderAddress.province === detail.orderAddress.city ? '' : detail.orderAddress.province}}
+                {{detail.orderAddress.city}} {{detail.orderAddress.area}} {{detail.orderAddress.address}}
+            </text>
+        </view>
+    </view>
+    <view class="goods-box">
+        <view class="goods-box-title">
+            商品清单：
+            <view class="goods-box-title-more" bindtap="onCollapseClick">
+                {{collapseStatus ? '收起' : '展开'}}
+                <z-icon type="{{collapseStatus ? 'arrow-down' : 'arrow-right'}}" size="14"></z-icon>
+            </view>
+        </view>
+        <van-transition show="{{ collapseStatus }}" name="fade">
+            <view class="goods-box-content" wx:for="{{detail.orderLines}}" wx:key="index" wx:for-item="goodDetail" data-detail="{{goodDetail}}" bindtap="ongoodsClick">
+                <block wx:if="{{goodDetail.isGroup != 1}}">
+                    <image class="goods-box-content-img" src="{{goodDetail.distributorImgUrl || goodDetail.imageUrl || '../../assets/image/defaultImg.png'}}" mode="aspectFit" lazy-load="false" />
+                    <view class="goods-box-content-msg">
+                        <view class="goods-box-content-title">
+                            {{goodDetail.distributorProductName || goodDetail.name}}
+                        </view>
+                        <view class="goods-box-content-specs">{{goodDetail.specValueText}}</view>
+                        <view class="goods-box-content-price">
+                            <view class="goods-box-content-price-money">￥</view>
+                            <view class="goods-box-content-price-value">
+                                {{goodDetail.actualPrice}}
+                            </view>
+                            <view class="goods-box-content-price-num">
+                                x{{goodDetail.quantity}}
+                            </view>
+                        </view>
+                        <view class="goods-box-content-btn">
+                            <view class="btn" wx:if="{{goodDetail.refundBtnText}}" data-id="{{goodDetail.id}}" bindtap="onRefundClick">
+                                {{goodDetail.refundBtnText}}
+                            </view>
+                        </view>
+                    </view>
+                </block>
+                <view wx:if="{{goodDetail.isGroup == 1}}" style="width: 100%;">
+                    <z-goods-suit-show group="{{goodDetail.groupProductDetailResDtos ? goodDetail.groupProductDetailResDtos : goodDetail.groupDetail}}" name="{{goodDetail.name}}" quantity="{{goodDetail.quantity}}" price="{{goodDetail.actualPrice}}"></z-goods-suit-show>
+                    <view class="goods-box-content-btn">
+                        <view class="btn" wx:if="{{goodDetail.refundBtnText}}" data-id="{{goodDetail.id}}" bindtap="onRefundClick">
+                            {{goodDetail.refundBtnText}}
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </van-transition>
+    </view>
+    <view class="info-box">
+        <view class="info-box-cell">
+            <view class="info-box-cell-label">商品金额：</view>
+            <view class="info-box-cell-value">¥{{detail.totalAmount}}</view>
+        </view>
+        <view class="info-box-cell">
+            <view class="info-box-cell-label">运费：</view>
+            <view class="info-box-cell-value">¥{{detail.freightAmount}}</view>
+        </view>
+             <view class="info-box-cell" wx:if="{{detail.freight}}">
+            <view class="info-box-cell-label">补充运费：</view>
+            <view class="info-box-cell-value">¥{{detail.freight.amount}}</view>
+        </view>
+        <view class="info-box-cell" wx:if="{{1 == 0}}">
+            <view class="info-box-cell-label">优惠券：</view>
+            <view class="info-box-cell-value">¥{{detail.profitAmount}}</view>
+        </view>
+        <view class="info-box-cell">
+            <view class="info-box-cell-label">优惠金额：</view>
+            <view class="info-box-cell-value">¥{{discountAmount}}</view>
+        </view>
+        <view class="info-box-cell">
+            <view class="info-box-cell-label" wx:if="{{!detail.payment || detail.payment.status == 'ToBePaid'}}">
+                需付款金额：
+            </view>
+            <view class="info-box-cell-label" wx:else>实付金额：</view>
+            <view class="info-box-cell-money">¥{{detail.amountPayable}}</view>
+        </view>
+    </view>
+    <view class="info-box">
+        <view class="info-box-cell">
+            <view class="info-box-cell-label">订单号：</view>
+            <view class="info-box-cell-value">{{detail.orderNumber}}</view>
+        </view>
+        <view class="info-box-cell">
+            <view class="info-box-cell-label">创建时间：</view>
+            <view class="info-box-cell-value">{{detail.createTime}}</view>
+        </view>
+    </view>
+    <view class="footer">
+        <z-adapter-view adapterBottom="{{true}}" z-class="btns">
+            <!-- 运费单支付 -->
+            <view class="btn btn-freight" wx:if="{{detail.status === 'Paid' && detail.freight.status == 'ToBePaid'}}" bindtap="onFreightPayClick">
+                运费支付
+            </view>
+            <!-- 确认收货 -->
+            <view class="btn" data-detail="{{detail}}" wx:if="{{detail.status ===  'Delivered'}}" bindtap="onConfirmationClick">
+                确认收货
+            </view>
+            <!-- 发票未申请 -->
+            <view class="btn" data-detail="{{detail}}" wx:if="{{detail.distributorDto.id == 1 && !detail.isSupportValue && (detail.status === 'Paid' || detail.status === 'Delivered' || detail.status === 'Completed') && !detail.invoice}}" bindtap="onApplyInvoiceClick">
+                申请发票
+            </view>
+            <!-- 发票申请，未开具 -->
+            <view class="btn" data-detail="{{detail}}" wx:if="{{detail.distributorDto.id == 1 && !detail.isSupportValue && (detail.status === 'Paid' || detail.status === 'Delivered' || detail.status === 'Completed') && (detail.invoice ? detail.invoice.status === 1 : false)}}" bindtap="onApplyInvoiceClick">
+                申请发票
+            </view>
+            <!-- 发票申请，已开具 -->
+            <view class="btn" data-detail="{{detail}}" wx:if="{{detail.distributorDto.id == 1 && !detail.isSupportValue && (detail.status === 'Paid' || detail.status === 'Delivered' || detail.status === 'Completed') && detail.invoice && detail.invoice.status === 2}}" bindtap="onViewInvoiceClick">
+                查看发票
+            </view>
+            <view class="{{currentChannel=='hkk' ? 'btn btn-'+currentChannel+'-pay' :'btn btn-pay'}}" wx:if="{{detail.status === 'ToBePaid'}}" bindtap="onCancelClick">
+                取消订单
+            </view>
+            <view class="btn btn-pay" wx:if="{{detail.status === 'ToBePaid'}}" bindtap="onPayClick">
+                付款
+            </view>
+            <view class="btn" wx:if="{{detail.status !== 'ToBePaid'}}" bindtap="onViewBuyAgain">
+                再次购买
+            </view>
+        </z-adapter-view>
+    </view>
+    <van-dialog id="van-dialog" />
+</view>

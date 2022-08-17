@@ -1,0 +1,23 @@
+view.container
+  van-dialog(
+    width="259"
+    use-slot
+    show="{{ show }}"
+    confirmButtonText="确认授权"
+    showConfirmButton="{{ false }}"
+  )
+    view.close 
+      van-icon(
+        name="cross"
+        size="22px"
+        color="#B2B2B2"
+        catchtap="onClose"
+      )
+    image.resgin-img( 
+      src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/EGQb4c1659319898591.png" 
+    )
+    view.resgin-tip 允许手机授权将会给您发放一张新人优惠券
+    button.resgin-btn(
+      open-type="getPhoneNumber"
+      bindgetphonenumber="onGetPhoneNumberClick"
+    ) 确认授权

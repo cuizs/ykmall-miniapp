@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新人专享",
+  "usingComponents": {
+    "z-scroll-nav": "../../components/scroll-nav/index",
+    "z-goods-list-row": "../../components/goods-list-row/index"
+  }
+}

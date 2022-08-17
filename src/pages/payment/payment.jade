@@ -1,0 +1,290 @@
+wxs(
+  src="./_tools.wxs"
+  module="tools"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.payment-content(
+    hidden!="{{orderStreamDetail && orderStreamDetail.orderLines && !orderStreamDetail.orderLines.length}}"
+  ) 
+    view.epidemic-tip(
+       wx:if="{{currentChannel == 'hkk'}}"
+    ) 
+      image(src="http://ykyao-mall.oss-cn-shanghai.aliyuncs.com/dev/56qcDh1658482439176.png", alt="")
+      view 温馨提示：尊敬的客户，部分地区由于疫情影响，可能存在被退回或者不能及时到达的情况，对此我们深感抱歉并竭力协调安排，谢谢！
+    z-adapter-view
+      view.container-region(
+        bindtap="onSelectRegion"
+        wx:if="{{orderAddress.userName}}"
+      )
+        van-icon( 
+          name="location-o" 
+          size="30px"
+          color="#999999"
+        )
+        view.container-region-name 
+          text.msg {{orderAddress.userName}} {{orderAddress.telephone}}
+          text.region {{orderAddress.province}}{{orderAddress.city}}{{orderAddress.area}}{{orderAddress.address}}
+        van-icon( 
+          custom-class="container-region-name-right"
+          name="arrow" 
+          size="16px"
+          color="#999999"
+        )
+      view.container-region(
+        bindtap="onSelectRegion"
+        wx:else
+      )
+        van-icon( 
+          name="location-o" 
+          size="30px"
+          color="#999999"
+        )
+        text.container-region-name 请选择地址
+        van-icon( 
+          custom-class="container-region-name-right"
+          name="arrow" 
+          size="16px"
+          color="#999999"
+        )
+      //- 问诊信息
+      view.inquiry(
+        wx:if="{{goodsType == 2}}"
+        bindtap="onRecipeClick"
+      )
+        view.inquiry-no(
+          wx:if!="{{!recipeNumber}}"
+        ) 
+          view.name 请添加问诊信息
+          view.desc 医生会根据您的问诊信息，为您提供复诊服务
+        view.inquiry-no(
+          wx:else
+        ) 
+          //- view.desc 处方单号：{{recipeNumber}}
+          view.name 患者：{{prescriptionData.name}} {{prescriptionData.gender == 1 ? '男' : '女'}} {{prescriptionData.age}}岁
+          view.desc *问诊信息已完善，预约支付成功后将匹配医生复诊
+        view.icon
+          van-icon(
+            name="arrow"
+            size="16px"
+            color="#999999"
+          )
+      //- 商品列表
+      view.payment-content-list
+        view(
+          wx:for="{{orderStreamDetail.orderLines}}"
+          wx:key="order_stream_detail"
+          class!="{{index < orderStreamDetail.orderLines.length - 1 ? 'cell-border-bottom' : ''}}"
+        )
+          view.cell(
+            wx:if!="{{item.isGroup != 1}}"
+          )
+            image.cell-img(
+              mode="aspectFit"
+              src="{{item.distributorImgUrl || item.imageUrl || '../../assets/image/defaultImg.png'}}"
+            )
+            view.cell-desc
+              view.cell-desc-name {{item.distributorProductName || item.name}}
+              view.cell-desc-spec(
+                wx:if="{{item.specValueJson}}"
+              )
+                view.cell-desc-spec-color(
+                  class="sub-title-color"
+                  wx:if="{{item.specValueJson['规格']}}"
+                ) 规格: {{item.specValueJson['规格']}}
+              view.cell-desc-spec(
+                wx:else
+                class="sub-title-color"
+              ) {{item.specValue}}
+              view.cell-desc-quantity(
+                class="sub-title-color"
+              ) 数量：{{item.quantity}}
+              view.cell-desc-price
+                z-member-price(
+                  value="{{item}}"
+                )
+              view.cell-desc-discountAmount(
+                wx:if="{{item.discountAmount}}"
+              ) 已为你节省：{{item.discountAmount}}元
+          view.cell(
+            wx:else 
+          )
+            z-goods-suit-show(
+              group="{{item.groupDetail || item.groupProductDetailResDtos}}"
+              name="{{item.skuName || item.groupProductName}}"
+              price="{{item.actualPrice || item.actualPrice}}"
+              discounts="{{item.marketPrice}}"
+            )
+        view.payment-content-list-num 共{{num}}件商品
+      view.payment-content-box 
+        view.payment-content-box-nav 支付方式
+        view.payment-content-box-conten 
+          image(
+            src="../../assets/image/wx.png"
+          )
+          text 微信支付
+          van-checkbox(
+            size="18px"
+            value 
+            checked-color="{{themeColor}}"
+          )
+      //- 优惠券选择
+      view.payment-content-coupon
+        view.payment-content-coupon-left
+          text 优惠券
+        view.payment-content-coupon-right(
+          bindtap="onShowCoupon"
+        )
+          text {{amoutData.discountAmount ? '共节省' + amoutData.discountAmount +'元' : '请选择'}}
+          van-icon(
+            name="arrow"
+            size="18"
+            color="#979797"
+          )
+      //- 配送方式
+      view.payment-content-box 
+        view.payment-content-box-nav 配送方式
+        view.payment-content-box-express
+          view.cell(
+            wx:for="{{express}}"
+            wx:key="key"
+          )
+            text {{item.name}}
+            van-checkbox(
+              size="18px"
+              data-type="{{item.type}}"
+              bind:change="onChange"
+              disabled="{{logisticsModeDisable}}"
+              value!="{{formdata.logisticsMode == item.type}}" 
+              checked-color="{{themeColor}}"
+            )
+        view.payment-content-box-nav(
+          bindtap="oninvoice"
+          class="invoice"
+          wx:if="{{currentChannel != 'rxga'}}"
+        ) 发票信息
+          view.nav
+            text {{ formdata.isInvoice ? '已选发票:' + formdata.invoice.title + '' : '不开发票' }}
+            van-icon(
+              size="16px"
+              name="arrow"
+            )
+        view.payment-content-box-nav(
+          class="remark"
+        ) 留言备注
+          textarea(
+            placeholder="请勿填写有关支付、收货方面的信息"
+            bindinput="onInput"
+            placeholder-style="font-size:24rpx;"
+            class="remark-box"
+          )
+      view.payment-content-box 
+        view.payment-content-box-nav(
+          class="amount"
+        ) 商品金额
+          view.payment-content-box-amount
+            z-currency(
+              unit="¥ "
+              value="{{amoutData.totalAmount}}"
+            )
+        view.amount-item
+          view.label 优惠
+          view.value(
+            class="red"
+          )
+            z-currency(
+              unit="- ¥ "
+              value="{{amoutData.discountAmount}}"
+            )
+        view.amount-item
+          view.label 运费
+            //- view.confuse(
+            //-   bindtap="freightAmountClick"
+            //- ) ?
+          view.value + ¥ {{amoutData.freightAmount}}
+  van-submit-bar(
+    price="{{ amoutData.amountPayable * 100 }}"
+    button-text="{{buyBtnText}}"
+    button-class="{{currentChannel ? currentChannel + '-button' : ''}}"
+    bind:submit="onBuyClick"
+  )
+  z-modal(
+    id="policy-modal"
+  )
+    view.modal-content
+      view.modal-content-item {{policyText}}
+
+  //- 领取优惠券
+  z-popup(
+    id="z-drawer"
+    direction="up"
+    mask-closable="{{true}}"
+  )
+    view.drawer-label 我的优惠券
+    view.drawer-tab
+      view.tab-inner
+        view.tab-item(
+          wx:for="{{couponTab}}"
+          wx:key="coupontab"
+          class="{{currentCouponTab.key === item.key ? 'tab-item-ed' : ''}}"
+          data-item="{{item}}"
+          bindtap="onCouponTabClick"
+        ) 
+          text {{item.label}}
+          text （{{item.key === 'canUsable' ? canUsableCoupon.length : notUsableCoupon.length}}）
+    view.drawer-content
+      view.drawer-content-inner(
+        wx:if="{{currentCouponTab.key === 'canUsable'}}"
+      )
+        view.coupon-wrapper(
+          wx:for="{{canUsableCoupon}}"
+          wx:key="canUsablecoupon"
+        )
+          z-coupon-item(
+            reverse-suffix
+            has-btn="{{true}}"
+            data="{{item}}"
+            type="{{item.status}}"
+          )
+            view.receive-wrapper(
+              wx:if="{{item.status !== 'exchanged'}}"
+            )
+              view.btn(
+                data-item="{{item}}"
+                bindtap="onReceiveClick"
+              ) 领取
+            view.check-wrapper(
+              wx:else
+            )
+              van-checkbox(
+                value="{{item.check}}"
+                color="#4389ef"
+                size="24px"
+                type="success-fill"
+                data-index="{{index}}"
+                bind:change="onSelectCouponClick"
+                checked-color="{{themeColor}}"
+              )
+
+      view.drawer-content-inner(
+        wx:if="{{currentCouponTab.key === 'notUsable'}}"
+      )
+        view.coupon-wrapper(
+          wx:for="{{notUsableCoupon}}"
+          wx:key="notusablecoupon"
+        )
+          z-coupon-item(
+            reverse-suffix
+            has-btn="{{false}}"
+            data="{{item}}"
+            type="{{item.status}}"
+          )
+        view.drawer-content-empty(
+          wx:if!="{{!notUsableCoupon.length}}"
+        ) - 暂无优惠券 -
+    view.drawer-btn(
+      catchtap="onCloseDrawer"
+    ) 完成
+

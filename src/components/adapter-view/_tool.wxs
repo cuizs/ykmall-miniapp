@@ -1,0 +1,10 @@
+var adapterNaviBarStyle = function(isAdapterNaviBar, naviBarHeight) {
+  if (isAdapterNaviBar) {
+    return 'padding-top: ' + naviBarHeight + 'px;'
+  }
+  return ''
+}
+
+module.exports = {
+  adapterNaviBarStyle: adapterNaviBarStyle
+}

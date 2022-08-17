@@ -1,0 +1,177 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container(
+    catchtap="onPageClick"
+)
+    view.order
+        van-dialog(id="van-dialog")
+        //- 头部 tab
+        view.order-header
+            z-tab-group.order-header-nav(
+                current="{{currentIdx}}"
+                color="#222"
+                bindonChange="onTabChange"
+            )
+                z-tab(
+                    wx:for="{{tabList}}"
+                    wx:key="tab"
+                    index="{{index}}"
+                    title="{{item.name}}"
+                    z-class="order-header-nav-tab"
+                )
+        z-adapter-view
+            view.order-content
+                //- 列表无数据时提示
+                view.order-content-message(
+                    wx:if!="{{( !orderData.ToBePaid.length && currentIdx == 1 ) || ( !orderData.Paid.length && currentIdx == 2 ) || ( !orderData.Delivered.length && currentIdx == 3 ) || ( !orderData.All.length && currentIdx == 0 ) || ( !orderData.AfterSale.length && currentIdx == 4 )}}"
+                )
+                    templete(
+                        wx:if="{{pageShow}}"
+                    )
+                        view.btn(
+                            bindtap="onJumpGoods"
+                        ) 立即选购
+                //- 全部
+                view(
+                    wx:if="{{currentIdx == 0}}"
+                    wx:for="{{orderData.All}}"
+                    wx:key="order_item_cancelled"
+                )
+                    //- 已完成
+                    z-order-item(
+                        wx:if="{{item.status === 'Completed'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindoptclick="onOptClick"
+                        bindmoreclick="onMoreClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+
+                    //- 问诊创建失败
+                    //- /* v1.4.1 隐藏向用户展示问诊创建失败的订单  author: Ryan Cui*/
+                    z-inquiry-item(
+                        wx:if!="{{false}}"
+                        item="{{item}}"
+                        status-text="问诊创建失败"
+                        bindoptclick="onOptClick"
+                    )
+
+                        //- 问诊问诊中
+                    z-inquiry-item(
+                        wx:if!="{{item.inquiryStatus == '1' && currentChannel == 'hkk' && item.inquiryId}}"
+                        item="{{item}}"
+                        status-text="问诊中"
+                        bindoptclick="onOptClick"
+                    )
+                        //- 问诊已完成
+                    z-inquiry-item(
+                        wx:if!="{{item.inquiryStatus == '2' && currentChannel == 'hkk' && item.inquiryId}}"
+                        item="{{item}}"
+                        status-text="已完成"
+                        bindoptclick="onOptClick"
+                    )
+                    //- 已经取消
+                    z-order-item(
+                        wx:if="{{item.status === 'Cancelled'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindonLeftClick="onViewOrder"
+                        bindoptclick="onOptClick"
+                        bindmoreclick="onMoreClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                    //- 未支付
+                    z-order-item(
+                        wx:if="{{item.status === 'ToBePaid'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindmoreclick="onMoreClick"
+                        bindoptclick="onOptClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                    //- 已支付
+                    z-order-item(
+                        wx:if="{{item.status === 'Paid'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindmoreclick="onMoreClick"
+                        bindoptclick="onOptClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                    //- 已发货
+                    z-order-item(
+                        wx:if="{{item.status === 'Delivered'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindmoreclick="onMoreClick"
+                        bindoptclick="onOptClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                    //-  ReturnApproved：退货已审批，Refunded：已退款，Refunding：退款中，ReturnApproving：退货审批中，ReturnApplySuccess：退货申请创建成功，
+                    z-order-item(
+                        wx:if!="{{item.status === 'ReturnApproved' || item.status === 'Refunded' || item.status === 'ReturnApproving' || item.status === 'ReturnApplySuccess' || item.status === 'Refunding'}}"
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        bindmoreclick="onMoreClick"
+                        bindoptclick="onOptClick"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                //- 待付款
+                z-order-item(
+                    wx:if="{{currentIdx == 1}}"
+                    wx:for="{{orderData.ToBePaid}}"
+                    wx:key="order"
+                    item="{{item}}"
+                    status-text="{{item._statusContext}}"
+                    bindoptclick="onOptClick"
+                    bindmoreclick="onMoreClick"
+                    showMoreKey="{{showMoreKey}}"
+                    status-color="{{item._statusColor}}"
+                )
+                //- 待发货
+                z-order-item(
+                    wx:if="{{currentIdx == 2}}"
+                    wx:for="{{orderData.Paid}}"
+                    wx:key="order_item_paid"
+                    item="{{item}}"
+                    status-text="{{item._statusContext}}"
+                    bindoptclick="onOptClick"
+                    bindmoreclick="onMoreClick"
+                    showMoreKey="{{showMoreKey}}"
+                    status-color="{{item._statusColor}}"
+                )
+                //- 已发货
+                z-order-item(
+                    wx:if="{{currentIdx == 3}}"
+                    wx:for="{{orderData.Delivered}}"
+                    wx:key="order_item_finished"
+                    item="{{item}}"
+                    status-text="{{item._statusContext}}"
+                    bindoptclick="onOptClick"
+                    bindmoreclick="onMoreClick"
+                    showMoreKey="{{showMoreKey}}"
+                    status-color="{{item._statusColor}}"
+                )
+                //- 售后
+                z-order-item(
+                    wx:if="{{currentIdx == 4}}"
+                    wx:for="{{orderData.AfterSale}}"
+                    wx:key="order_item_aftersale"
+                    item="{{item}}"
+                    status-text="{{item._statusContext}}"
+                    bindoptclick="onOptClick"
+                    bindmoreclick="onMoreClick"
+                    showMoreKey="{{showMoreKey}}"
+                    status-color="{{item._statusColor}}"
+                )
+        
+                
+
+  

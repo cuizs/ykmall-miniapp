@@ -1,0 +1,16 @@
+<!--components/messageText.wxml-->
+	<view>
+	<view class="msgItem {{data.role == '1' ? 'msgItemLeft' : 'msgItemRight'}}" id='msg-{{data.id}}'>
+		<view class="userAvatar userAvatarLeft" wx:if="{{data.role == '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+		<view class="msgText {{data.role == '1' ? 'serverMsgText':''}}">
+			<image wx:if="{{data.contentType === 'im_img'}}" bindtap="previewImages" data-url="{{imgSrc}}" src="{{imgSrc}}" mode="aspectFill"></image>
+			<video wx:if="{{data.contentType === 'im_fileVideo'}}" bindtap="previewImages" data-url="{{videoSrc}}" poster="{{videoThumbTempFilePath}}" show-play-btn="{{false}}" controls="{{false}}" 	object-fit="cover" duration="{{videoDuration}}" src="{{videoSrc}}" ></video>
+		</view>
+		<view class="userAvatar userAvatarRight" wx:if="{{data.role != '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+	</view>
+	</view>
+

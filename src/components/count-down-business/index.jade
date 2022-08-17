@@ -1,0 +1,45 @@
+view.xy-countDown(
+  wx:if!="{{format.length && times}}"
+)
+  view (
+    class="title-class front-title"
+    wx:if="{{frontTitle}}"
+  ) {{frontTitle}}
+  view(
+    wx:if!="{{format[0] && items.day > 0}}"
+  ) 
+    text(
+      class="z-class time-box"
+    ) {{times.day}}
+    text(
+      class="time-format"
+      wx:if!="{{!(!format[1] && format[0] === ':')}}"
+    ) {{format[0]}}
+  view(
+    wx:if!="{{format[1]}}"
+  ) 
+    text(
+      class="z-class time-box"
+    ) {{times.hour}}
+    text(
+      class="time-format"
+      wx:if!="{{!(!format[2] && format[1] === ':')}}"
+    ) {{format[1]}}
+  view(
+    wx:if!="{{format[2]}}"
+  ) 
+    text(
+      class="z-class time-box"
+    ) {{times.minu}}
+    text(
+      class="time-format"
+      wx:if!="{{!(!format[3] && format[2] === ':')}}"
+    ) {{format[2]}}
+  view(
+    wx:if!="{{format[3]}}"
+  ) 
+    text(
+      class="z-class time-box"
+    ) {{times.secs}}
+    text.time-format {{format[3] !== ':' ? format[3] : ''}} 
+  slot

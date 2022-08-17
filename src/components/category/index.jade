@@ -1,0 +1,26 @@
+view.category
+  view.category-content
+    scroll-view.category-content-nav(
+      scroll-y
+    )
+      view.category-content-nav-menu(
+        class="{{!currentId? 'menu-active' : ''}}"
+        data-id=""
+        bindtap="onMenuClick"
+      )
+        view.name(
+          class="hover-btn"
+        ) 
+          text 全部商品
+      view.category-content-nav-menu(
+        class="{{currentId === item.id ? 'menu-active' : ''}}"
+        wx:for="{{categoryList}}"
+        wx:key="category"
+        data-id="{{item.id}}"
+        bindtap="onMenuClick"
+      )
+        view.name(
+          class="hover-btn"
+          ) 
+          text {{item.name}}
+    

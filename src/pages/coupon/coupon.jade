@@ -1,0 +1,86 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.tab-wrapper
+    view.tab-inner
+      view.tab-item(
+        class="center-text"
+        wx:for="{{tabList}}"
+        wx:key="tabitem"
+      )
+        view.tab-item-label(
+          data-item="{{item}}"
+          bindtap="onTabClick"
+        )
+          view(
+            class="{{currentTab.key == item.key ? 'tab-active-text' : ''}}"
+          ) {{item.label}}
+          view.tab-active-line(
+            wx:if="{{currentTab.key == item.key}}"
+          )
+
+  z-adapter-view
+    //- 已领取
+    view.content-wrapper(
+      wx:if="{{currentTab.key == 'exchanged'}}"
+    )
+      view.coupon-cell(
+        wx:for="{{couponList.exchanged}}"
+        wx:key="item"
+      )
+        z-coupon-item(
+          data="{{item}}"
+          type="exchanged"
+          data-item="{{item}}"
+          bindcouponclick="onToUserClick"
+        )
+      view.xy-text-center(
+        class="container-empty"
+        wx:if!="{{!couponList.exchanged.length}}"
+      ) — 暂无优惠券 —
+      view.xy-text-center(
+        class="container-tipword"
+        wx:if!="{{ couponList.exchanged.length}}"
+      ) — 没有更多了 —
+      //- 已使用
+    view.content-wrapper(
+      wx:if="{{currentTab.key == 'redeemed'}}"
+    )
+      view.coupon-cell(
+        wx:for="{{couponList.redeemed}}"
+        wx:key="item"
+      )
+        z-coupon-item(
+          data="{{item}}"
+          type="redeemed"
+        )
+      view.xy-text-center(
+        class="container-empty"
+        wx:if="{{!couponList.redeemed.length}}"
+      ) — 暂无优惠券 —
+      view.xy-text-center(
+        class="container-tipword"
+        wx:if!="{{couponList.redeemed.length}}"
+      ) — 没有更多了 —
+      
+    //- 已过期列表
+    view.content-wrapper(
+      wx:if="{{currentTab.key == 'expired'}}"
+    )
+      view.coupon-cell(
+        wx:for="{{couponList.expired}}"
+        wx:key="item"
+      )
+        z-coupon-item(
+          data="{{item}}"
+          type="expired"
+        )
+      view.xy-text-center(
+        class="container-empty"
+        wx:if="{{!couponList.expired.length}}"
+      ) — 暂无优惠券 —
+      view.xy-text-center(
+        class="container-tipword"
+        wx:if!="{{couponList.expired.length}}"
+      ) — 没有更多了 —

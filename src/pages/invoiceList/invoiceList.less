@@ -1,0 +1,70 @@
+@import "../../style/xy.css.library/variable.less";
+page {
+  background: #f4f5f6;
+}
+.cue {
+  font-size: 14px;
+  color: #333;
+  line-height: 42rpx;
+  padding: 32rpx 36rpx;
+  font-weight: 500;
+  margin-top: 14rpx;
+}
+.invoice-list {
+  // padding-bottom: 135rpx;
+  padding-bottom: 212rpx;
+  &-item {
+    padding: 24rpx 36rpx 40rpx;
+    margin-top: 14rpx;
+    background-color: #fff;
+    font-size: 14px;
+    line-height: 20px;
+    color: #353535;
+    position: relative;
+    &-title {
+      margin-bottom: 3px;
+      max-width: 580rpx;
+    }
+    &-value {
+      margin-bottom: 34rpx;
+    }
+    &-radio {
+      
+    }
+    &-type {
+      position: absolute;
+      top: 30rpx;
+      right: 40rpx;
+      font-size: 12px;
+      color: #B2B2B2;
+    }
+    &-btn {
+      position: absolute;
+      bottom: 40rpx;
+      right: 40rpx;
+      .icon {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+.invoice-list-none {
+  text-align: center;
+  font-size: 14px;
+  color: #353535;
+  margin-top: 30%;
+}
+
+.fixed-footer-handle {
+  display: flex;
+
+  &-btn {
+    flex: 1;
+    width: 100%;
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

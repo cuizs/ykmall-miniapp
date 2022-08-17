@@ -1,0 +1,10 @@
+view.member
+  text.price-tag(
+    wx:if!="{{value.campaignProduct && value.campaignProduct.isAvailable}}"
+  ) [{{value.campaignProduct.name}}]
+  view.member-box
+    text.member-price ¥{{value.campaignProduct && value.campaignProduct.isAvailable ?  value.campaignProduct.salePrice : value.actualPrice}}
+    text.member-actualPrice(
+      wx:if!="{{value.marketPrice > (value.campaignProduct && value.campaignProduct.isAvailable ?  value.campaignProduct.salePrice : value.actualPrice)}}"
+      class="ml-10"
+    ) ¥{{value.marketPrice}}

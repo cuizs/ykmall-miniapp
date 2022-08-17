@@ -1,0 +1,69 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  //-搜索框 
+  view.search
+    view.search-input
+      z-icon(
+        type="search"
+        color="#B2B2B2"
+        size="18"
+      )
+      input(
+        focus="{{focus}}"
+        confirm-type="search"
+        placeholder="{{def}}"
+        placeholder-style="opacity: 0.6;"
+        bindconfirm="confirm"
+      )
+  //- 最近搜索
+  view.recently(
+    wx:if!="{{!show}}"
+  )
+    view.recently-nav 
+      text 最近搜索
+      z-icon(
+        wx:if="{{recently.length}}"
+        catchtap="ondel"
+        color="#B2B2B2"
+        size="18"
+        type="ashbin"
+      )
+    view.recently-cell
+      view.item(
+        wx:for="{{recently}}"
+        wx:key="index"
+        data-keyword="{{item}}"
+        bindtap="onHistoryKeywordClick"
+      ) {{item}}
+  //- 热门搜索
+  view.recently(
+    wx:if!="{{!show}}"
+  )
+    view.recently-nav 
+      text 热门发现
+    view.recently-cell
+      view.item(
+        wx:for="{{hot}}"
+        wx:key="index"
+        data-item="{{item}}"
+        bindtap="onActionClick"
+      ) {{item.keyword}}
+  //- 展示搜索到的商品
+  view.goods(
+    wx:if="{{show}}"
+  )
+    view.goods-item(
+      bindtap="onGoodClick"
+      wx:for="{{list}}"
+      wx:key="index"
+      data-id="{{item.id}}"
+    ) 
+      image(
+        src="{{item.distributorImgUrl || item.imgUrl  || '../../assets/image/defaultImg.png'}}"
+        class="goods-item-img"
+        binderror="onImageError"
+        data-index="{{index}}"
+      )
+      view.goods-item-name {{item.distributorProductName || item.name}}

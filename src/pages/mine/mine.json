@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#4389EF",
+  "navigationBarTitleText": "个人中心",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "z-cell": "../../components/cell/index",
+    "z-member-nav": "../../components/member-nav/index",
+    "z-invite-attention":"../../components/invite-attention/index"
+  }
+}

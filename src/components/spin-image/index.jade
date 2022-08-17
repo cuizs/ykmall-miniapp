@@ -1,0 +1,20 @@
+view.spin-image(
+  class="z-class"
+)
+  image.subimg(
+    class="z-class"
+    src="{{src}}"
+    mode="{{mode}}"
+    lazy-load
+    bindload="onImageLoad"
+    binderror="onImageError"
+  )
+  view.spinner(
+    wx:if="{{visible}}"
+  )
+  view.agency(
+    wx:if="{{hintText}}"
+  )
+    view.agency-text {{hintText}}
+
+

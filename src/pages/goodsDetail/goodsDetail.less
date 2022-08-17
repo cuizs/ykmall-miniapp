@@ -1,0 +1,419 @@
+@import '../../style/page.common.css/common.variable.less';
+
+@banner-height: 750rpx;
+@goods-info-padding-x: 40rpx;
+@goods-bg-color: @bg-color-gray;
+@goods-border-color: @border-color-gray;
+@goods-spec-item-size: (750rpx - @goods-info-padding-x * 2) / 7;
+
+page {
+  background: #f6f6f6;
+}
+
+.container {
+  padding-bottom: 90rpx;
+  background: @goods-bg-color;
+
+  .goods-banner {
+    width: 100%;
+    height: @banner-height;
+
+    &-img {
+      width: 100%;
+      max-height: 750rpx;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    &-typepic {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 130rpx;
+      height: 53rpx;
+    }
+  }
+
+  .goods-info {
+    padding: 0 @goods-info-padding-x;
+    font-size: 32rpx;
+    text-align: left;
+    background-color: #ffffff;
+
+    &-collect {
+      width: 48rpx;
+      height: 48rpx;
+    }
+
+    &-content {
+      padding: 20rpx 0 40rpx 0;
+      font-size: 34rpx;
+
+      &-name {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .name {
+          width: 600rpx;
+        }
+      }
+
+      &-desc {
+        font-size: 28rpx;
+        color: #999999;
+      }
+
+      &-price {
+        margin-bottom: 20rpx;
+        position: relative;
+
+        .goods-price {
+          margin-top: 20rpx;
+          font-size: 32rpx;
+          font-weight: 700;
+          color: #ff3b30;
+          display: flex;
+          justify-content: space-between;
+
+          &-line {
+            text-decoration: line-through;
+            color: #999999;
+            font-size: 26rpx;
+            margin-left: 20rpx;
+          }
+
+          .sales {
+            color: #333;
+            font-size: 26rpx;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+  }
+
+  .goods-wrapper {
+    margin: 0 40rpx;
+    padding: 20rpx 0;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid @goods-border-color;
+
+    &-img {
+      width: 180rpx;
+    }
+
+    &-info {
+      width: 400rpx;
+      padding-left: 20rpx;
+
+      &-name {
+        font-weight: bold;
+      }
+
+      &-price {
+        padding: 5rpx 0;
+      }
+
+      &-stock {
+        color: #999999;
+        font-size: 24rpx;
+      }
+    }
+  }
+
+  .number-wrapper {
+    margin: 0 20rpx;
+    padding: 25rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid @goods-border-color;
+    border-bottom: 1px solid @goods-border-color;
+
+    &-label {
+      font-weight: bold;
+    }
+
+    &-input {
+      width: 140rpx;
+    }
+  }
+
+  .member-content {
+    background-color: #fff;
+    color: #0091FF;
+   font-size: 28rpx;
+  }
+
+  .goods-spec {
+    padding: 0 @goods-info-padding-x;
+    margin: 20rpx 0;
+
+    &-content {
+      padding: 20rpx 0;
+      max-height: 25vh;
+      overflow: scroll;
+
+      &-section {
+        padding: 15rpx 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .item-title {
+          &-label {
+            font-weight: bold;
+          }
+        }
+
+        .item-content {
+          display: flex;
+          background: #fff;
+          flex-wrap: wrap;
+
+          &-block {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            // height: @goods-spec-item-size;
+            &-disabled {
+              opacity: 0.5;
+              background-color: @goods-bg-color !important;
+            }
+
+            &-content {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              // height: @goods-spec-item-size - 40rpx;
+              border: 3rpx solid @goods-border-color;
+              border-radius: 8rpx;
+              background: #fff;
+              margin-right: 20rpx;
+              color: #444444;
+              // width: 160rpx;
+              font-size: 24rpx;
+              margin-bottom: 6rpx;
+
+              &-img {
+                width: @goods-spec-item-size - 34rpx;
+                height: @goods-spec-item-size - 36rpx;
+                border-radius: 8rpx;
+                padding: 0 10rpx;
+              }
+
+              text {
+                padding: 6rpx 14rpx;
+                font-weight: 500;
+              }
+            }
+
+            &-content-ed {
+              border: 3rpx solid #3d8bf1;
+              color: #3d8bf1;
+              box-sizing: border-box;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // 优惠券
+  .goods-coupon {
+    padding: 20rpx 0;
+    position: relative;
+    overflow: hidden;
+    font-size: 24rpx;
+
+    &-label {
+      text-align: center;
+      background: #ff3b30;
+      width: 96rpx;
+      height: 45rpx;
+      line-height: 45rpx;
+      border-radius: 6px;
+      color: #fff;
+      margin-right: 20rpx;
+      display: inline-block;
+      float: left;
+    }
+
+    &-value {
+      border-radius: 6px;
+      margin-right: 20rpx;
+      margin-bottom: 20rpx;
+      color: #ff3b30;
+      border: 1px solid #ff3b30;
+      padding: 0 20rpx;
+      height: 45rpx;
+      line-height: 45rpx;
+      float: left;
+      box-sizing: border-box;
+
+      &-gray {
+        color: #999;
+        border: 1px solid #999;
+      }
+    }
+
+    &-right {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+
+      .title {
+        color: #ff3b30;
+        font-size: 24rpx;
+        padding-top: 5rpx;
+      }
+    }
+  }
+
+  .goods-specifications {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 26rpx;
+    padding-left: @goods-spec-item-size;
+    color: #777777;
+    width: 200rpx;
+
+    &-img {
+      width: 37rpx;
+      height: 37rpx;
+      margin-right: 6rpx;
+    }
+  }
+
+  .spec-label {
+    margin: 8rpx 0 4rpx 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 25rpx 40rpx;
+
+    .label {
+      color: #000;
+    }
+
+    .desc {
+      color: #999;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .goods-desc {
+    padding-top: 30rpx;
+    background: #fff;
+
+    &-label {
+      padding: 0 40rpx;
+      font-weight: 500;
+      margin-bottom: 20rpx;
+      font-size: 34rpx;
+    }
+
+    &-img {
+      margin: 0;
+      // padding: 0 0 40rpx;
+      width: 100vw;
+      height: 220rpx;
+      display: block;
+    }
+  }
+
+  // 弹出选规格
+  .goods-popup {
+    width: 0;
+    height: auto;
+    overflow: hidden;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+  }
+
+  .drawer {
+    &-label {
+      text-align: center;
+      font-size: 36rpx;
+      font-weight: bold;
+      margin-bottom: 40rpx;
+    }
+
+    &-content {
+      padding: 20rpx 20rpx 0 20rpx;
+      max-height: 48vh;
+      min-height: 40vh;
+      overflow-y: scroll;
+      box-sizing: border-box;
+
+      &-gray {
+        background: #f4f5f6;
+      }
+
+      &-empty {
+        color: #999999;
+        padding-top: 70rpx;
+        text-align: center;
+      }
+    }
+
+    &-btn-group {
+      padding: 0 30rpx;
+      display: flex;
+      margin-top: 40rpx;
+      align-items: center;
+      justify-content: space-between;
+
+      .btn {
+        height: 84rpx;
+        width: 48%;
+        color: #fff;
+        line-height: 84rpx;
+        text-align: center;
+        border-radius: 21px;
+
+        &-add-bg {
+          background: #ffb63c;
+        }
+
+        &-buy-bg {
+          background: #ff3b30;
+        }
+
+        &-buy-list {
+          background: #0091FF;
+        }
+      }
+    }
+
+    &-btn {
+      width: 579rpx;
+      height: 84rpx;
+      background: @bg-button-color;
+      border-radius: 21px;
+      margin: 40rpx auto;
+      font-size: 32rpx;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      line-height: 84rpx;
+    }
+  }
+
+  .sku-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -1,0 +1,9 @@
+wxs(
+  src="./_tool.wxs"
+  module="tool"
+)
+view.adaper-content(
+  style="{{tool.adapterNaviBarStyle(isAdapterNaviBar, bh_naviBarHeight)}}"
+  class!="z-class {{tool.adapterBottomClass(bh_isIpx, isAdapterIpx, isAdapterTabBar)}}"
+)
+  slot

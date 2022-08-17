@@ -1,0 +1,41 @@
+<view class="container" wx:if="{{ goods.dosageAndAdministration || goods.purpose || goods.contraindications }}">
+  <view class="nav">
+    <text>药品说明</text>
+    <text catchtap="onShow">...</text>
+  </view>
+</view>
+<van-popup 
+  show="{{ show }}"
+  closeable
+  round
+  close-icon="close"
+  position="bottom"
+  custom-style="height: 75%"
+  bind:close="onClose">
+  <view class="popcontainer">
+    <view class="box">
+      <view class="name">{{goods.name}}说明书</view>
+      <view class="sub">请仔细阅读说明书并按说明使用或在药师指导下购买和使用</view>
+      <view class="ins">
+        <view class="card">
+          <view class="item" wx:for="{{insPop}}"
+            wx:key="index">
+            <view class="label">{{item.label}}</view>
+            <view class="value">
+              <rich-text nodes="{{insPopValue[item.key]}}"></rich-text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn">
+      <van-button 
+        round 
+        block
+        color="#008DF9"
+        bind:click="onClose">
+        确 定
+      </van-button>
+    </view>
+  </view>
+</van-popup>

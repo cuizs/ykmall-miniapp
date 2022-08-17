@@ -1,0 +1,111 @@
+z-customer-service(
+  pagePath="pages/mine/mine"
+  pageName="个人中心"
+)
+z-register(
+  show="{{show}}"
+  bind:updateUserInfo="updateUserInfo"
+)
+z-register(
+  show="{{memberShow}}"
+  bind:updateUserInfo="toMemberCenter"
+)
+z-invite-attention(
+  show="{{inviteShow}}"
+  channel-name="{{channelInfo.name}}"
+  invite-src="{{inviteSrc}}"
+)
+view.container
+  view.container-header(
+    class="{{currentChannel ? currentChannel + '-gradient-bg' : ''}}"
+  )
+    view.container-header-box()
+      view.container-header-box-left()
+        view.container-header-aver
+          image.container-header-aver(
+             src="{{userInfo.avatarUrl || atavarSrc}}"
+          )
+          //- open-data( 
+          //-   type="userAvatarUrl"
+          //- )
+         
+        view.container-header-contain   {{ userInfo.nickname || "微信用户" }}
+          //- open-data.container-header-contain-name( 
+          //-   type="userNickName"
+          //- )
+          view.container-header-auth-phone(
+              wx:if="{{userInfo.mobile}}"
+              bindtap="checkVip"
+          ) {{userInfo.mobile}}
+          view.container-header-contain-level
+            text.container-header-contain-level-role {{userInfo.level=='Vip' ? '注册会员' : '普通用户' }}
+            text.container-header-contain-level-reocomend(
+              wx:if="{{userInfo.doctorRole}}"
+            ) {{userInfo.doctorRole}}
+      view.container-header-auth
+        view.container-header-auth-btn(
+          wx:if="{{!userInfo.mobile}}"
+          bindtap="checkVip"
+        ) 注册/登录
+  view.container-normal(
+     wx:if!="{{userInfo.level ==  'Normal' && memberChannel}}"
+  )
+    image.container-normal-img(
+    src="http://ykyao-mall.oss-cn-shanghai.aliyuncs.com/dev/kgpUHs1658212195529.png"
+    )
+    view.container-normal-btn(
+      bindtap="toVip"
+      data-level="{{userInfo.level}}"
+    ) 立即加入
+  view.container-vip(
+     wx:if!="{{userInfo.level ==  'Vip' && memberChannel}}"
+  )
+    image.container-vip-img(
+    src="http://ykyao-mall.oss-cn-shanghai.aliyuncs.com/dev/x2mzD31658212215760.png"
+    )
+    view.container-vip-btn(
+      data-level="{{userInfo.level}}"
+      bindtap="toMemberCenterHome"
+    ) 立即前往
+  view.container-order
+    view.container-order-contain
+      view.container-order-contain-item(
+        wx:for="{{orderNav}}"
+        wx:key="index"
+        data-key="{{item.key}}"
+        bindtap="onClickOrder"
+        class="{{item.key != 0 ? '' : 'container-order-contain-all'}}"
+      ) 
+        view.container-order-contain-item-dot(
+          wx:if="{{item.num}}"
+        ) {{item.num}}
+        image(
+          src="{{item.img}}"
+        )
+        text {{item.text}}
+  view.container-list 
+    view.container-list-title 更多功能
+    z-cell(
+      z-class!="container-list-item {{index < list.length - 1 ? 'container-list-nomer' : ''}}"
+      title="{{item.text}}"
+      hasBorder="{{false}}"
+      prefixIcon="right"
+      wx:for="{{list}}"
+      wx:key="index"
+      data-item="{{item}}"
+      bindtap="onClickItem"
+    )
+      view.container-list-item-image(
+        slot="icon"
+      )
+        image(
+          src="{{item.img}}"
+        )
+  view.privacy(
+    bindtap='handlePrivacy'
+  )
+    隐私条例
+          
+       
+  
+

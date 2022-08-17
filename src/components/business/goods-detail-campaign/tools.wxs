@@ -1,0 +1,12 @@
+var mapping = {
+  LOW_PRICE: '公益低价药',
+  NEW_CUSTOMER:'新人专享'
+}
+
+
+var getName = function (type) {
+  return mapping[type] || ''
+}
+module.exports = {
+  getName: getName
+}

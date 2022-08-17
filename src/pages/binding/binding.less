@@ -1,0 +1,62 @@
+@import '../../style/xy.css.library/variable.less';
+@import '../../style/page.common.css/common.variable.less';
+@import './iconfont.less';
+.binding {
+  color: #000;
+  font-size: 26rpx;
+  background: #ffffff;
+  padding: 50rpx;
+  &-hint {
+    font-size: 34rpx;
+    margin-bottom: 120rpx;
+  }
+  &-cell {
+    height: 160rpx;
+    padding: 30rpx 10rpx 20rpx 10rpx;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d8d8d8;
+    &-label {
+      display: flex;
+      align-items: center;
+      color: #333333;
+      margin-bottom: 20rpx;
+      &-icon {
+        margin-right: 10rpx;
+      }
+    }
+    &-input {
+      display: flex;
+      input {
+        width: 400rpx;
+        height: 70rpx;
+        padding-left: 50rpx;
+      }
+      &-text {
+        width: 200rpx;
+        text-align: center;
+        line-height: 70rpx;
+        position: relative;
+        &::before {
+          content: '';
+          width: 1px;
+          height: 40rpx;
+          position: absolute;
+          left: 0;
+          top: 15rpx;
+          background: #999999;
+        }
+      }
+    }
+  }
+  &-submit {
+    width: 440rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 100rpx;
+    background: @bg-button-color;
+    border-radius: 8rpx;
+    color: #ffffff;
+  }
+}

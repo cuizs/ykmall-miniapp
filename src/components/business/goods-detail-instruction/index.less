@@ -1,0 +1,114 @@
+@import '../../../style/page.common.css/common.mixins.less';
+.container {
+ width:100%;
+ padding:20rpx 31rpx 20rpx 31rpx;
+ box-sizing: border-box;
+ background: #ffffff;
+ margin:14rpx auto;
+ .nav{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   font-weight: bolder;
+   text {
+     line-height: 40rpx;
+   }
+ }
+ .cell{
+   margin-bottom:10rpx;
+   display: flex;
+   .value{
+     width:500rpx;
+    .word-line-ellipsis(1);
+   }
+ }
+}
+.popcontainer {
+  display: flex;
+  flex-direction: column;
+}
+// 内容
+.box{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  .name{
+    font-size: 28rpx;
+    font-weight: bolder;
+    text-align: center;
+    padding-top: 38rpx;
+  }
+  .sub{
+    font-size: 24rpx;
+    margin-top:3rpx;
+    text-align: centerß;
+  }
+  .ins{
+    overflow-y:auto;
+    margin-top:22rpx;
+    height:48vh;
+    padding-bottom: 30rpx;
+  }
+  .card{
+    width:700rpx;
+    overflow: hidden;
+    border:1px solid #b2b2b2;
+    .item{
+      border-bottom:1px solid #b2b2b2;
+      box-sizing: border-box;
+      display: flex;
+      font-size: 24rpx;
+      width: 100%;
+      .label{
+        width:180rpx;
+        border-right:1px solid #b2b2b2;
+        box-sizing: border-box;
+        padding:10rpx 0;
+        padding-left:14rpx;
+        line-height: 30rpx;
+      }
+      .value{
+        box-sizing: border-box;
+        padding:10rpx 0;
+        padding-left:14rpx;
+        flex: 1;
+        max-width: 500rpx;
+        line-height: 30rpx;
+      }
+      &:last-of-type{
+        border:none;
+      }
+    }
+    
+  }
+}
+.btn{
+  width:640rpx;
+  margin:0 auto;
+  margin-top:2vh;
+  overflow: hidden;
+}
+
+.richTextImg {
+  max-width: 500rpx !important;
+}
+.richTextOl {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-left: 40rpx !important;
+  li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+.richTextUl {
+  margin: 0 !important;
+  padding: 0 !important;
+  margin-left: 40rpx !important;
+  li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}

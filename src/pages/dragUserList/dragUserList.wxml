@@ -1,0 +1,35 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="user-list" wx:if="{{userList.length > 0}}">
+    <view class="user-list-item" wx:for="{{userList}}" wx:key="index" data-item="{{item}}" bindtap="selectDragUser">
+      <view class="user-list-item-name">
+        {{item.name}}
+        <view class="verified" wx:if="{{item.verified}}">实名认证</view>
+      </view>
+      <view class="user-list-item-detail">
+        <text>{{item.gender ? '男' : '女'}}</text>
+        <text>{{item.age}}岁</text>
+        <text>{{item.noPassByMobile}}</text>
+      </view>
+      <view class="user-list-item-default">
+        <view class="user-list-item-default-select" wx:if="{{currentChannel == 'hkk'}}">
+          <van-checkbox catchtap bind:change="onChange" icon-size="14px" data-item="{{item}}" model:value="{{ item.defaultUser }}">
+            <view class="">设为默认</view>
+          </van-checkbox>
+        </view>
+        <view class="user-list-item-default-not" wx:if="{{!item.province}}">未完善</view>
+      </view>
+      <view class="user-list-item-btn" bindtap="onClickUserMore">
+        <van-icon class="icon" name="edit" data-id="{{item.id}}" catchtap="goDragUserDetail" size="24px" color="#008DF9" />
+        <!-- <van-icon class="icon" name="delete-o" size="24px" color="#008DF9" data-id="{{item.id}}" catchtap="deleteDragUser" /> -->
+      </view>
+    </view>
+  </view>
+  <view class="user-list-none" wx:else>- 暂无用药人，请新增 -</view>
+  <van-dialog id="van-dialog" />
+  <z-fixed-footer class="fixed-footer-handle">
+    <van-button class="fixed-footer-handle-btn" type="info" round block data-id="new" bindtap="goDragUserDetail">
+      新增用药人
+    </van-button>
+  </z-fixed-footer>
+</view>

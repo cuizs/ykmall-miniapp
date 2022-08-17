@@ -1,0 +1,54 @@
+wxs(
+  module="tool"
+  src="./tool.wxs"
+)
+
+view.z-loading-mask(
+  wx:if!="{{fixed && mask && visible}}"
+  class="{{hideAnimateClass}}"
+  catchtouchmove="_onTouchMove"
+)
+
+view.z-loading-container(
+  wx:if="{{visible}}"
+  class="{{hideAnimateClass}}"
+)
+  view.z-loading-inner(
+    style="{{tool.getFixedStyle(fixed)}}"
+  )
+    view.circle-1(
+      class="circle-ios"
+    )
+    view.circle-2(
+      class="circle-ios"
+    )
+    view.circle-3(
+      class="circle-ios"
+    )
+    view.circle-4(
+      class="circle-ios"
+    )
+    view.circle-5(
+      class="circle-ios"
+    )
+    view.circle-6(
+      class="circle-ios"
+    )
+    view.circle-7(
+      class="circle-ios"
+    )
+    view.circle-8(
+      class="circle-ios"
+    )
+    view.circle-9(
+      class="circle-ios"
+    )
+    view.circle-10(
+      class="circle-ios"
+    )
+    view.circle-11(
+      class="circle-ios"
+    )
+    view.circle-12(
+      class="circle-ios"
+    )

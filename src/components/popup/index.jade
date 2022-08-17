@@ -1,0 +1,23 @@
+view.xy-drawer(
+  class="z-class"
+)
+  view.xy-drawer-mask(
+    class="{{visible ? 'xy-drawer-mask-show' : ''}}" 
+    catchtap="hideDrawer"
+  )
+      view.xy-drawer-window(
+        wx:if="{{direction}}"
+        class="xy-drawer-window-{{direction}} {{visible ? 'xy-drawer-window-show-' + direction : ''}}"
+        style!="{{direction === 'left' || direction === 'right' ? 'width:' + size + 'vw;' : 'height:' + size + 'vh;'}}"
+        catchtap="_preventTouchMove"
+      )
+        view.close(
+          catchtap="onCloseClick"
+        )
+          van-icon(
+            name="close"
+            size="18px"
+            color="#999999"
+          )
+        slot
+      

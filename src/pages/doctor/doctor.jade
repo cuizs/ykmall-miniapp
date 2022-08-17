@@ -1,0 +1,65 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.title 我的私人药师
+  view.list(
+    wx:if="{{doctors}}"
+  )
+    view.list-item(
+      wx:for="{{doctors}}"
+      wx:key="key"
+    )
+      view.list-item-title
+        view.list-item-title-left
+          image.head-img(
+            class="list-item-title-img"
+            mode="aspectFit"
+            src="{{item.imageUrl ? item.imageUrl : '../../assets/image/user_avatar_default.png'}}"
+          )
+          view.name-text {{item.name}}
+        view.list-item-title-right(
+          wx:if="{{item.qrCodeUrl}}"
+          data-index="{{index}}"
+          bindtap="onQrcodeClick"
+        )
+          image.card-img(
+            mode="widthFix"
+            src="../../assets/icon/b-card.png"
+          )
+          view.card-text 查看名片
+      view.list-item-btn
+        van-button(
+          plain
+          block
+          size="small"
+          type="info"
+          data-phone="{{item.telephone}}"
+          bind:click="call"
+        ) 电话咨询
+        van-button(
+          plain
+          block
+          size="small"
+          type="info"
+          bind:click="customerService"
+        ) 在线咨询
+van-popup(
+  closeable
+  show="{{cardVisible}}"
+  custom-style="background: transparent;"
+  bindclose="onCardPopupCloseClick"
+)
+  view.card-wrapper
+    view.card-title 申请成为我的药师
+    image.card-image(
+      mode="widthFix"
+      src="{{cardInfo.qrCodeUrl}}"
+      show-menu-by-longpress
+    )
+    view.card-desc 长按识别二维码，成为您的私人药师
+    view.doctor-panel
+      view.doctor-panel-name 药师姓名：{{cardInfo.name}}
+      view.doctor-panel-desc {{cardInfo.description}}
+
+

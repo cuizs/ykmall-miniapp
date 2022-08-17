@@ -1,0 +1,57 @@
+wxs(
+  src="./tools.wxs"
+  module="tool"
+)
+view.container
+  view.nav 套装推荐
+  view.content
+    view.cell(
+      wx:for="{{suit}}"
+      wx:key="index"
+    )
+      view.header 
+        view.header-name 套餐{{tool.getIndex(index + 1)}}
+        view.header-discounts 优惠了：¥{{item.groupPreferentialPrice}}
+        view.header-yj 原价：
+          text.header-yj-text ¥{{item.groupMarketOriginalPrice}}
+      view.product
+        scroll-view(
+          scroll-x="true" 
+          style=" white-space: nowrap; display: flex;width:100%"
+        ) 
+          view.item(
+            wx:for="{{item.groupProductDetailResDtos}}"
+            wx:for-item="product"
+            wx:for-index="inx"
+            wx:key="inx"
+          )
+            view.box 
+              view.box-count 
+                text.box-count-icon x
+                text.box-count-num  {{product.quantity}}
+              view.box-img 
+                image.image(
+                  mode="widthFix"
+                  src="{{product.distributorImgUrl || product.imgUrl  || '../../../assets/image/defaultImg.png'}}"
+                )
+              view.box-name {{product.distributorProductName || product.skuName}}
+              view.box-price ¥{{product.marketPrice}}
+            view.icon(
+              wx:if!="{{inx < item.groupProductDetailResDtos.length - 1}}"
+            )
+              van-icon(
+                name="add-o"
+                size="16px"
+                color="#e6e6e6"
+              )
+      view.price
+        view.price-title 共件{{item.groupSize}}商品 合计：¥{{item.groupTotalPrice}}
+        van-button(
+          custom-class="btn"
+          round 
+          block
+          color="#008DF9"
+          data-item="{{item}}"
+          bind:click="onAdd"
+        ) {{type == 2 ? '加入需求清单' : '加入购物车'}}
+

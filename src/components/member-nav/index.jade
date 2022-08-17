@@ -1,0 +1,17 @@
+view.member-nav(
+  bindtap="onMemberClick"
+)
+  image.vip-image(
+    src="../../assets/icon/min-vip.png"
+  )
+  view.member-nav-money(
+    wx:if!="{{data.level && data.level == 'Vip'}}"
+  ) 
+    text 已为您节省
+    text.member-nav-money-text {{data.economizePrice || 0}}
+    text 元
+  view.member-nav-money(
+    wx:if!="{{data.id && (!data.level || data.level != 'Vip')}}"
+  )
+    text.member-nav-money-small 限时免费领取
+    view.member-nav-btn 立即领取

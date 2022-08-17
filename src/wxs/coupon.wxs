@@ -1,0 +1,61 @@
+/**
+ * 优惠券 scope
+ */
+
+var COUPON_TYPE_LIST = [
+  {
+    value: '立减券',
+    key: 'CashVoucher'
+  },
+  {
+    value: '满减券',
+    key: 'Full'
+  },
+  {
+    value: '立减折扣券',
+    key: 'Discount'
+  },
+  {
+    value: '满折券',
+    key: 'FullDiscount'
+  }
+]
+
+var COUPON_SCOPE_LIST = [
+  {
+    value: '全部商品可用',
+    key: 'All'
+  },
+  {
+    value: '指定商品可用',
+    key: 'Product'
+  },
+  {
+    value: '指定商品不可用',
+    key: 'NotProduct'
+  }
+]
+
+var coupon = {
+  type: {
+    getTypeName: function (key) {
+      for (var i = 0; i < COUPON_TYPE_LIST.length; i++) {
+        var item = COUPON_TYPE_LIST[i]
+        if (key == item.key) return item.value
+      }
+      return key
+    }
+  },
+
+  scope: {
+    getScopeName: function (key) {
+      for (var i = 0; i < COUPON_SCOPE_LIST.length; i++) {
+        var item = COUPON_SCOPE_LIST[i]
+        if (item.key == key) return item.value
+      }
+      return ''
+    }
+  }
+}
+
+module.exports = coupon

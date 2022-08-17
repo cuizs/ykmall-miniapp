@@ -1,0 +1,54 @@
+z-register(
+  show="{{show}}"
+  bind:updateUserInfo="registerPromoter"
+)
+view.container(
+)
+  image(
+    class="register-bg"
+    mode="widthFix"
+    src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/za0XWS1660013404534.png"
+  )
+  view.register-box(
+  )
+    view.register-box-cell 
+      view.register-box-cell-label 姓名
+        span *
+      view.register-box-cell-input
+        input(
+          placeholder-style="color:#AAAAAA"
+          data-key="name"
+          bindinput="onInput"
+          placeholder="请输入姓名"
+          minlength=1
+          maxlength=10
+          value="{{name}}"
+          disabled="{{promoterStatus}}"
+        )
+    view.register-box-cell(
+        bindtap="onAdressChange"
+    ) 
+      view.register-box-cell-address 所在地区
+        span *
+      view.register-box-cell-input(
+        wx:if="{{address}}"
+      ) {{address}}
+      view.register-box-cell-select(
+        wx:else
+      ) 请选择
+    van-popup(
+      show="{{addressShow}}" bindclose="onClose" position="bottom"
+      )
+      van-area(
+        area-list="{{areaList}}" bindconfirm="onSelectAddress"  bindcancel="onClose"
+      )
+     view.register-box-btn 
+      view.register-box-btn-item(
+        bindtap="registerPromoter"
+        wx:if="{{!promoterStatus}}"
+      ) 绑定成为推广人
+      view.register-box-btn-item(
+        bindtap="toMinePage"
+        wx:if="{{promoterStatus}}"
+      ) 已完成绑定，前往推广
+    

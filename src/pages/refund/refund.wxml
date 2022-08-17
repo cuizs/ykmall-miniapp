@@ -1,0 +1,134 @@
+<z-customer-service  distinguishChannel="{{true}}" pagePath="pages/refund/refund" pageName="订单退款"></z-customer-service>
+<view class="container">
+  <view class="status-box" wx:if="{{goodDetail.status == 'ReturnApplying'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_pass.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">后台审核中</view>
+  </view>
+  <view class="status-box" wx:if="{{goodDetail.status == 'ReturnApproved'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_pass.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">审核通过</view>
+  </view>
+  <view class="status-box" wx:if="{{goodDetail.status == 'ReturnRejected'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_pass.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">审核未通过</view>
+  </view>
+  <view class="status-box" wx:if="{{goodDetail.status == 'ApplyRefund'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_pass.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">申请退款中</view>
+  </view>
+  <view class="status-box" wx:if="{{goodDetail.status == 'Refunding'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_pass.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">退款中</view>
+  </view>
+  <view class="status-box" wx:if="{{goodDetail.status == 'Returned'}}">
+    <image class="status-box-img" src="../../assets/icon/refund_done.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-value">此商品已退货成功，</view>
+    <view class="status-box-value">退款金额会返还到您的支付账户！</view>
+  </view>
+  <view class="goods-box">
+    <view class="goods-box-title">退货商品</view>
+    <view class="goods-box-content" wx:if="{{goodDetail.isGroup != 1}}">
+      <image class="goods-box-content-img" src="{{goodDetail.distributorImgUrl || goodDetail.imageUrl || '../../assets/image/defaultImg.png'}}" mode="aspectFit" lazy-load="false" />
+      <view class="goods-box-content-msg">
+        <view class="goods-box-content-title">
+          {{goodDetail.distributorProductName || goodDetail.name}}
+        </view>
+        <view class="goods-box-content-specs">{{goodDetail.specValueText}}</view>
+        <view class="goods-box-content-price">
+          <view class="goods-box-content-price-money">￥</view>
+          <view class="goods-box-content-price-value">
+            {{goodDetail.isMemberPrice ? goodDetail.memberPrice : goodDetail.actualPrice}}
+          </view>
+          <view class="goods-box-content-price-num">x{{goodDetail.quantity}}</view>
+        </view>
+        <view class="goods-box-content-btn">
+          <view class="btn" wx:if="{{goodDetail.refundBtnText}}" data-id="{{goodDetail.id}}" bindtap="onRefundClick">
+            {{goodDetail.refundBtnText}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{goodDetail.isGroup == 1}}">
+      <z-goods-suit-show group="{{goodDetail.groupProductDetailResDtos ? goodDetail.groupProductDetailResDtos : goodDetail.groupDetail}}" name="{{goodDetail.name}}" quantity="{{goodDetail.quantity}}" price="{{goodDetail.actualPrice}}"></z-goods-suit-show>
+      <view class="goods-box-content-btn">
+        <view class="btn" wx:if="{{goodDetail.refundBtnText}}" data-id="{{goodDetail.id}}" bindtap="onRefundClick">
+          {{goodDetail.refundBtnText}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="box" wx:if="{{goodDetail.status == 'Created'}}">
+    <van-cell-group>
+      <van-cell title="退款金额：">
+        <view class="red-money">￥{{refundPrice}}</view>
+      </van-cell>
+      <van-cell title="退款数量：">
+        <van-stepper value="{{ refundQuantity }}" max="{{maxRefundQuantity}}" integer disable-input="true" input-width="32px" button-size="26px" bind:change="onQuantityChange" />
+      </van-cell>
+    </van-cell-group>
+  </view>
+  <view class="box" wx:if="{{goodDetail.status != 'Created'}}">
+    <van-cell-group>
+      <van-cell title="退款金额：">
+        <view>￥{{applyRefundAmount ? applyRefundAmount : refundPrice }}</view>
+      </van-cell>
+      <van-cell title="退款数量：">
+        <view>{{applyRefundNum ? applyRefundNum : refundQuantity}}</view>
+      </van-cell>
+    </van-cell-group>
+  </view>
+  <view class="box" wx:if="{{returnExpressCompany && returnExpressNumber}}">
+    <van-cell-group>
+      <van-cell title="物流公司：">
+        <view>{{returnExpressCompany}}</view>
+      </van-cell>
+      <van-cell title="物流单号：">
+        <view>{{returnExpressNumber}}</view>
+      </van-cell>
+    </van-cell-group>
+  </view>
+  <view class="box" wx:if="{{goodDetail.status == 'ReturnApproved'}}">
+    <van-cell-group>
+      <van-cell title="物流公司：" is-link bindtap="showCompanyPopup">
+        <view>{{ logisticsCompany ? logisticsCompany : '请选择' }}</view>
+      </van-cell>
+      <van-field model:value="{{ logisticsNumber }}" label="物流单号：" placeholder="请填写" input-align="right" />
+    </van-cell-group>
+     <!-- 经销商商品退货信息展示 -->
+    <view class="returnInfo" wx:if="{{orderDetail.distributorDto && orderDetail.distributorDto.id != 1}}">
+      <view class="title">退货商品收货信息：</view>
+      <view class="des">收货人：{{orderDetail.distributorDto.contacts}}</view>
+      <view class="des">联系方式：{{orderDetail.distributorDto.phone}}</view>
+      <view class="des">收货地址：{{orderDetail.distributorDto.address}}</view>
+    </view>
+    <!-- 云开内部商品退货信息展示 -->
+    <view class="returnInfo" wx:if="{{orderDetail.distributorDto.id == 1}}">
+      <view class="title">退货商品收货信息：</view>
+      <!-- 处方药 -->
+      <view wx:if="{{orderDetail.recipeNumber}}">
+        <view class="des">收货人：云开亚美</view>
+        <view class="des">联系方式：0571-88736137</view>
+        <view class="des">收货地址：浙江省杭州市余杭区五常街道后山路18号（南门）3号楼1楼</view>
+      </view>
+      <!-- 其他类型药品 -->
+      <view wx:else> 
+        <view class="des">收货人：云开亚美</view>
+        <view class="des">联系方式：0571-88736159</view>
+        <view class="des">收货地址：浙江省杭州市余杭区五常街道后山路18号（南门）3号楼4楼</view>
+      </view>
+    </view>
+  </view>
+  <van-popup show="{{ showPopup }}" position="bottom" round z-index="200">
+    <van-picker show-toolbar columns="{{ companyColumns }}" bind:cancel="hideCompanyPopup" bind:confirm="onConfirm" />
+  </van-popup>
+  <z-fixed-footer class="fixed-footer-handle" wx:if="{{goodDetail.status == 'Created'}}">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="submitRefund">
+      提交
+    </van-button>
+  </z-fixed-footer>
+  <z-fixed-footer class="fixed-footer-handle" wx:if="{{goodDetail.status == 'ReturnApproved'}}">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="submitLogistics">
+      提交
+    </van-button>
+  </z-fixed-footer>
+</view>

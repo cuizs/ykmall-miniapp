@@ -1,0 +1,36 @@
+@import '../../style/xy.css.library/variable.less';
+@dot-size: 20rpx;
+@content-height: 30rpx;
+@defailt-shadow: 0 1px 4px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12);
+
+.xy-badge {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  &-dot {
+    position: absolute;
+    width: @dot-size;
+    height: @dot-size;
+    top: -@dot-size / 3;
+    right: -@dot-size / 2;
+    border-radius: @dot-size;
+    background: @error-color;
+    box-shadow: @defailt-shadow;
+  }
+  &-content {
+    position: absolute;
+    padding: 0 11rpx;
+    top: -@content-height / 2.5;
+    right: 0;
+    transform: translateX(70%);
+    height: @content-height;
+    line-height: @content-height;
+    font-size: 22rpx;
+    color: #fff;
+    background: @error-color;
+    border-top-left-radius: @content-height / 2;
+    border-top-right-radius: @content-height / 2;
+    border-bottom-right-radius: @content-height / 2;
+    box-shadow: @defailt-shadow;
+  }
+}

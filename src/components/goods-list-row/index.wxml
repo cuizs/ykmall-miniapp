@@ -1,0 +1,34 @@
+<view class="list sol-class">
+		<view class="list-item" wx:for="{{goodsList}}" wx:key="swiper" data-id="{{item.spuId}}" data-item="{{item}}" bindtap="onGoodClick">
+				<image class="list-item-image" src="{{item.distributorImgUrl || item.imageUrl || '../../assets/image/defaultImg.png'}}" mode="aspectFit" lazy-load="false" />
+				<view class="list-detail">
+						<view wx:if="{{item.distributorProductName || item.title}}">
+								<text class="list-detail-title">{{item.distributorProductName || item.title}}</text>
+						</view>
+						<view wx:if="{{item.remark}}">
+							
+								<text class="list-detail-note">{{item.remark}}</text>
+						</view>
+						<view wx:if="{{type === 'exclusiveForNewPeople'}}">
+								<text class="list-detail-tag">新人专享</text>
+						</view>
+						<view wx:if="{{type === 'miaoshaPage'}}">
+								<z-countDown-business class="count-down" time="{{interval}}" format="{{format}}" frontTitle="距离结束仅剩" title-class="title-class-n" bindendTimeFn="endTimeFn"></z-countDown-business>
+						</view>
+						<view class="list-detail-price" wx:if="{{type === 'lowCostPublicMedicine'}}">
+								<text class="list-detail-actual-price">补贴价 ￥{{item.salePrice}}</text>
+								<!-- <text class="list-detail-original-price-new">{{item.originSalePrice}}元</text> -->
+						</view>
+						<view class="list-detail-price" wx:if="{{type === 'exclusiveForNewPeople'}}">
+								<text class="list-detail-actual-money-new">￥</text>
+								<text class="list-detail-actual-price-new">{{item.salePrice}}</text>
+								<text class="list-detail-original-price-new">{{item.originSalePrice}}</text>
+						</view>
+				</view>
+				<view class="list-detail-mask" wx:if="{{item.stock == 0}}" capture-catch:tap="onMaskClick">
+						<view class="list-detail-mask-box">
+								<text>已抢光</text>
+						</view>
+				</view>
+		</view>
+</view>

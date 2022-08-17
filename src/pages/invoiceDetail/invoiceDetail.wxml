@@ -1,0 +1,68 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="invoice-radio">
+    <van-radio-group value="{{ needInvoice }}" direction="horizontal" bind:change="onNeedInvoiceChange">
+      <van-radio name="false">不开发票</van-radio>
+      <van-radio name="true">开发票</van-radio>
+    </van-radio-group>
+  </view>
+  <view class="invoice-detail" wx:if="{{needInvoice == 'true'}}">
+    <view class="invoice-detail-row">
+      <view class="invoice-detail-row-label">发票类型：</view>
+      <view class="invoice-detail-row-value">
+        <view class="invoice-detail-row-value-tags">
+          <view class="invoice-detail-row-value-tags-item tag-active">电子发票</view>
+        </view>
+      </view>
+    </view>
+    <view class="invoice-detail-row">
+      <view class="invoice-detail-row-label">发票内容：</view>
+      <view class="invoice-detail-row-value">
+        <input class="invoice-detail-row-value-input" data-name="remark" bindinput="inputEdit"  model:value="{{remark}}" type="text" placeholder="请填写发票内容" placeholder-class="input-placeholder" maxlength="140" bindfocus="" bindblur="" bindconfirm=""></input>
+      </view>
+    </view>
+    <view class="invoice-detail-row">
+      <view class="invoice-detail-row-label">发票抬头：</view>
+      <view class="invoice-detail-row-value">
+        <view class="invoice-detail-row-value-tags">
+          <view wx:for="{{titleTypeConfig}}" wx:key="index" class="invoice-detail-row-value-tags-item {{titleType == item.value ? 'tag-active' : ''}}" data-value="{{item.value}}" bindtap="onTitleTypeChange">
+            {{item.label}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class="invoice-detail-btn" bindtap="getWechatTitle">一键获取微信发票抬头</button>
+    <block wx:if="{{titleType == 2}}">
+      <view class="invoice-detail-row">
+        <view class="invoice-detail-row-value">
+          <input class="invoice-detail-row-value-input" data-name="title" bindinput="inputEdit" model:value="{{title}}" type="text" placeholder="请填写公司名称" placeholder-class="input-placeholder" maxlength="140" bindfocus="" bindblur="" bindconfirm=""></input>
+        </view>
+      </view>
+      <view class="invoice-detail-row">
+        <view class="invoice-detail-row-value">
+          <input class="invoice-detail-row-value-input" data-name="tariffItem" bindinput="inputEdit"  model:value="{{tariffItem}}" type="text" placeholder="请填写公司税号" placeholder-class="input-placeholder" maxlength="20" bindfocus="" bindblur="" bindconfirm=""></input>
+        </view>
+      </view>
+      <view class="invoice-detail-row">
+        <view class="invoice-detail-row-value">
+          <input class="invoice-detail-row-value-input" data-name="companyAddress" bindinput="inputEdit"  model:value="{{companyAddress}}" type="text" placeholder="请填写公司地址" placeholder-class="input-placeholder" maxlength="140" bindfocus="" bindblur="" bindconfirm=""></input>
+        </view>
+      </view>
+      <view class="invoice-detail-row">
+        <view class="invoice-detail-row-value">
+          <input class="invoice-detail-row-value-input" data-name="bankAccount" bindinput="inputEdit"  model:value="{{bankAccount}}" type="number" placeholder="请填写公司银行账号" placeholder-class="input-placeholder" maxlength="30"  bindfocus="" bindblur="" bindconfirm=""></input>
+        </view>
+      </view>
+    </block>
+    <view class="invoice-detail-row" wx:if="{{titleType == 1}}">
+      <view class="invoice-detail-row-value">
+        <input class="invoice-detail-row-value-input"data-name="title" bindinput="inputEdit"  model:value="{{title}}" type="text" placeholder="请填写姓名" placeholder-class="input-placeholder" maxlength="140" bindfocus="" bindblur="" bindconfirm=""></input>
+      </view>
+    </view>
+  </view>
+  <z-fixed-footer class="fixed-footer-handle" wx:if="{{needInvoice == 'true'}}">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="saveInvoice">
+      保存发票
+    </van-button>
+  </z-fixed-footer>
+</view>

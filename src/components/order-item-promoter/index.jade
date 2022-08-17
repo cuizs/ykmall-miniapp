@@ -1,0 +1,47 @@
+view.order-item
+  view.order-status 
+    text 订单号：{{item.orderNumber}}
+    text.order-status-text(
+      style="color:{{statusColor}}"
+    ) {{statusText}}
+  view.item-goods(
+    class="xy-row xy-item-center"
+    data-id="{{item.id}}"
+    data-type='order'
+    bindtap="onBtnClick"
+  )
+    
+    view.item-goods-cell(
+      wx:for="{{item.orderLines}}"
+      wx:key="index"
+      wx:for-item="child"
+    )
+      image(       
+        class="item-goods-cell-img"
+        mode="aspectFit" 
+        lazy-load="false"
+        src="{{child.distributorImgUrl || child.imageUrl || '../../assets/image/defaultImg.png'}}"
+        wx:if!="{{index < 4}}"
+        binderror="onImageError"
+        data-index="{{index}}"
+      )
+      view.item-goods-cell-text(
+        wx:else
+      ) ...
+    //- view.item-goods-more(
+    //- ) 共{{item.goodsNum || 0}}件
+    //-   z-icon(
+    //-     type="arrow-right"
+    //-     size="14"
+    //-   )  
+  view.item-bottom  
+    view.item-time 创建时间：{{item.createTime }} 
+    view.item-total 实付款：  
+      z-currency(
+          value="{{item.amountPayable}}"
+          color="#F07F24"
+          fontSize=28
+        )
+
+
+  

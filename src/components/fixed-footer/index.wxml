@@ -1,0 +1,6 @@
+<view class="fixed-footer sol-class">
+	<view class="fixed-footer-content">
+		<slot></slot>
+	</view>
+</view>
+

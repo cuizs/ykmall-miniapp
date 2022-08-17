@@ -1,0 +1,88 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view style="padding-top: 20rpx">
+	<view style="margin: 0 20rpx 64rpx;">
+		<view class="form-title form-title-required">
+			用药人
+		</view>
+		<!-- 用药人选择区域 -->
+		<view class="customer-select-area">
+			<view class="customer-select-area-card" wx:if="{{dragUserDetail}}">
+				<view class="customer-select-area-card-name">
+				<view style="margin-right: 20rpx">
+					{{dragUserDetail.name}}
+				</view>
+				<van-tag plain  size="medium" type="danger">实名认证</van-tag></view>
+				<view class="customer-select-area-card-info">
+					<text style="margin-right: 6rpx">{{dragUserDetail.gender ? '男' : '女'}}</text>
+					<text>{{dragUserDetail.age}}岁</text>
+					<text wx:if="{{!dragUserDetail.province}}" style="margin-left: 6rpx; color: red; ">未完善</text>
+				</view>
+			</view>
+			<view class="customer-select-area-cardNo" style="" bindtap="onSelectDragUser" wx:else>
+				<view><van-icon name="plus" color="#999999" size="30rpx"/></view>
+				<view style="margin-left: 2rpx">添加用药人</view>
+			</view>
+			<view class="customer-select-area-link" bindtap="onSelectDragUser">新增/编辑</view>
+		</view>
+	</view>
+	<view style="margin: 0 20rpx 64rpx;">
+		<view class="form-title form-title-required">
+			<view style="color: #522CCC">确诊疾病</view>
+			<view style="font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #333333;">（请选择您的确诊疾病）</view>
+		</view>
+		<view style="display: flex; flex-wrap: wrap;">
+			<view
+			 class="disease-tag {{item.isSelected ? 'disease-tag-selected' : ''}}"
+			 wx:for="{{confirmedDiseasesConfig}}"
+			 wx:key="index"
+			 bindtap="onClickDiseases"
+			 data-name="{{item.name}}"
+			>{{item.name}}
+			</view>
+		</view>
+	</view>
+	<view style="margin: 0 20rpx 64rpx;">
+		<view class="form-title form-title-required">
+			病情描述
+		</view>
+		<view class="base-font-style">
+			为了让医生更快地了解您的病情，请描述您的当前病情症状、病患时长、用药情况等。
+		</view>
+		<view class="textarea-wrp">
+			<textarea
+			 maxlength="{{500}}"
+			 placeholder-class="text-area-placeholder"
+			 placeholder="请填写病情描述，最少10个字，最多500字。"
+			 value="{{diseasesInfo}}"
+			 bindinput="onDiseasesInfoChange"
+			/>
+			<view class="text-area-placeholder" style="text-align: right; font-size: 24rpx">{{diseasesInfo.length}}/500</view>
+    </view>
+  </view>
+  <view style="margin: 0 20rpx 64rpx; padding-bottom: 350rpx">
+    <view class="form-title">
+      上传检查报告/处方/病历/患处照片
+    </view>
+    <view class="base-font-style">
+    照片仅自己和问诊医生可见（最多9张）
+    </view>
+    <view style="display: flex; margin-top: 22rpx;flex-wrap: wrap">
+			<view class="preview-image-upload" bindtap="onTempUrlsChange">
+			<van-icon name="plus" color="#CDCDCD" size="50rpx"/>
+			</view>
+      <view wx:for="{{tempUrls}}" class="preview-image" wx:key="*this">
+        <view class="preview-image-delete-icon" data-url="{{item}}" bindtap="deleteTempUrl"><van-icon name="cross"/></view>
+        <image src="{{item}}" class="preview-image-img"></image>
+      </view>
+    </view>
+  </view>
+  <view class="submit-btn-group">
+    <view class="submit-btn-group-tip">
+      <van-checkbox  bind:change="onPolicyCheckedChange"  checked-color="#583cc1" icon-class="submit-btn-group-tip-icon" label-class="submit-btn-group-tip-label" custom-class="submit-btn-group-tip-item" icon-size="24rpx" shape="round" value="{{ policyChecked }}" >
+      <view style="transition: .3s;color: {{policyChecked ? 'rgba(102, 102, 102, 1)' : 'rgba(102, 102, 102, .7)'}}">我已线下就诊确诊此疾病并使用过该药，且无过敏史、无相关禁忌症及不良反应</view>
+      </van-checkbox>
+    </view>
+    <van-button class="submit-btn-group-btn" color="linear-gradient(90deg, #583cc1, #6f2fd4)" type="info" block round size="normal" bindtap="submitPrescription">提交</van-button>
+  </view>
+</view>
+

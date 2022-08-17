@@ -1,0 +1,315 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+z-register(
+  show="{{memberShow}}"
+  bind:updateUserInfo="toMemberCenter"
+)
+//- 药品说明
+view.container(
+  hidden="{{!detail.id}}"
+)
+  z-adapter-view
+    //- banners
+    swiper.goods-banner(
+      indicator-dots
+      current="{{0}}"
+      id="goods-banner"
+    )  
+      swiper-item.goods-banner-item(
+        wx:for="{{detail._bannerList}}"
+        wx:key="banners"
+        wx:if!="{{detail._bannerList.length > 0}}"
+      )
+        image.goods-banner-img(
+          mode="widthFix"
+          src="{{item}}{{imgThumConfig.product_detail_banner_img}}"
+          data-index="{{index}}"
+          bindtap="onBannerClick"
+          binderror="onBannerError"
+        )
+        image.goods-banner-typepic(
+          src="{{'../../assets/icon/goodsType/type_' + detail.goodsType + '.png'}}"
+        )
+      swiper-item.goods-banner-item(
+       wx:if!="{{detail._bannerList.length == 0}}"
+      )
+        image.goods-banner-img(
+          mode="widthFix"
+          src="{{'../../assets/image/defaultImg.png'}}{{imgThumConfig.product_detail_banner_img}}"
+        )
+        image.goods-banner-typepic(
+          src="{{'../../assets/icon/goodsType/type_' + detail.goodsType + '.png'}}"
+        )
+    //- 活动
+    goods-detail-campaign(
+      wx:if!="{{currentSku.campaignProduct && currentSku.campaignProduct.isAvailable}}"
+      campaign="{{currentSku.campaignProduct}}"
+    )
+    //- 名称，价格
+    view.goods-info
+      view.goods-info-content
+        view.goods-coupon(
+          data-type="coupon"
+          bindtap="onPopupShowClick"
+          wx:if="{{couponList.length}}"
+        )
+          text.goods-coupon-label 优惠券
+          text.goods-coupon-value(
+            wx:if!="{{index < 3}}"
+            wx:for="{{couponList}}"
+            wx:key="index"
+            class="{{item.status != 'pending' ? 'goods-coupon-value-gray' : ''}}"
+          ) {{item.couponName}}
+          view.goods-coupon-right
+            z-icon(
+              z-class=""
+              type="right"
+              size="18"
+              color="#999"
+            )
+        view.goods-info-content-price 
+          view.goods-info-content-name 
+            view.name {{detail.distributorProductName || detail.name}}
+            image.goods-info-collect(
+              wx:if="{{detail.isFavorite}}"
+              data-type="cancel"
+              bindtap="onCollectClick"
+              src="../../assets/icon/goodsdetail/collect.png"
+            )
+            image.goods-info-collect(
+              wx:else
+              data-type="certain"
+              bindtap="onCollectClick"
+              src="../../assets/icon/goodsdetail/collect-hide.png"
+            )
+          view.goods-price
+            z-member-price(
+              wx:if!="{{currentSku && currentSku.actualPrice}}"
+              value!="{{currentSku}}"
+            )
+            z-member-price(
+              wx:else
+              value="{{detail}}"
+            )
+            view.sales(
+                wx:if="{{storeChannel != 'hkk'}}"
+            )
+              销量：{{detail.saleTotalStr}}
+              //- view 库存：{{detail.stockTotal}}
+        //加入会员
+        view.member-content(
+          wx:if!="{{ userInfo.level ==  'Normal' && memberChannel }}"
+          bindtap="toVip"
+        )加入会员下单获取健康豆，享受更多权益 >>
+
+    
+
+    //- 商品规格
+    view.spec-label
+      view.label(
+        wx:if="{{currentSku.specValueText}}"
+      ) 已选 {{currentSku.specValueText}}，{{currentSku.quantity}}件
+      view.desc
+        view(
+          data-type="spec"
+          bindtap="onPopupShowClick"
+        ) 共{{detail.sku && detail.sku.length}}种规格可选
+        view
+          z-icon(
+            type="right"
+          )
+    //- 药品说明
+    goods-detail-instruction(
+      goods="{{detail}}"
+    )
+    //- 套装
+    goods-detail-suit(
+      wx:if!="{{!!groupList.length}}"
+      suit="{{groupList}}"
+      type="{{detail.goodsType}}"
+      bindbuysuit="onBuySuit"
+    )
+    //- 评价
+    goods-detail-evaluate(
+      productId="{{detail.id}}"
+      commentTotal="{{commentTotal}}"
+      commentList="{{commentList}}"
+    )
+    //- 详情图片
+    view.goods-desc
+      view.goods-desc-label 图文详情
+      image.goods-desc-img(
+        wx:if="{{detail.goodsType == 2 || detail.goodsType == 1}}"
+        lazy-load
+        mode="widthFix"
+        src="{{tips_type_1and4}}"
+      )
+      image.goods-desc-img(
+        lazy-load
+        wx:for="{{detail._descriptionList}}"
+        wx:key="desc_img"
+        mode="widthFix"
+        src="{{item}}{{imgThumConfig.product_detail_desc_img}}"
+      )
+      image.goods-desc-img(
+        wx:if="{{detail.goodsType == 2 || detail.goodsType == 1}}"
+        lazy-load
+        mode="widthFix"
+        src="{{tips_type_2}}"
+      )
+      image.goods-desc-img(
+        wx:if="{{detail.goodsType == 4}}"
+        lazy-load
+        mode="widthFix"
+        src="{{tips_type_4}}"
+      )
+  z-buy-button-group(
+    id="buy-button-group"
+    isSoldOut="{{isSoldOut}}"
+    bindbuyClick="onGoBuyClick"
+    move="{{startAddCartAnimation}}"
+    type="{{detail.goodsType == 2 ? 'prescription' : 'cart' }}"
+    number="{{number}}"
+    bindaddCartClick="onAddCartClick"
+    bindappointmentClick="onAppointmentClick"
+    binddoctorClick="onDoctorClick"
+    bindsoldOutClick="showSoldOutModal"
+  )
+
+  //- 指南弹框 type="prescription"
+  z-modal(
+    id="sizeGuide-modal"
+  )
+    view.modal-content
+      image(
+        wx:if="{{detail.sizeGuide}}"
+        mode="widthFix"
+        src='{{detail.sizeGuide.imageUrl}}'
+      )
+
+  //- 选择规格
+  z-popup(
+    id="z-spec-drawer"
+    direction="up"
+    mask-closable="{{true}}"
+    bindonClose="onSpecDrawerClose"
+
+  )
+    z-adapter-view
+      view.goods-wrapper
+        image.goods-wrapper-img(
+          mode="widthFix"
+          src="{{currentSku.imageUrl || '../../assets/image/defaultImg.png'}}"
+          binderror="onImageError"
+        )
+        view.goods-wrapper-info
+          view.goods-wrapper-info-name {{detail.distributorProductName ? detail.distributorProductName : currentSku.name}}
+          view.goods-wrapper-info-price
+            z-member-price(
+              wx:if!="{{currentSku && currentSku.actualPrice}}"
+              value="{{currentSku}}"
+            )
+            z-member-price(
+              wx:else
+              value="{{detail}}"
+            )
+          view.goods-wrapper-info-stock(
+              wx:if="{{storeChannel != 'hkk'}}"
+          )
+           库存: {{currentSku.stock}}
+      view.drawer-content
+        view.goods-spec
+          view.goods-spec-content
+            view.goods-spec-content-section(
+              wx:for="{{detail.specs}}"
+              wx:key="spec"
+            )
+              view.item-title
+                view.item-title-label {{item.name}}
+              view.item-content
+                view.item-content-block(
+                  wx:for="{{item.values}}"
+                  wx:for-item="subItem"
+                  wx:for-index="subIndex"
+                  wx:key="value"
+                  data-disabled="{{subItem.disabled}}"
+                ) 
+                  view.item-content-block-content(  
+                    bindtap="onSpecValueClick"
+                    data-parent="{{index}}"
+                    data-child="{{subIndex}}"
+                    wx:if="{{!subItem.disabled}}"
+                    class="{{subItem.selected ? 'item-content-block-content-ed' : ''}}"
+                  ) 
+                    text {{subItem.value}}
+                  view.item-content-block-content(  
+                    wx:else
+                    class="item-content-block-disabled"
+                  ) 
+                    text {{subItem.value}}
+            view.goods-spec-content-section(
+              wx:if="{{relationGroup.length}}"
+            )
+              view.item-title
+                view.item-title-label 组合推荐
+              view.item-content
+                view.item-content-block(
+                  wx:for="{{relationGroup}}"
+                  wx:key="index"
+                ) 
+                  view.item-content-block-content(  
+                    data-product="{{item}}"
+                    bindtap="onGroupProductClick"
+                    class=""
+                  ) 
+                    text {{item.name}}
+        view.number-wrapper
+          view.number-wrapper-label 购买数量
+          view.number-wrapper-input(
+            wx:if="{{popType == 'spec'}}"  
+          )
+            z-input-number(
+              width="100"
+              min="{{1}}"
+              value="{{currentSku.quantity}}"
+              disabled!="{{!(currentSku.stock > 0) || currentSku.status == 'Disable'}}"
+              bindonChange="onSkuQuantityChange"
+            )
+        view(
+          wx:if!="{{currentSku.stock > 0 && !isSoldOut}}"
+        )
+          view.drawer-btn(
+            data-type="spec"
+            catchtap="onDrawerCertainClick"
+          ) 确定
+        view.drawer-btn(
+          style="background:gray;"
+          catchtap="showSoldOutModal"
+          wx:else
+        ) 已售罄
+
+  //- 领取优惠券
+  z-popup(
+    id="z-coupon-drawer"
+    direction="up"
+    mask-closable="{{true}}"
+  )
+    z-adapter-view
+      view.drawer-label 当前优惠券
+      view.drawer-content(
+        scroll-y
+        class="drawer-content-gray"
+      )
+        z-coupon-item(
+          wx:for="{{couponList}}"
+          wx:key="index"
+          data="{{item}}"
+          type="{{item.status}}"
+          btn-text="{{item.status == 'exchanged' ? '立即使用' : ''}}"
+          bindcouponclick="onCouponSelectClick"
+        )
+        view.drawer-content-empty(
+          wx:if!="{{!couponList.length}}"
+        ) - 暂无优惠券 -
+  

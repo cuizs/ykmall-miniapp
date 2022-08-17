@@ -1,0 +1,59 @@
+@import '../../style/page.common.css/common.variable.less';
+@color-white: #fff;
+page {
+  background: @bg-color-gray;
+}
+
+.container {
+  // padding: 0 20rpx;
+  height: 100vh;
+  .order {
+    &-header {
+      position: fixed;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: @color-white;
+      border-bottom: 2rpx solid @border-color-gray;
+      &-nav-tab {
+        border-bottom-width: 2rpx !important;
+        margin-bottom: -1px;
+        color: #aaa;
+        z-index: 999;
+      }
+    }
+    &-content {
+      padding: 98rpx 0 100rpx 0;
+      overflow-y: auto;
+      &-message {
+        padding: 0 100rpx;
+        position: fixed;
+        top: 40%;
+        left: 0;
+        right: 0;
+        .btn {
+          padding: 0 10rpx;
+          font-size: 32rpx;
+          color: @color-white;
+          height: 90rpx;
+          line-height: 90rpx;
+          text-align: center;
+          background: @bg-button-color;
+          border-radius: 40rpx;
+        }
+      }
+    }
+  }
+}
+.modal-content-item {
+  padding: 30rpx 40rpx;
+  .logistics-modal-company {
+    // text-align: center;
+    margin-bottom: 20rpx;
+    padding: 0 50rpx;
+  }
+  .logistics-modal-number {
+    padding: 0 50rpx;
+    // text-align: center;
+  }
+}

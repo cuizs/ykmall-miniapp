@@ -1,0 +1,80 @@
+@import "../../style/xy.css.library/variable.less";
+page{
+  background: @page-bg;
+}
+.container {
+  background:#ffffff;
+  margin-top:20rpx;
+  .cell{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom:20rpx;
+    position: relative;
+    padding: 24rpx;
+    box-sizing: border-box;
+    &-header{
+      height:50rpx;
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-bottom:4rpx;
+      &-step{
+        width:40rpx;
+        height: 40rpx;
+        border-radius: 100%;
+        background:@primary-color;
+        margin-right:20rpx;
+        color:#ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        z-index: 9;
+      }
+      &-name{
+        color:#888888;
+      }
+      &-btn{
+        width:126rpx;
+        height:50rpx;
+        border-radius: 25rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: @primary-color;
+        border:1px solid @primary-color;
+        position: absolute;
+        right:0;
+        top:0;
+      }
+    }
+    &-name{
+      padding:0 60rpx;
+      color:#000000;
+      margin-bottom:10rpx;
+    }
+    &-desc{
+      padding:0 60rpx;
+      padding-bottom:6rpx;
+      color: #b2b2b2;
+    }
+  }
+  .cell-line{
+    &::after{
+      content: '';
+      width:1px ;
+      height:100%;
+      background: @primary-color;
+      position: absolute;
+      left:42rpx;
+      top:40rpx;
+    }
+  }
+}
+.empty{
+  padding-top:20vh;
+  color: #353535;
+  text-align: center;
+  opacity: 0.6;
+}

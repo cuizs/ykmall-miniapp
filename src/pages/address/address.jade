@@ -1,0 +1,56 @@
+z-loading(
+  id="z-loading"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.cell(
+    wx:for="{{list}}"
+    wx:key="index"
+    data-item="{{item}}"
+    bindtap="onselect"
+  )
+    view.cell-content()
+      view.cell-content-name 
+        text.name {{item.userName}}
+        text.tel {{item.telephone}}
+      view.cell-content-address {{item.province}}{{item.city}}{{item.area}}{{item.address}}
+    view.cell-content-checkbox
+      van-checkbox(
+        catchtap
+        bind:change="onChange"
+        icon-size="14px"
+        data-item="{{item}}"
+        model:value="{{ item.isDefault }}"
+      )
+        view.cell-content-checkbox-label 设为默认
+    view.cell-content-select(
+      data-item="{{item}}"
+    ) 选择
+    view.opt
+      van-icon(
+        catchtap="onEdit"
+        data-item="{{item}}"
+        name="edit"
+        size="17px"
+        color="#008DF9"
+      )
+      van-icon(
+        catchtap="ondel"
+        data-id="{{item.id}}"
+        name="delete-o"
+        size="17px"
+        color="#E23F34"
+      )
+  //- 添加地址
+  view.add(
+    catchtap="onAddClick"
+  )
+    van-icon(
+      size="26px"
+      name="plus"
+    )
+    text 新增地址
+
+

@@ -1,0 +1,48 @@
+wxs(
+  src="./index.wxs" 
+  module="parse" 
+)
+view.xy-swipeout(
+  toggle
+  class="z-class"
+)
+  view.xy-swipeout-wrap
+    view.xy-swipeout-item(
+      bindtouchstart="handlerTouchstart",
+      bindtouchmove="handlerTouchmove",
+      bindtouchend="handlerTouchend",
+      style="{{parse.setPosition(position)}}"
+    )
+      view.xy-swipeout-content
+        slot( 
+          name="content"
+        )
+      view.xy-swipeout-button-right-group(
+        wx:if="{{!!actions.length}}",
+        catchtouchend="stopLoop"
+      )
+        view(
+          class="xy-swipeout-button-right-item",
+          wx:for="{{actions}}",
+          style="{{parse.setStyle(item)}}",
+          wx:key="index",
+          data-index="{{index}}",
+          bind:tap="handlerButton"
+        )
+          z-icon(
+            wx:if="{{item.icon}}"
+            type="{{item.icon}}"
+            color="{{item.color}}"
+          )
+          text {{item.label}}
+      view( 
+        class="xy-swipeout-button-right-group",
+        catchtouchend="stopLoop",
+        bindtap="handlerParentButton",
+        wx:if="{{actions.length === 0}}",
+        style="width: {{operateWidth}}px; right: -{{operateWidth}}px;"
+      )
+        slot(
+          name="button"
+        )
+

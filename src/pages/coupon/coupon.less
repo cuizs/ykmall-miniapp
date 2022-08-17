@@ -1,0 +1,68 @@
+@import '../../style/page.common.css/_page.series.less';
+@tab-bar-height: 60rpx;
+
+page {
+  background: #f2f2f2;
+}
+.container {
+  padding: 20rpx 30rpx;
+  .tab-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    border-bottom: 1px solid rgba(229, 229, 229, 0.2);
+    background-color: #fff;
+    .tab-inner {
+      display: flex;
+      align-items: center;
+      .tab-item {
+        width: 33.3%;
+        height: @tab-bar-height;
+        display: flex;
+        &-label {
+          font-size: 32rpx;
+          line-height: @tab-bar-height - 8rpx;
+        }
+        .tab-active-line {
+          height: 8rpx;
+          width: 94rpx;
+          border-radius: 8rpx;
+          background: #4389ef;
+        }
+        .tab-active-text {
+          font-weight: 500;
+          color: #4389ef;
+        }
+      }
+      .center-text {
+        justify-content: center;
+      }
+    }
+  }
+  .content-wrapper {
+    padding: @tab-bar-height 0rpx 100rpx;
+    .coupon-cell {
+      margin-top: 10rpx;
+    }
+  }
+  .tipword {
+    color: #292929;
+    opacity: 0.3;
+    letter-spacing: 1px;
+    line-height: 28rpx;
+    font-size: 24rpx;
+  }
+  &-tipword {
+    .tipword;
+    margin-top: 20%;
+  }
+  &-empty {
+    .tipword;
+    margin-top: 30%;
+  }
+}
+.common-series-item-name {
+  margin-top: 60rpx;
+}

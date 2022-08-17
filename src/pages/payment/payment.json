@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "订单确认",
+  "usingComponents": {
+    "van-icon": "@vant/weapp/icon/index",
+    "z-popup": "../../components/popup/index",
+    "z-form-button": "../../components/form-button/index",
+    "z-coupon-item": "../../components/coupon-item/index",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-popup": "@vant/weapp/popup/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "z-goods-suit-show":"../../components/business/goods-suit-show"
+  }
+}

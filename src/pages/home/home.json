@@ -1,0 +1,12 @@
+{
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "",
+  "backgroundColor": "#F4F5F6",
+  "usingComponents": {
+    "z-icon": "../../components/common/icon/index",
+    "z-cell": "../../components/cell/index",
+    "z-coupon-card": "../../components/coupon-card/index",
+    "z-member-nav": "../../components/member-nav/index"
+    
+  }
+}

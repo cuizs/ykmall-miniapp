@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-form-button": "../form-button/index"
+  }
+}

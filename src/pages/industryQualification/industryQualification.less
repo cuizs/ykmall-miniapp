@@ -1,0 +1,54 @@
+@import "../../style/xy.css.library/variable.less";
+.container {
+  background: #ffffff;
+  // padding: 24rpx;
+  font-size: 14px;
+  color: #333;
+  .one-img {
+    width: 100%;
+  }
+  .item {
+    margin: 16rpx 0;
+    &-title-box {
+      text-align: center;
+      line-height: 20px;
+      font-weight: 500;
+      position: relative;
+      width: 210rpx;
+      word-wrap: break-word;
+      word-break: break-all;
+      margin: 0 auto 30rpx;
+      &-star-left {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        left: -20px;
+        margin-top: -5px;
+      }
+      &-star-right {
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        margin-top: -5px;
+      }
+    }
+    &-detail {
+      font-weight: normal;
+      text-indent: 2em;
+      line-height: 1.5em;
+      letter-spacing: 2px;
+      word-spacing: 50px;
+      text-align: left;
+    }
+    &-imgs {
+      text-align: center;
+      &-item {
+        margin: 0 auto 20rpx;
+        height: 240rpx;
+      }
+    }
+  }
+}

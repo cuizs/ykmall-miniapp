@@ -1,0 +1,39 @@
+view.container
+  //- 搜索
+  view.container-input
+    z-icon(
+      type="search"
+      size="20"
+    )
+    div.search-input(
+      bindtap="onConfirmClick"
+    ) 搜索商品
+  scroll-view(
+    class="list"
+    scroll-x
+  )
+    view.cell(
+      wx:for="{{list}}"
+      wx:key="tab"
+      data-index="{{index}}"
+      data-type="{{item.type}}"
+      bindtap="onCellClick"
+    )
+      view.cell-content(
+        class="{{currentIdx === index ? 'cell-select-font-ed' : ''}}"
+      )
+        text.iconfont(
+          wx-if="{{item.icon === 'image'}}"
+          class="icon-shaixuan cell-content-icon"
+        )
+        view.cell-content-title {{item.label}}
+        view.cell-content-suffix
+          view.cell-content-suffix-sort(
+            wx:if="{{item.type === 'sort'}}"
+          )
+            view.icon-up(
+              class!="{{(currentIdx === index && item.sortType === 'asc') ? 'cell-icon-bg-ed' : 'cell-icon-bg'}}"
+            )
+            view.icon-down(
+              class!="{{(currentIdx === index && item.sortType === 'desc') ? 'cell-icon-bg-ed' : 'cell-icon-bg'}}"
+            )

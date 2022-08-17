@@ -1,0 +1,52 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.binding
+  view.binding-hint 请填写注册信息
+  view.binding-cell 
+    view.binding-cell-label 
+      text.binding-cell-label-icon(
+        class="iconfont icon-xingming"
+      )
+      姓名
+    view.binding-cell-input
+      input(
+        placeholder-style="color:#cccccc"
+        placeholder="请输入您的姓名"
+        data-key="name"
+        bindinput="onInput"
+      )
+  view.binding-cell 
+    view.binding-cell-label 
+      text.binding-cell-label-icon(
+         class="iconfont icon-shouji"
+      )
+      手机号
+    view.binding-cell-input
+      input(
+        type="number"
+        placeholder-style="color:#cccccc"
+        placeholder="请输入您的手机号"
+        data-key="mobile"
+        bindinput="onInput"
+      )
+  view.binding-cell 
+    view.binding-cell-label 
+      text.binding-cell-label-icon(
+        class="iconfont icon-yanzhengma"
+      )
+      验证码
+    view.binding-cell-input
+      input(
+        type="number"
+        placeholder-style="color:#cccccc"
+        placeholder="请输入您的验证码"
+        data-key="smsCode"
+        bindinput="onInput"
+      )
+      text.binding-cell-input-text(
+        bindtap="onSendCode"
+      ) {{countDown}}
+  view.binding-submit(
+    bindtap="onSubmitClick"
+  ) 确定绑定

@@ -1,0 +1,15 @@
+var setStyle = function(item) {
+  var defaults = '#f7f7f7'
+  var background = 'background:' + (item.background ? item.background : defaults)
+  var color = 'color:' + item.color
+  var fontSize = 'font-size:' + item.size
+  var width = 'width:' + item.width + 'px'
+  return background + ';' + color + ';' + fontSize + ';' + width + ';'
+}
+var setPosition = function(position) {
+  return 'transform:translate(' + position.pageX + 'px,0);'
+}
+module.exports = {
+  setStyle: setStyle,
+  setPosition: setPosition
+}

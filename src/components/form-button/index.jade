@@ -1,0 +1,16 @@
+form.container(
+  bindsubmit="onFormSubmit"
+)
+  button.form-button(
+    class="z-class"
+    plain
+    hover-class="none"
+    catchtap="onButtonClick"
+  )
+    text(
+      style="color: {{color}}; font-size: {{size}}rpx"
+      wx:if="{{text}}"
+    ) {{text}}
+    slot(
+      wx:else
+    )

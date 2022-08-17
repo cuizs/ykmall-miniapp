@@ -1,0 +1,10 @@
+view.xy-badge(
+  class="z-class"
+)
+  slot
+  view.xy-badge-dot(
+    wx:if="{{dot}}"
+  )
+  view.xy-badge-content(
+     wx:if!="{{!dot && !!visibleContent}}"
+  ) {{visibleContent}}

@@ -1,0 +1,5 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <image  bindtap="showPic" class="invoice-image" mode="aspectFit" src="{{picUrl}}"	show-menu-by-longpress></image>
+  <van-button type="info" block round bindtap="saveImg">保存</van-button>
+</view>

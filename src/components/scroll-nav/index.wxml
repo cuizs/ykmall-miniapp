@@ -1,0 +1,18 @@
+<view class="nav-container">
+	<view class="label-nav">
+		<scroll-view scroll-x="true" class="label-scoll" scroll-left="{{ navScrollLeft }}">
+			<view id="nav">
+				<view
+				 class="label-item {{ activeIndex==index?'active sol-class':'' }}"
+				 wx:for="{{ tabs }}"
+				 wx:key="index"
+				 data-index="{{ index }}"
+				 bindtap="onClick"
+				>
+					<text>{{ item.title }}</text>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>
+

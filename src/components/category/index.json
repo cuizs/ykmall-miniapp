@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-icon": "../common/icon/index",
+    "z-adapter": "../adapter-view/index",
+    "z-search-bar": "../search-bar/index",
+    "z-form-button": "../form-button/index"
+  }
+}

@@ -1,0 +1,121 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  z-adapter-view
+    view.checkout-content
+      view.checkout-title
+        view.checkout-title-label 收件信息
+        view.checkout-title-oper(
+          class="xy-line-under"
+          bindtap="onAuthAddressCilck"
+        ) 授权微信地址信息
+      form.checkout-info(
+        report-submit
+        bindsubmit="onSubmit"
+      )
+        view.text-filed
+          view.text-filed-label 收件人
+            text *
+          view.text-filed-content(
+            class=" xy-row xy-item-center xy-justify-center"
+          )
+            input.text-filed-content-input(
+              name="userName"
+              maxlength="12"
+              value="{{formData.userName}}"
+              placeholder="请输入收件人姓名"
+            )
+        view.text-filed
+          view.text-filed-label 手机
+            text *
+          view.text-filed-content(
+            class="xy-row xy-item-center xy-justify-center"
+          )
+            input.text-filed-content-input(
+              name="telephone"
+              maxlength="12"
+              value="{{formData.telephone}}"
+              placeholder="请输入收件人手机号"
+            )
+          picker.text-filed(
+            mode="region"
+            bindchange="onPickerChange"
+          )
+            view.text-filed-label 地区
+              text *
+            view.text-filed-content(
+              class="text-filed-region xy-row xy-item-center xy-justify-between"
+            )
+              view.text-filed-content-picker(
+                class=" xy-row xy-item-center xy-justify-center"
+              )
+                input.text-filed-content-picker-input(
+                  disabled
+                  name="province"
+                  value="{{formData.province}}"
+                  placeholder="省"
+                )
+                view.text-filed-content-arrow(
+                  class="xy-row xy-item-center xy-justify-center"
+                )
+                  van-icon(
+                    color="#008DF9"
+                    name="arrow-down"
+                  )
+              view.text-filed-content-picker(
+                class=" xy-row xy-item-center xy-justify-center"
+              )
+                input.text-filed-content-picker-input(
+                  disabled
+                  name="city"
+                  value="{{formData.city}}"
+                  placeholder="市"
+                )
+                view.text-filed-content-arrow(
+                  class="xy-row xy-item-center xy-justify-center"
+                )
+                  van-icon(
+                    color="#008DF9"
+                    name="arrow-down"
+                  )
+              view.text-filed-content-picker(
+                class=" xy-row xy-item-center xy-justify-center"
+              )
+                input.text-filed-content-picker-input(
+                  disabled
+                  name="area"
+                  value="{{formData.area}}"
+                  placeholder="区"
+                )
+                view.text-filed-content-arrow(
+                  class="xy-row xy-item-center xy-justify-center"
+                )
+                  van-icon(
+                    color="#008DF9"
+                    name="arrow-down"
+                  )
+          view.text-filed
+            view.text-filed-label 详细地址
+              text *
+            view.text-filed-content(
+              class=" xy-row xy-item-center xy-justify-center"
+            )
+              input.text-filed-content-input(
+                name="address"
+                maxlength="30"
+                value="{{formData.address}}"
+                placeholder="请输入收件人详细地址"
+              )
+          view.button-content
+            z-adapter-view
+              button(
+                plain
+                form-type="submit"
+                class="checkout-info-button"
+              ) 提交
+        
+        
+
+
+

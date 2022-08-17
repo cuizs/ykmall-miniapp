@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "成为推广人",
+  "usingComponents": {
+    "van-popup": "@vant/weapp/popup/index",
+    "van-area": "@vant/weapp/area/index"
+  }
+}

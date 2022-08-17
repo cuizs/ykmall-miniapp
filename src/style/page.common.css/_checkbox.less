@@ -1,0 +1,17 @@
+@import '../xy.css.library//variable.less';
+
+checkbox .wx-checkbox-input {
+  width: 32rpx;
+  height: 32rpx;
+  border-radius: 0;
+}
+checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+  text-align: center;
+  font-size: @font-size-small;
+  color: @primary-color;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+}

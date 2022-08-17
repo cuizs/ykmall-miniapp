@@ -1,0 +1,20 @@
+<!--components/messageText.wxml-->
+	<view>
+	<view class="msgItem {{data.role == '1' ? 'msgItemLeft' : 'msgItemRight'}}" id='msg-{{data.id}}'>
+		<view class="userAvatar userAvatarLeft" wx:if="{{data.role == '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+		<view data-audio="{{path}}" bindtap="playAudio" hover-class="msgTextHover" class="msgText {{data.role == '1' ? 'serverMsgText':''}}" style="width: {{20 + (duration * 0.5)}}%">
+				<view style="margin-left: {{data.role == '1' ? '-30rpx': '0'}}; margin-right: {{data.role == '0'? '-30rpx' : ''}}">{{duration}}"</view>
+				<view class="voiceIcon {{data.role == '0' ? 'voiceIconCustomer':''}}">
+						<view class="voiceCircle voiceCircle-one"></view>
+						<view class="voiceCircle voiceCircle-two {{playIndex === index? 'voiceCircle-two-active': ''}}"></view>
+						<view class="voiceCircle voiceCircle-tree  {{playIndex === index? 'voiceCircle-tree-active': ''}}"></view>
+				</view>
+		</view>
+		<view class="userAvatar userAvatarRight" wx:if="{{data.role != '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+	</view>
+	</view>
+

@@ -1,0 +1,26 @@
+view.order-item(
+    data-type='inquiry'
+    bindtap="onBtnClick"
+    data-detail="{{item}}"
+)
+  view.order-status 
+    text 问诊单号：{{item.inquiryId ? item.inquiryId :'暂无'}}
+    text.order-status-text(
+        class="{{statusText=='问诊中' ? '':'cancel'}}"
+    )
+      {{statusText}}
+  //- view.order-status-item 
+  //-   text 问诊内容：{{item.confirmedDiseasesInfo?item.confirmedDiseasesInfo:"暂无"}}
+  //- view.order-status-item 
+  //-   text 问诊时间：{{item.expireTime}}
+  view.item-total 实付款：  
+    z-currency(
+        unit="¥"
+        value="0.00"
+      )
+   
+    
+    
+
+
+  

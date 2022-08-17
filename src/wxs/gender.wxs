@@ -1,0 +1,12 @@
+var GENDER_MAP = {
+  '1': '男',
+  '2': '女'
+}
+
+var getGenderByKey = function (key) {
+  return GENDER_MAP[decodeURI(key)] || '其他'
+}
+
+module.exports = {
+  getGenderByKey: getGenderByKey
+}

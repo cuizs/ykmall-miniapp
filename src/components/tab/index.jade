@@ -1,0 +1,12 @@
+wxs(
+  src="./index.wxs"
+  module="tool"
+)
+view.xy-tab(
+  class="z-class"
+  style="{{tool.getDomStyles(current, index, color)}}"
+  data-index="{{index}}"
+  catchtap="changeTab"
+) {{title}}
+  slot
+  

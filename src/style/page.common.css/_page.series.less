@@ -1,0 +1,116 @@
+/*
+* 公共系列模块样式
+*/
+@import './_scroll.less';
+@import './common.mixins.less';
+@import './common.variable.less';
+
+@common-series-item-pb: 40rpx;
+@common-scroll-item-px: 20rpx;
+.common-series {
+  &-item {
+    &-name {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 10rpx;
+      padding-bottom: 40rpx;
+      position: relative;
+      // image {
+      //   width: 40rpx;
+      //   height: 26rpx;
+      // }
+      &-title {
+        font-size: 36rpx;
+        color: #000;
+        font-weight: 500;
+        padding: 0 20rpx;
+        .word-line-ellipsis(1);
+      }
+      &-more {
+        font-size: 12px;
+        color: #B2B2B2;
+        line-height: 24px;
+        position: absolute;
+        top: 6px;
+        right: 22px;
+      }
+    }
+  }
+}
+.common-scroll {
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  &-item {
+    width: 330rpx;
+    float: left;
+    background: #fff;
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 12rpx;
+    margin-bottom: 30rpx;
+    position: relative;
+    &:nth-of-type(2n) {
+      margin-left: 30rpx;
+    }
+    &-pic {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .goods-img {
+        width: @home-goods-img-width;
+        height: @home-goods-img-height;
+        border-top-left-radius: 12rpx;
+        border-top-right-radius: 12rpx;
+      }
+      &-loading {
+        width: @home-goods-img-width;
+        height: @home-goods-img-height;
+        border-top-left-radius: 12rpx;
+        border-top-right-radius: 12rpx;
+      }
+    }
+    &-typepic {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 90rpx;
+      height: 40rpx;
+    }
+    &-title {
+      height: 190rpx;
+      width: @home-goods-img-width;
+      font-size: 24rpx;
+      padding: 15rpx;
+      box-sizing: border-box;
+      &-sales {
+        font-size: 20rpx;
+        color: @sub-title-color;
+      }
+      &-text {
+        width: @home-goods-img-width - 40rpx;
+        height: 74rpx;
+        padding: 10rpx 0;
+        .word-line-ellipsis(2);
+        font-size: 28rpx;
+        
+      }
+      &-pric {
+        display: flex;
+        align-items: center;
+        .coupon-tag {
+          width: 30rpx;
+          height: 30rpx;
+          line-height: 30rpx;
+          color: #fff;
+          font-size: 22rpx;
+          text-align: center;
+          background: #ff3b30;
+          border-radius: 4rpx;
+          margin-left: 8rpx;
+        }
+      }
+    }
+  }
+}

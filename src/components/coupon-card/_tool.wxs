@@ -1,0 +1,44 @@
+// 根据券类型
+var getName = function (item) {
+  var name = ''
+  switch (item.type) {
+    // 立减券
+    case 'CashVoucher':
+      name = item.amount + '元券'
+      break
+    // 满减券
+    case 'Full':
+      name = item.amount + '元券'
+      break
+    // 立减折扣券
+    case 'Discount':
+      name = item.discountRate * 10 + '折券'
+      break
+    // 满折券
+    case 'FullDiscount':
+      name = item.discountRate * 10 + '折券'
+      break
+  }
+  return name
+}
+
+// 根据券类型获取副标题
+var getDesc = function (item) {
+  var desc = ''
+  switch (item.type) {
+    // 满减券
+    case 'Full':
+      desc = '满' + item.minAmount + '减' + item.amount
+      break
+    // 满折券
+    case 'FullDiscount':
+      desc = desc = '满' + item.minAmount + '打' + item.discountRate * 10 + '折'
+      break
+  }
+  return desc
+}
+
+module.exports = {
+  getName: getName,
+  getDesc: getDesc
+}

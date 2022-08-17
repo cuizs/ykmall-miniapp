@@ -1,0 +1,37 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container(
+    catchtap="onPageClick"
+)
+    view.order
+        van-dialog(id="van-dialog")
+        //- 头部 tab
+        view.order-header
+          view.order-header-left
+            view.order-header-left-paid {{sumAmount}}
+            view.order-header-left-tip  推广订单总金额 (已支付）
+          view.order-header-center 
+          view.order-header-right
+            view.order-header-right-paid  {{orderCount}}
+            view.order-header-right-tip  推广订单总数
+        z-adapter-view
+            view.order-content
+                //- 列表无数据时提示
+                view.order-content-message(
+                    wx:if="{{!orderData.length}}"
+                ) 暂无订单
+                //- 全部
+                view(
+                    wx:for="{{orderData}}"
+                    wx:key="order_item_cancelled"
+                )
+                    z-order-item(
+                        item="{{item}}"
+                        status-text="{{item._statusContext}}"
+                        showMoreKey="{{showMoreKey}}"
+                        status-color="{{item._statusColor}}"
+                    )
+                
+
+  

@@ -1,0 +1,52 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container 
+  view(id="layout" wx:if="{{pageStatus}}") 
+    view.layout(
+      wx:for="{{layout}}"
+      wx:key="id"
+      wx:for-item="modules"
+    ) 
+      //- 轮播
+      view(wx:if!="{{modules.type === 'banner'}}")
+        swiper(
+          indicator-dots="{{true}}"
+          autoplay="{{true}}" 
+          interval="{{2000}}" 
+          duration="{{500}}"
+          circular="{{true}}"
+          style="height: {{modules.sizeType == 1? 562 : 250 }}rpx"
+        )
+          swiper-item(
+            wx:for="{{modules.items}}" 
+            wx:key="*this"
+          )
+            view.swiper-item
+              image(src="{{item.picUrl}}" data-item="{{item}}" bindtap="onBannerClick"  style="width: 100%; height: {{modules.sizeType === 1? 562 * ratioTo375 : 250 * ratioTo375 }}rpx")
+
+      //- 热区
+      view(
+          wx:if!="{{modules.type === 'hotArea'}}"
+          style="position: relative;width: {{modules.bounding.w * ratioTo375 * 2}}rpx;height: {{modules.bounding.h * ratioTo375 * 2}}rpx;"
+        )
+        view(
+          wx:for="{{modules.items}}"
+          wx:for-item="rect"
+          wx:for-key="index"
+          style="position: absolute; z-index:{{index + 1}};width: {{rect.bounding.w * ratioTo375 *2}}rpx;height: {{rect.bounding.h * ratioTo375 * 2}}rpx; left:{{rect.bounding.l * ratioTo375 * 2}}rpx; top:{{rect.bounding.t * ratioTo375 * 2}}rpx"
+          data-item="{{rect}}" 
+          bindtap="onBannerClick"
+        )
+        image(
+          src="{{modules.areaPic}}" 
+          style="width: {{modules.bounding.w * ratioTo375 * 2}}rpx;height: {{modules.bounding.h * ratioTo375 * 2}}rpx"
+        )
+  view.end(wx:else)
+    image.nullImg(
+      src="http://ykyao-mall.oss-cn-shanghai.aliyuncs.com/dev/GdXwaq1648890561208.png"
+    )
+    view.text1 很抱歉，您来晚了
+    view.text2 活动已结束
+   
+

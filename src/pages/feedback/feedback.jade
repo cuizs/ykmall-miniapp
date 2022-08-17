@@ -1,0 +1,27 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container(
+  class="xy-column xy-item-center "
+)
+  textarea.text(
+    placeholder="请输入您的宝贵意见或建议，限140字。"
+    maxlength="140"
+    auto-focus
+    model:value="{{value}}"
+    disable-default-padding
+    confirm-type="done"
+    bindinput="bindinput"
+  )
+  view.btn(
+    bindtap="onsave"
+  ) 提交
+
+view.success(
+  wx:if="{{show}}"
+)
+  image.img(
+    src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/s5YB6i1659319852043.png"
+  )
+  view.tip 反馈成功
+  view.msg 感谢您提出的宝贵意见，我们将提供更专业便捷的就医购药服务！

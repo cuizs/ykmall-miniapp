@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-badge": "../../badge/index",
+    "z-form-button": "../../form-button/index",
+    "z-adapter-view": "../../adapter-view/index"
+  }
+}

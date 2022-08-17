@@ -1,0 +1,17 @@
+/**
+ * 返回过期时间
+ */
+
+var returnExpireTime = function (expireTime) {
+  if (expireTime) return expireTime.slice(0, 10)
+}
+
+contentFlexStyle = function (reverseSuffix) {
+  if (reverseSuffix) return 'flex-direction: row-reverse;'
+  return ''
+}
+
+module.exports = {
+  returnExpireTime: returnExpireTime,
+  contentFlexStyle: contentFlexStyle
+}

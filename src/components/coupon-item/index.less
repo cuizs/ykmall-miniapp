@@ -1,0 +1,167 @@
+@import '../../style/page.common.css/common.mixins.less';
+@import '../../style/page.common.css/common.variable.less';
+
+@cell-height: 262rpx;
+@cell-border-radius: 8px;
+
+.coupon-cell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: @cell-height;
+  position: relative;
+  font-size: 28rpx;
+  border-radius: @cell-border-radius;
+  margin-bottom: 20rpx;
+  background: #fff;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  &-left {
+    padding: 30rpx 0 30rpx 40rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &-name {
+      display: flex;
+      align-items: center;
+      font-size: 36rpx;
+      font-weight: 600;
+      margin-right: 20rpx;
+      .word-line-ellipsis(1);
+    }
+    &-scope {
+      padding-top: 10rpx;
+    }
+    &-type {
+      display: flex;
+      align-items: center;
+      padding-top: 8rpx;
+      .type-tag {
+        padding: 2rpx 14rpx;
+        color: #fff;
+        font-size: 22rpx;
+        background: #82b5ff;
+        border-radius: 20rpx;
+      }
+      .ml {
+        margin-left: 5rpx;
+      }
+    }
+    &-time {
+      color: #999999;
+      padding-top: 10rpx;
+    }
+  }
+
+  &-right {
+    width: @cell-height;
+    min-height: @cell-height;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &-positive {
+      background: radial-gradient(transparent 0, transparent 4px, #82b5ff 4px);
+      background-size: 15px 15px;
+      background-position: 8px 0px;
+      position: relative;
+      border-top-right-radius: @cell-border-radius;
+      border-bottom-right-radius: @cell-border-radius;
+      .positive-bg {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 1;
+        width: @cell-height - 15rpx;
+        background: #82b5ff;
+        border-top-right-radius: @cell-border-radius;
+        border-bottom-right-radius: @cell-border-radius;
+      }
+    }
+    &-reverse {
+      position: relative;
+      border-top-left-radius: @cell-border-radius;
+      border-bottom-left-radius: @cell-border-radius;
+      &::before {
+        content: '';
+        position: absolute;
+        height: 100%;
+        width: 20rpx;
+        right: 6rpx;
+        top: 0;
+        background-image: radial-gradient(circle at 0px 10rpx, #fff 10rpx, #82b5ff 10rpx);
+        background-size: 10rpx 40rpx;
+        transform: rotate(180deg);
+      }
+      .reverse-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1;
+        width: @cell-height - 15rpx;
+        background: #82b5ff;
+        border-top-left-radius: @cell-border-radius;
+        border-bottom-left-radius: @cell-border-radius;
+      }
+    }
+    .inner {
+      position: absolute;
+      z-index: 2;
+      width: @cell-height - 40rpx;
+      height: @cell-height - 40rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #4389ef;
+      border-radius: @cell-border-radius;
+      &-positive {
+        margin-left: 5rpx;
+      }
+      &-reverse {
+        margin-left: -5rpx;
+      }
+      &-content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        .amount {
+          color: #fff;
+          text-align: end;
+          &-text {
+            font-size: 42rpx;
+          }
+          &-unit {
+            font-size: 24rpx;
+          }
+        }
+        .desc {
+          color: #fff;
+          font-size: 24rpx;
+        }
+        .btn {
+          width: 140rpx;
+          margin-top: 20rpx;
+          line-height: 45rpx;
+          font-size: 24rpx;
+          color: #4389ef;
+          text-align: center;
+          border-radius: 62rpx;
+          background: #ffffff;
+        }
+      }
+    }
+  }
+
+  &-suffix {
+    width: 60rpx;
+  }
+
+  &-status {
+    position: absolute;
+    width: 120rpx;
+    height: 120rpx;
+    right: 10rpx;
+    top: 10rpx;
+    z-index: 99;
+  }
+}

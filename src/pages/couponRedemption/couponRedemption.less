@@ -1,0 +1,28 @@
+@tab-bar-height: 20rpx;
+
+page {
+  background: #f2f2f2;
+}
+.container {
+  .content-wrapper {
+    padding: @tab-bar-height 30rpx;
+    .coupon-cell {
+      margin-bottom: 20rpx;
+    }
+  }
+  .tipword {
+    color: #292929;
+    opacity: 0.3;
+    letter-spacing: 1px;
+    line-height: 28rpx;
+    font-size: 24rpx;
+  }
+  &-tipword {
+    .tipword;
+    margin-top: 20%;
+  }
+  &-empty {
+    .tipword;
+    margin-top: 30%;
+  }
+}

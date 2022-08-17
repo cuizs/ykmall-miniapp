@@ -1,0 +1,18 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.tabs
+    view(
+      class="tab-item {{ activeIndex==index?'active':'' }}"
+      wx:for="{{ tabs }}"
+      wx:key="index"
+      data-index="{{ index }}"
+      bindtap="onTabClick"
+    ) {{item.title}}
+  //- 商品列表
+  z-goods-list-row(
+    goodsList="{{goodsList}}"
+    bindclick="onGoodsRowClick"
+    type="miaoshaPage"
+  )

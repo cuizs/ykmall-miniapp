@@ -1,0 +1,147 @@
+{
+  "pages": [
+    "pages/home/home",
+    "pages/category/category",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/checkout/checkout",
+    "pages/series/series",
+    "pages/goodsDetail/goodsDetail",
+    "pages/payment/payment",
+    "pages/goodsList/goodsList",
+    "pages/orderDetail/orderDetail",
+    "pages/inquiryDetail/inquiryDetail",
+    "pages/imageView/imageView",
+    "pages/webView/webView",
+    "pages/advanceOrder/advanceOrder",
+    "pages/binding/binding",
+    "pages/mine/mine",
+    "pages/collection/collection",
+    "pages/registerMember/registerMember",
+    "pages/registerPromoter/registerPromoter",
+    "pages/coupon/coupon",
+    "pages/customerEquity/customerEquity",
+    "pages/couponRedemption/couponRedemption",
+    "pages/address/address",
+    "pages/lowCostPublicMedicine/lowCostPublicMedicine",
+    "pages/miaoshaPage/miaoshaPage",
+    "pages/exclusiveForNewPeople/exclusiveForNewPeople",
+    "pages/feedback/feedback",
+    "pages/search/search",
+    "pages/industryQualification/industryQualification",
+    "pages/couponCenter/couponCenter",
+    "pages/prescribe/prescribe",
+    "pages/historyPrescription/historyPrescription",
+    "pages/dragUserList/dragUserList",
+    "pages/dragUserDetail/dragUserDetail",
+    "pages/invoiceList/invoiceList",
+    "pages/invoiceDetail/invoiceDetail",
+    "pages/refund/refund",
+    "pages/evaluateCreate/evaluateCreate",
+    "pages/evaluateDetail/evaluateDetail",
+    "pages/logisticsDetail/logisticsDetail",
+    "pages/doctor/doctor",
+    "pages/goodsComment/goodsComment",
+    "pages/bill/bill",
+    "pages/register/register",
+    "pages/privacy/privacy",
+    "pages/hiddenCoupon/hiddenCoupon",
+    "pages/registerSpread/registerSpread",
+    "pages/promoteOrder/promoteOrder"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/campaignPage/",
+      "pages": [
+        "campaignPage"
+      ]
+    },
+    {
+      "root": "pages/applyInvoice/",
+      "pages": [
+        "applyInvoice"
+      ]
+    },
+    {
+      "root": "pages/viewInvoice/",
+      "pages": [
+        "viewInvoice"
+      ]
+    },
+    {
+    "root": "pages_hkk",
+    "pages": [
+      "prescribe/prescribe",
+      "inquiryChat/inquiryChat"
+    ]
+  }
+  ],
+  "preloadRule": {
+    "pages/campaignPage/campaignPage": {
+      "network": "all",
+      "packages": ["__APP__"]
+    },
+    "pages_hkk/prescribe/prescribe": {
+      "network": "all",
+      "packages": ["__APP__"]
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "云开药网",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 50
+  },
+  "usingComponents": {
+    "z-icon": "components/common/icon/index",
+    "z-modal": "components/modal/index",
+    "z-currency": "components/currency/index",
+    "z-navi-bar": "components/navi-bar/index",
+    "z-loading": "components/common/loading/index",
+    "z-spin-image": "components/spin-image/index",
+    "z-member-price": "components/member-price/index",
+    "z-adapter-view": "components/common/adapter-view/index",
+    "z-register": "components/register/index",
+    "z-customer-service":"components/customer-service/index"
+  },
+  "tabBar": {
+    "color": "#aaa",
+    "selectedColor": "#000",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/home/home",
+        "iconPath": "assets/icon/tabbar/home-ed.png",
+        "selectedIconPath": "assets/icon/tabbar/home.png"
+      },
+      {
+        "text": "分类",
+        "pagePath": "pages/category/category",
+        "iconPath": "assets/icon/tabbar/category-ed.png",
+        "selectedIconPath": "assets/icon/tabbar/category.png"
+      },
+      {
+        "text": "需求清单",
+        "pagePath": "pages/bill/bill",
+        "iconPath": "assets/icon/tabbar/bill.png",
+        "selectedIconPath": "assets/icon/tabbar/bill-ed.png"
+      },
+      {
+        "text": "购物车",
+        "pagePath": "pages/cart/cart",
+        "iconPath": "assets/icon/tabbar/cart-ed.png",
+        "selectedIconPath": "assets/icon/tabbar/cart.png"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/mine/mine",
+        "iconPath": "assets/icon/tabbar/min-ed.png",
+        "selectedIconPath": "assets/icon/tabbar/min.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000
+  },
+  "navigateToMiniProgramAppIdList": []
+}

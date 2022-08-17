@@ -1,0 +1,270 @@
+z-loading(
+  id="z-loading"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.movable-content
+    view.container-header(wx:if="{{iscustomHomePage}}")
+      view.container-header-bg(
+        class="{{currentChannel ? currentChannel + '-main-bg' : ''}}"
+      )
+      //- 搜索
+      view.container-header-filter
+        image(
+          class="container-header-filter-logo"
+          mode="widthFix"
+          src!="{{currentChannel ? '../../assets/image/channel/logo_' + currentChannel + '.png' : '../../assets/image/channel/logo_default.png'}}"
+        )
+        view.container-header-filter-input(
+          bindtap="onSearchClick"
+        )
+          z-icon(
+            class="container-header-filter-input-icon"
+            type="search"
+            size="14"
+          )
+          text 搜索药品名称、品牌
+      view.container-header-title-cue(
+        bindtap="onIndustryQualificationClick"
+      )
+        text {{currentChannel == 'youanmen' ? '正品保障、售后无忧、方便及时' : '正品保障、售后无忧、专业权威'}}
+        view.container-header-title-cue-right 专业 权威
+          z-icon(
+            type="arrow-right"
+            size="14"
+          )
+
+      //- banners
+      //- swiper.banners-swiper(
+      //-   autoplay
+      //-   circular
+      //-   indicator-dots
+      //-   duration="500"
+      //-   interval="3000" 
+      //-   indicator-color="#999"
+      //-   indicator-active-color="#fff"
+      //- )
+      //-   swiper-item.banners-swiper-item(
+      //-     wx:for="{{bannerList}}"
+      //-     wx:key="swiper"
+      //-     data-id="{{item.id}}"
+      //-   )
+      //-     image.swiper-image(
+      //-       src="{{item.imageUrl}}"
+      //-       data-item="{{item}}"
+      //-       bindtap="onBannerClick"
+      //-     )
+    view(wx:if="{{iscustomHomePage}}" id="layout" style="margin: 0 auto; margin-top: -300rpx") 
+      view.layout(
+        wx:for="{{layout}}"
+        wx:key="id"
+        wx:for-item="modules"
+      ) 
+        //- 轮播
+        view(wx:if!="{{modules.type === 'banner'}}")
+          swiper(
+            indicator-dots="{{true}}"
+            autoplay="{{true}}" 
+            interval="{{2000}}" 
+            duration="{{500}}"
+            circular="{{true}}"
+            style="height: {{modules.sizeType == 1? 562 : 250 }}rpx"
+          )
+            swiper-item(
+              wx:for="{{modules.items}}" 
+              wx:key="*this"
+            )
+              view.swiper-item(style="width: 100%; background: #fff; height: {{modules.sizeType === 1? 562 * ratioTo375 : 250 * ratioTo375 }}rpx")
+                image(src="{{item.picUrl}}" data-item="{{item}}" bindtap="onBannerClick"  style="width: 100%; height: {{modules.sizeType === 1? 562 * ratioTo375 : 250 * ratioTo375 }}rpx")
+
+        //- 热区
+        view(
+            wx:if!="{{modules.type === 'hotArea'}}"
+            style="position: relative;width: 100%;height: {{modules.bounding.h * ratioTo375 * 2}}rpx;"
+          )
+          view(
+            wx:for="{{modules.items}}"
+            wx:for-item="rect"
+            wx:for-key="index"
+            style="position: absolute; z-index:{{index + 1}};width: {{rect.bounding.w * ratioTo375 *2}}rpx;height: {{rect.bounding.h * ratioTo375 * 2}}rpx; left:{{rect.bounding.l * ratioTo375 * 2}}rpx; top:{{rect.bounding.t * ratioTo375 * 2}}rpx"
+            data-item="{{rect}}" 
+            bindtap="onBannerClick"
+          )
+          image(
+            src="{{modules.areaPic}}" 
+            style="width: 100%;height: {{modules.bounding.h * ratioTo375 * 2}}rpx"
+          )
+    view(wx:else)
+      view.container-header
+        view.container-header-bg(
+          class="{{currentChannel ? currentChannel + '-main-bg' : ''}}"
+        )
+        //- 搜索
+        view.container-header-filter
+          image(
+            class="container-header-filter-logo"
+            mode="widthFix"
+            src!="{{currentChannel ? '../../assets/image/channel/logo_' + currentChannel + '.png' : '../../assets/image/channel/logo_default.png'}}"
+          )
+          view.container-header-filter-input(
+            bindtap="onSearchClick"
+          )
+            z-icon(
+              class="container-header-filter-input-icon"
+              type="search"
+              size="14"
+            )
+            text 搜索药品名称、品牌
+        view.container-header-title-cue(
+          bindtap="onIndustryQualificationClick"
+        )
+          text {{currentChannel == 'youanmen' ? '正品保障、售后无忧、方便及时' : '正品保障、售后无忧、专业权威'}}
+          view.container-header-title-cue-right 专业 权威
+            z-icon(
+              type="arrow-right"
+              size="14"
+            )
+        //- banners
+        swiper.banners-swiper(
+          autoplay
+          circular
+          indicator-dots
+          duration="500"
+          interval="3000" 
+          indicator-color="#999"
+          indicator-active-color="#fff"
+        )
+          swiper-item.banners-swiper-item(
+            wx:for="{{bannerList}}"
+            wx:key="swiper"
+            data-id="{{item.id}}"
+          )
+            image.swiper-image(
+              src="{{item.imageUrl}}"
+              data-item="{{item}}"
+              bindtap="onBannerClick"
+            )
+      //- 分类
+      view.category-scroll(
+        wx:if!="{{!!categoryList.length}}"
+      )
+        view.category-scroll-item(
+          wx:for="{{categoryList}}"
+          wx:key="category"
+          data-id="{{item.externalIdentity}}"
+          data-detail="{{item}}"
+          bindtap="onCategoryClick"
+        )
+          z-spin-image(
+            mode="widthFix"
+            z-class="category-pic"
+            src="{{item.imageUrl}}"
+          )
+          view.category-name( 
+            class="xy-text-center xy-f-24 xy-py-5"
+          ) {{item.name}}
+      //- 新人专享
+      view.new-people(
+        wx:if!="{{exclusiveForNewPeople.length > 0}}"
+      )
+        view.new-people-title-row 
+          view.new-people-title-row-title 新人专享
+          view.new-people-title-row-more(
+            bindtap="onNewPeopleMoreClick"
+          ) 更多
+            z-icon(
+              type="arrow-right"
+              size="14"
+            )
+        view.new-people-content 
+          view(
+            wx:if!="{{!!campaignObj.id}}"
+            class="new-people-content-item new-people-content-item-first"
+            bindtap="onCampaignCouponClick"
+          )
+            image(
+              class="new-people-content-item-first-image"
+              mode="heightFix"
+              src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/wj05WE1659060172701.png"
+            )
+            view.new-people-content-item-first-title 新人优惠券
+            view.new-people-content-item-first-price 
+              view.new-people-content-item-first-price-money {{campaignObj.extAmountText.unit}}
+              view.new-people-content-item-first-price-num {{campaignObj.extAmountText.amount}}
+          view(
+            class="new-people-content-item new-people-content-item-normal"
+            wx:for="{{exclusiveForNewPeople}}"
+            wx:key="index"
+            data-item="{{item}}"
+            bindtap="onExclusiveForNewPeopleClick"
+          )
+            view.empty-mask(
+              wx:if="{{item.stock == 0}}"
+            )
+              view.empty-mask-box 已抢光
+            image(
+              class="new-people-content-item-normal-image"
+              mode="widthFix"
+              src="{{item.distributorImgUrl ||item.imageUrl ||  '../../assets/image/defaultImg.png'}}"
+              binderror="onExclusiveForNewPeopleError"
+              data-index="{{index}}"
+
+            )
+            view.new-people-content-item-normal-tag 新人专享
+            view.new-people-content-item-normal-price 
+              view.new-people-content-item-normal-price-actual
+                view.new-people-content-item-normal-price-actual-money ￥
+                view.new-people-content-item-normal-price-actual-num {{item.salePrice}}
+              view.new-people-content-item-normal-price-original ￥{{item.originSalePrice}}
+      //- 推荐药品
+      view.common-series
+      view.common-series-item(
+        wx:for="{{seriesList}}"
+        wx:key="series"
+        wx:if!="{{item.products && item.products.length}}"
+      ) 
+        view.common-series-item-name
+          view.common-series-item-name-title(
+            class="{{currentChannel + '-text-color'}}"
+          ) {{item.name}}
+          view.common-series-item-name-more(
+            data-id="{{item.externalIdentity}}"
+            bindtap="onNewMoreClick"
+          ) 更多
+            z-icon(
+              type="arrow-right"
+              size="14"
+            )
+        view.common-scroll
+          view.common-scroll-item(
+            wx:for="{{item.products}}"
+            wx:for-item="subItem"
+            wx:key="index"
+            data-id="{{subItem.id}}"
+            bindtap="onGoodsClick"
+          )
+            view.common-scroll-item-pic
+              z-spin-image(
+                z-class="goods-img"
+                lazy-load
+                mode="aspectFit"
+                item="{{subItem}}"
+                hint-text="{{subItem.totalStock === 0 ? '补货中' : null }}"
+                src="{{subItem.distributorImgUrl || subItem.imgUrl || '../../assets/image/defaultImg.png'}}{{imgThumConfig.product_list_img}}"
+              )
+            image.common-scroll-item-typepic(src="{{'../../assets/icon/goodsType/type_' + subItem.goodsType + '.png'}}", alt="")
+            view.common-scroll-item-title
+              view.common-scroll-item-title-sales(
+                wx:if="{{currentChannel != 'hkk'}}"
+              )
+               销量：{{subItem.saleTotalStr}}
+              view.common-scroll-item-title-text {{subItem.distributorProductName || subItem.name}}
+              view.common-scroll-item-title-pric
+                z-member-price(
+                  value="{{subItem}}"
+                )
+                view.coupon-tag(
+                  wx:if="{{subItem.existCoupon}}"
+                ) 券

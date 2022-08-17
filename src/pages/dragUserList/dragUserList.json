@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "用药人信息列表",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "z-icon": "../../components/common/icon/index",
+    "z-fixed-footer": "../../components/fixed-footer/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-checkbox": "@vant/weapp/checkbox/index"
+  }
+}

@@ -1,0 +1,73 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<van-overlay show="{{ showDemo }}" z-index="{{ 200 }}" bind:click="onClickHide">
+  <view class="imageWrapper">
+    <image src="{{demoPath}}" mode="widthFix" alt="" />
+  </view>
+</van-overlay>
+<view class="container">
+  <view class="user-info" wx:if="{{selectedDragUserId && dragUserDetail}}">
+    <view class="user-info-title">用药人</view>
+    <view class="user-info-name">{{dragUserDetail.name}}
+      <view class="verified" wx:if="{{dragUserDetail.verified}}">实名认证</view>
+    </view>
+    <view class="user-info-detail">
+      <text>{{dragUserDetail.gender ? '男' : '女'}}</text>
+      <text>{{dragUserDetail.age}}岁</text>
+      <text>{{dragUserDetail.noPassByMobile}}</text>
+    </view>
+    <view class="user-info-btn" bindtap="onClickUserMore">
+      更多 <z-icon type="arrow-right" size="14"></z-icon>
+    </view>
+  </view>
+  <view class="user-info-none" wx:else>
+    <van-button round type="info" class="bottom-button" bindtap="onClickUserMore">选择用药人</van-button>
+  </view>
+  <view class="content-box">
+    <view class="content-box-cue">以下信息用于提交医生获取电子处方，医生若需要会电话联系您。</view>
+    <view class="content-box-title">确诊疾病<text style="color:red;">*</text></view>
+    <view class="content-box-tags">
+      <view 
+        wx:for="{{confirmedDiseasesConfig}}" 
+        wx:key="index"
+        data-name="{{item.name}}"
+        class="content-box-tags-item {{item.isSelected ? 'tag-active' : ''}}"
+        bindtap="onClickDiseases"
+        >{{item.name}}</view>
+    </view>
+    <view class="content-box-radio-cell">
+      <text>是否去医院就诊过</text>
+      <van-radio-group class="content-box-radio-cell-group" value="{{ seenDoctor }}" bind:change="onSeenDoctorChange">
+        <van-radio class="content-box-radio-cell-group-item" name="true">是</van-radio>
+        <van-radio class="content-box-radio-cell-group-item" name="false">否</van-radio>
+      </van-radio-group>
+    </view>
+    <view class="content-box-radio-cell">
+      <text>有无不良反应</text>
+      <van-radio-group class="content-box-radio-cell-group" value="{{ adverseReactions }}" bind:change="onAdverseReactionsChange">
+        <van-radio class="content-box-radio-cell-group-item" name="true">有</van-radio>
+        <van-radio class="content-box-radio-cell-group-item" name="false">无</van-radio>
+      </van-radio-group>
+    </view>
+  </view>
+  <view class="content-box">
+    <view class="content-box-title">
+      <view>添加病历证明</view>
+      <view class="inlineView">请上传线下就诊的处方单<view style="color: #1989fa;" class="inlineView" bindtap="demoClick" data-index='1'>（查看示例1）</view>或者病历证明材料<view style="color: #1989fa;" class="inlineView" bindtap="demoClick" data-index='2'>（查看示例2）</view>。</view>
+      <view>
+        <view class="inlineView" style="color: red;">购买精神类药品、未满18岁患者必须上传以上凭证。</view>
+      </view>
+    </view>
+    <view class="content-box-imgs">
+      <view class="content-box-imgs-item" wx:for="{{tempUrls}}" wx:key="index">
+        <image class="" src="{{item}}" mode="aspectFit" lazy-load="false" data-img="{{item}}" data-imgs="{{tempUrls}}" bindtap="previewImage" />
+        <z-icon class="del-icon" type="delete-filling" size="22" data-index="{{index}}" bindtap="delImage"></z-icon>
+      </view>
+      <view class="content-box-imgs-item add-img" bindtap="chooseImage">
+        <z-icon class="add-icon" type="success" size="22"></z-icon>
+      </view>
+    </view>
+  </view>
+  <z-fixed-footer class="fixed-footer-handle">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="submitPrescription">提交</van-button>
+  </z-fixed-footer>
+</view>

@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-currency": "../currency/index",
+    "z-form-button": "../form-button/index",
+    "z-spin-image": "../spin-image/index",
+    "z-order-cell": "../order-item-goods"
+  }
+}

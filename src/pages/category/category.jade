@@ -1,0 +1,83 @@
+z-loading(
+  id="z-loading"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.category
+  z-adapter-view(
+    adapterBottom="{{false}}"
+  )    
+    //- 搜索框
+    view.search-bar-warp
+      view.bar-inner(
+        bindtap="onSearchClick"
+      )
+        z-icon(
+          type="search"
+          color="#B2B2B2"
+          size="18"
+        )
+        view.bar-inner-text 搜索商品
+
+    view.category-content
+      scroll-view.category-content-nav(
+        scroll-y
+      )
+        view.category-content-nav-menu(
+          class="{{currentIdx === index ? 'menu-active' : ''}}"
+          wx:for="{{categoryList}}"
+          wx:key="category"
+          data-index="{{index}}"
+          bindtap="onMenuClick"
+        )
+          view.name(
+            class="hover-btn"
+          ) 
+            text {{item.name}}
+        view.category-content-nav-menu(
+          bindtap="onAllClick"
+        )
+          view.name(
+            class="hover-btn"
+          ) 
+            text 全部
+      scroll-view.category-content-goods(
+        scroll-y
+      )
+        view.category-content-goods-container
+          z-spin-image(
+            wx:if="{{currentCategory.imgUrl}}"
+            z-class="category-banner"
+            src="{{currentCategory.imgUrl}}"
+            bindtap="onGoodsListByIdClick"
+          )
+          view.list
+            view.second(
+              wx:for="{{currentSubList}}"
+              wx:key="index"
+            )
+              view.second-nav(
+                data-item="{{item}}"
+                bindtap="onSubCategoryClick"
+              )
+                view.name {{item.name}}
+                view.right 
+                  更多
+                  z-icon(
+                    type="arrow-right"
+                    color="#B2B2B2"
+                    size="14"
+                  )
+              view.box
+                view.cell(
+                  wx:for="{{item.children}}"
+                  wx:key="sub_category"
+                  wx:for-item="child"
+                  data-item="{{child}}"
+                  bindtap="onSubCategoryClick"
+                )
+                  z-spin-image(
+                    src="{{child.imgUrl}}"
+                  )
+                  view.catagory-name {{child.name}}

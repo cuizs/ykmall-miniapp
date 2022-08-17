@@ -1,0 +1,25 @@
+wxs(
+  src="./tools.wxs"
+  module="tool"
+)
+view.container(
+  wx:if!="{{campaign.overTime > 0}}"
+)
+  //-活动药品
+  view.price(
+    class="cell"
+  ) ¥
+    text {{campaign.salePrice}}
+  view.stock(
+    class="cell"
+  ) 仅剩{{campaign.stock}}件
+  view.time(
+    class="cell"
+  )
+    view.time-title {{tool.getName(campaign.type)}}
+    van-count-down(
+      color="#ffffff"
+      size="24rpx"
+      format="DD天HH:mm:ss"
+      time="{{ campaign.overTime }}"
+    )

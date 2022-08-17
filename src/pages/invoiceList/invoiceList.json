@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "发票列表",
+  "usingComponents": {
+    "van-button": "@vant/weapp/button/index",
+    "z-icon": "../../components/common/icon/index",
+    "z-fixed-footer": "../../components/fixed-footer/index",
+    "van-radio": "@vant/weapp/radio/index",
+    "van-radio-group": "@vant/weapp/radio-group/index",
+    "van-icon": "@vant/weapp/icon/index"
+  }
+}

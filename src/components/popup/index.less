@@ -1,0 +1,80 @@
+@close-btn-szie: 40rpx;
+@mask-bg: rgba(0, 0, 0, 0.6);
+
+.xy-drawer {
+  &-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999999;
+    opacity: 0;
+    visibility: hidden;
+    background: @mask-bg;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+  }
+  &-mask-show {
+    opacity: 1;
+    visibility: visible;
+    right: 0;
+  }
+  &-window {
+    position: fixed;
+    background: #ffffff;
+    box-sizing: border-box;
+    z-index: 9;
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    box-sizing: border-box;
+    padding: 40rpx 0;
+    width: 100%;
+    max-height: 90vh;
+    border-top-left-radius: 30rpx;
+    border-top-right-radius: 30rpx;
+  }
+  .close {
+    width: @close-btn-szie;
+    height: @close-btn-szie;
+    position: absolute;
+    right: 40rpx;
+    top: 40rpx;
+  }
+  // 底出
+  &-window-up {
+    bottom: -100vh;
+    left: 0;
+    width: 100vw;
+  }
+  &-window-show-up {
+    bottom: 0;
+  }
+  // 上出
+  &-window-down {
+    top: -100vh;
+    left: 0;
+    width: 100vw;
+  }
+  &-window-show-down {
+    top: 0;
+  }
+  // 左出
+  &-window-left {
+    left: -100vw;
+    top: 0;
+    height: 100vh;
+  }
+  &-window-show-left {
+    left: 0;
+  }
+  // 右出
+  &-window-right {
+    right: -100vw;
+    top: 0;
+    height: 100vh;
+  }
+  &-window-show-right {
+    right: 0;
+  }
+}

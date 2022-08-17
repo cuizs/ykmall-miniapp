@@ -1,0 +1,101 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view>
+	<view class="{{inquiryStatus === 2 ? 'inquiry-status-bar-gray': 'inquiry-status-bar'}}">
+		<view class="inquiry-status-bar-text">{{inquiryStatus == 2 ? '本次问诊已完成': '问诊中'}}</view>
+		<view class="inquiry-status-bar-link" bindtap="handleService">联系客服</view>
+	</view>
+
+	<scroll-view
+	 scroll-y
+	 class="scrollView"
+	 scroll-into-view='{{toView}}'
+	 scroll-with-animation="{{scrollWithAnimation}}"
+	 enhanced="{{true}}"
+	 bounces="{{false}}"
+	 show-scrollbar="{{false}}"
+	 style='height: {{scrollHeight}};'
+	>
+		<view class="blanck-top" />
+		<view wx:if="{{inquiryList.length > 0}}">
+			<van-divider contentPosition="center">咨询开始</van-divider>
+			<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{inquiryBase.createdFormat}}</view>
+		</view>
+		<block wx:key="index" wx:for='{{inquiryList}}' >
+			<view id="msg-{{item.id}}">
+				<!-- 问诊单卡片 -->
+				<block wx:if="{{item.contentType === 'im_inquiry_init'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-inquity-detail inquiryBase="{{inquiryBase}}" data="{{item}}" />
+				</block>
+				<!-- 问诊消息双方 role_1_医生 role_0_患者 -->
+				<block wx:if="{{item.contentType === 'im_text'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-text data="{{item}}" />
+				</block>
+				<!-- 语音问诊消息双方 role_1_医生 role_0_患者 -->
+				<block wx:if="{{item.contentType === 'im_audio'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-audio data="{{item}}" index="{{index}}" playIndex="{{playAudioIndex}}"  bindclick="handlePlayAudio"/>
+				</block>
+				<!-- 图片消息-->
+				<block wx:if="{{item.contentType === 'im_img' || item.contentType === 'im_fileVideo'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-image data="{{item}}" inquiryList="{{inquiryList}}" />
+				</block>
+				<!-- 处方开具，未审核和为驳回信息 -->
+				<block wx:if="{{item.contentType === 'im_prescription_notice' && item.role === '0'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-text-help data="{{item}}" />
+				</block>
+
+				<!-- 处方开具，已审核通过信息 -->
+				<block wx:if="{{item.contentType === 'im_prescription'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-prescription
+					 inquiryBase="{{inquiryBase}}"
+					 data="{{item}}"
+					 status="{{1}}"
+					 bindclick="handlePrescriptionClick"
+					/>
+				</block>
+
+				<!-- 处方开具，已驳回信息 -->
+				<block wx:if="{{item.contentType === 'im_prescription_refusal'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-prescription inquiryBase="{{inquiryBase}}" data="{{item}}" status="{{0}}" />
+				</block>
+
+				<!-- 医生建议 -->
+				<block wx:if="{{item.contentType === 'im_advise'}}">
+					<view style="margin: 20rpx 0;text-align: center;font-size: 24rpx;font-family: PingFang SC;font-weight: 400;color: #999999;">{{item.showTime}}</view>
+					<message-advise inquiryBase="{{inquiryBase}}" data="{{item}}" status="{{1}}" bindclick="handlePrescriptionClick"/>
+				</block>
+
+			</view>
+		</block>
+		<view style="padding: 0 40rpx;" wx:if="{{inquiryBase.inquiryClosedDate && inquiryStatus == 2}}">
+			<van-divider custom-style="margin-top: 100rpx;" contentPosition="center">问诊结束：{{inquiryBase.inquiryClosedDateFormat}}</van-divider>
+		</view>
+		<!-- 占位 -->
+		<view class="blanck" />
+	</scroll-view>
+
+	<view wx:if="{{inquiryStatus != 2}}" class="{{keyboardPush?'bottomInputRoom-push' : platform == 'ios' ? 'bottomInputRoomIOS' : 'bottomInputRoomAndroid'}}" style='bottom: {{inputBottom}}'>
+		<input
+		 class="chatInput"
+		 bindconfirm='sendClick'
+		 adjust-position='{{false}}'
+		 value='{{inputVal}}'
+		 confirm-type='send'
+		 confirm-hold="{{true}}"
+		 bindinput="inputValueChange"
+		 bindfocus='focus'
+		 bindblur='blur'
+		/>
+		<image class="choosePhoto" src="../static/add.png" bindtap="onAddImageClick" />
+		<button class="submitBtn" size="mini" bindtap="sendClick">发送</button>
+		<!--<input class="chatInput" bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' confirm-hold="{{true}}" bindfocus='focus' bindblur='blur'></input>-->
+		<!--<textarea class="chatInput" bindconfirm='sendClick' adjust-position='{{false}}' value='{{inputVal}}' confirm-type='send' confirm-hold="{{true}}" bindfocus='focus' bindblur='blur'></textarea>-->
+	</view>
+</view>
+

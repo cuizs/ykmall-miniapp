@@ -1,0 +1,48 @@
+@import '../../style/page.common.css/_scroll.less';
+@import '../../style/page.common.css/common.variable.less';
+@import '../../style/page.common.css/common.mixins.less';
+
+@category-nav-weight: 195rpx;
+@font-size-active: 32rpx;
+@category-contanier-height: 100%;
+
+.category {
+  background: red;
+  &-content {
+    width: 100%;
+    box-sizing: border-box;
+    height: @category-contanier-height;
+    &-nav {
+      width: @category-nav-weight;
+      float: left;
+      height: @category-contanier-height;
+      box-sizing: border-box;
+      &-menu {
+        height: 100rpx;
+        line-height: 100rpx;
+        .word-line-ellipsis(1);
+      }
+      .menu-active {
+        font-weight: bold;
+        background: #fff;
+        color: @sub-title-color-active;
+        .name {
+          text {
+            border-left: 2px solid rgb(255, 0, 0);
+          }
+        }
+      }
+      .name {
+        text {
+          padding-left: 30rpx;
+        }
+      }
+    }
+  }
+  .category-content-empty {
+    height: 30rpx;
+  }
+  .category-content-empty-tow {
+    height: 50rpx;
+  }
+}

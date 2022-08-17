@@ -1,0 +1,39 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  image.container-banner(
+    src="../../assets/icon/customer/customer.png"
+  )
+  view.container-box
+    view.container-nav
+      image(
+        src='../../assets/icon/home/name-left.png'
+      )
+      text 权益 1
+      image(
+        src='../../assets/icon/home/name-right.png'
+      )
+    view.container-equity 商品指定商品会员价
+    view.container-nav
+      image(
+        src='../../assets/icon/home/name-left.png'
+      )
+      text 权益 2
+      image(
+        src='../../assets/icon/home/name-right.png'
+      )
+    view.container-equity(
+      wx:if!="{{couponList && couponList.length}}"
+    ) 优惠券礼包
+    view.container-list
+      z-coupon-card.item(
+        wx:for="{{couponList}}"
+        wx:key="index"
+        type!="{{index % 2}}"
+        item="{{item}}"
+      )
+  view.container-btn(
+    bindtap="onLoginClick"
+  ) 注册会员
+

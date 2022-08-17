@@ -1,0 +1,14 @@
+{
+  "name": "yunkai",
+  "version": "1.0.0",
+  "description": "小程序NPM进入外部资源插件",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xu.zhang",
+  "license": "ISC",
+  "dependencies": {
+    "@vant/weapp": "^1.6.8"
+  }
+}

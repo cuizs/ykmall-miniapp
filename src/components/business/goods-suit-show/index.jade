@@ -1,0 +1,30 @@
+
+view.group
+  view.group-name {{name}}
+  view.cell(
+    wx:for="{{group}}"
+    wx:key="index"
+  )
+    view.cell-image
+      image.image(
+        src="{{item.distributorImgUrl || item.imgUrl || '../../../assets/image/defaultImg.png' }}"
+        mode="widthFix"
+      )
+    view.cell-content
+      view.name {{item.distributorProductName || item.skuName}}
+      view.rule(
+        wx:if!="{{item.specs && item.specs[0].values}}"
+      ) {{item.specs[0].name}}：{{item.specs[0].values[0].value}}
+      view.price 
+        text.cell-price-actur(
+          style="color:#999999;"
+        ) ¥{{item.actualPrice}} 
+  view.cell-price
+    text.cell-price-actur ¥{{price}} 
+    text.cell-price-total(
+      wx:if="{{discounts}}"
+    ) ¥{{discounts}}
+    text.cell-price-num(
+      wx:if="{{quantity}}"
+    ) x{{quantity}}
+

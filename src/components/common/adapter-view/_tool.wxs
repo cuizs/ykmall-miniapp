@@ -1,0 +1,27 @@
+// 适配底部选择器
+var adapterBottomClass = function (isPhx, isAdapterIpx, isAdapterTabBar) {
+  if (!isAdapterIpx && isAdapterTabBar) {
+    return 'tab-bar-padding '
+  }
+
+  if (isPhx && isAdapterIpx && !isAdapterTabBar) {
+    return 'ipx-padding'
+  }
+
+  if (isPhx && isAdapterIpx && isAdapterTabBar) {
+    return 'ipx-and-tab-bar-padding'
+  }
+}
+
+// 适配自定义导航栏样式
+var adapterNaviBarStyle = function (isAdapterNaviBar, naviBarHeight) {
+  if (isAdapterNaviBar) {
+    return 'padding-top: ' + naviBarHeight + 'px;'
+  }
+  return ''
+}
+
+module.exports = {
+  adapterBottomClass: adapterBottomClass,
+  adapterNaviBarStyle: adapterNaviBarStyle
+}

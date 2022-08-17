@@ -1,0 +1,118 @@
+.list {
+    margin-top: 10px;
+    .list-item {
+        background-color: #fff;
+        padding: 8px 12px 8px 115px;
+        margin-bottom: 10px;
+        min-height: 120px;
+        box-sizing: border-box;
+        position: relative;
+        .list-item-image {
+            position: absolute;
+            top: 9px;
+            left: 0;
+            width: 105px;
+            height: 102px;
+        }
+        .list-detail {
+            position: relative;
+            min-height: 104px;
+            .list-detail-title {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1;
+                font-size: 14px;
+                line-height: 20px;
+                color:#353535;
+                margin-bottom: 3px;
+            }
+            .list-detail-note {
+                font-size: 12px;
+                line-height: 16px;
+                color: #EC861A;
+            }
+            .list-detail-tag {
+                font-size: 12px;
+                line-height: 18px;
+                color: #ffffff;
+                background-color: #E23F34;
+                border-radius: 8px;
+                padding: 0 8px;
+                margin-top: 3px;
+            }
+            .list-detail-price {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                vertical-align: text-bottom;
+                .list-detail-actual-price {
+                    font-size: 14px;
+                    line-height: 26px;
+                    font-weight: 300;
+                    color: #ffffff;
+                    background-color: #E23F34;
+                    border-radius: 12px;
+                    padding: 0 8px;
+                    margin-right: 5px;
+                }
+                .list-detail-original-price {
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: #B2B2B2;
+                }
+                .list-detail-actual-money-new {
+                    font-size: 10px;
+                    line-height: 20px;
+                    color: #E23F34;
+                    margin-right: 2px;
+                }
+                .list-detail-actual-price-new {
+                    font-size: 14px;
+                    line-height: 26px;
+                    color: #E23F34;
+                    margin-right: 14px;
+                }
+                .list-detail-original-price-new {
+                    font-size: 12px;
+                    line-height: 16px;
+                    color: #B2B2B2;
+                    text-decoration: line-through;
+                }
+            }
+        }
+        .list-detail-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: rgba(46, 44, 44, 0.5);
+            z-index: 2;
+            .list-detail-mask-box {
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background-color: #fff;
+                text-align: center;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                margin-top: -30px;
+                margin-left: -30px;
+                font-size: 14px;
+                line-height: 60px;
+                color: #F94E4E;
+                transform:rotate(15deg);
+                -ms-transform:rotate(15deg);
+                -moz-transform:rotate(15deg);
+                -webkit-transform:rotate(15deg);
+                -o-transform:rotate(15deg);
+            }
+        }
+    }
+}
+.title-class-n {
+    color: #353535;
+}

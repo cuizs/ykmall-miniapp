@@ -1,0 +1,42 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="tags" wx:if="{{commentTotal}}">
+    <view class="tags-item active">所有评价（{{commentTotal}}）</view>
+  </view>
+  <view wx:if="{{commentList.length == 0}}">
+    <view class="no-data">暂无商品评价</view>
+  </view>
+  <block wx:if="{{commentList}}">
+    <view class="evaluate-box" wx:for="{{commentList}}" wx:key="index">
+      <view class="evaluate-box-name">
+        <image class="evaluate-box-name-img" src="../../assets/image/user_avatar_default.png" mode="aspectFit" lazy-load="false" />
+        <view class="evaluate-box-name-top">
+          <text>匿名</text>
+          <van-rate value="{{item.starLevel}}" icon="{{likeIcon}}" void-icon="{{noLikeIcon}}"  size="24rpx" gutter="2rpx" class="evaluate-box-name-top-heart" disabled/>
+          <image wx:if="{{item.selected === true}}" class="evaluate-box-name-top-select"  src="../../assets/image/select.png"/>
+       </view>
+       <view class="evaluate-box-name-bottom">
+          {{item.createTime}}
+       </view>
+      </view>
+      <view class="evaluate-box-content">{{item.content}}</view>
+      <view class="evaluate-box-photos" wx:if="{{item.imgList.length > 0}}">
+        <view class="evaluate-box-photos-item" wx:for="{{item.imgList}}" wx:key="key" wx:for-item="imgItem">
+          <image class="" src="{{imgItem}}" mode="aspectFit" lazy-load="false" data-img="{{imgItem}}" data-imgs="{{item.imgList}}" bindtap="previewImage" />
+        </view>
+      </view>
+      <view class="goods-box-content">
+        <image class="goods-box-content-img" src="{{item.distributorImgUrl || item.imgUrl || '../../assets/image/defaultImg.png'}}" mode="aspectFit" lazy-load="false" />
+        <view class="goods-box-content-title">
+          {{item.distributorProductName || item.name}}
+        </view>
+        <view class="goods-box-content-price">
+          <view class="goods-box-content-price-money">￥</view>
+          <view class="goods-box-content-price-value">
+            {{item.isMemberPrice ? item.memberPrice : item.actualPrice}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

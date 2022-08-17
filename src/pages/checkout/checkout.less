@@ -1,0 +1,92 @@
+@import '../../style/page.common.css/common.variable.less';
+
+@view-padding-x: 50rpx;
+@text-field-height: 85rpx;
+@certain-button-height: 95rpx;
+
+.container {
+  padding: 0 @view-padding-x / 2;
+  .checkout-content {
+    padding: 40rpx @view-padding-x / 2 0 @view-padding-x / 2;
+    .checkout-title {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      &-label {
+        font-size: 32rpx;
+        font-weight: 500;
+       
+      }
+    }
+    .checkout-info {
+      padding-top: 10rpx;
+      .text-filed {
+        margin-top: 30rpx;
+        &-checkbox{
+          display: flex;
+          padding-top:30rpx;
+          .text-filed-label{
+            margin-right:14rpx;
+          }
+        }
+        &-label {
+          padding-bottom: 15rpx;
+          text{
+            color:#E23F34;
+          }
+        }
+        &-content {
+          height: @text-field-height;
+          background: rgba(15, 142, 234, 0.1);
+          padding: 0 0rpx;
+          color:#008DF9;
+          
+          &-input {
+            width: 95%;
+          }
+          &-picker {
+            width: 30%;
+            height: 100%;
+            position: relative;
+            &-input {
+              width: 80%;
+            }
+          }
+          &-arrow {
+            position: absolute;
+            width: 50rpx;
+            top: 0;
+            bottom: 0;
+            right: 0;
+          }
+        }
+        &-region{
+          background: none;
+          .text-filed-content-picker{
+            background: rgba(15, 142, 234, 0.1);
+          }
+        }
+      }
+
+      .button-content {
+        position: fixed;
+        left: @view-padding-x;
+        right: @view-padding-x;
+        bottom: 50rpx;
+        button[plain] {
+          border: none;
+        }
+        button {
+          height: @certain-button-height;
+          line-height: @certain-button-height;
+          background:#008DF9;
+          color: #fff;
+          border-radius: 43rpx;
+        }
+      }
+    }
+    .text-filed-border {
+      border: 1px solid @sub-title-color;
+    }
+  }
+}

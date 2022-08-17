@@ -1,0 +1,142 @@
+@import "../../style/xy.css.library/variable.less";
+page {
+  background: #f4f5f6;
+}
+.container{
+  min-height: 100vh;
+  padding-bottom: 280rpx;
+  box-sizing: border-box;
+
+}
+.status-box {
+  background: #E5F3FE;
+  padding: 24rpx 36rpx 24rpx 124rpx;
+  height: 128rpx;
+  position: relative;
+  margin-top: 14px;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  &-img {
+    position: absolute;
+    top: 24rpx;
+    left: 36rpx;
+    width: 40px;
+    height: 40px;
+  }
+  &-value {
+    width: 100%;
+    font-size: 14px;
+    color: #008DF9;
+    line-height: 18px;
+  }
+}
+.goods-box {
+  padding: 24rpx 36rpx;
+  background-color: #fff;
+  margin-top: 7px;
+  &-title {
+    font-size: 14px;
+    line-height: 20px;
+    color: #353535;
+    font-weight: 500;
+    margin-bottom: 38rpx;
+    position: relative;
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -36rpx;
+      width: 4px;
+      height: 20px;
+      background-color: #008DF9;
+    }
+  }
+  &-content {
+    padding-left: 92px;
+    position: relative;
+    &-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 72px;
+      height: 72px;
+    }
+    &-title {
+      font-size: 14px;
+      line-height: 20px;
+      color: #353535;
+      overflow: hidden;
+      text-overflow:ellipsis;
+      white-space: nowrap;
+    }
+    &-specs {
+      font-size: 12px;
+      line-height: 18px;
+      color: #353535;
+      font-weight: 500;
+      padding: 0 14px;
+      background: #EFEFEF;
+      border-radius: 8px;
+      margin-top: 3px;
+      display: inline-block;
+    }
+    &-price {
+      margin-top: 20px;
+      line-height: 20px;
+      &-money {
+        font-size: 10px;
+        color: #353535;
+        display: inline-block;
+      }
+      &-value {
+        font-size: 14px;
+        color: #353535;
+        display: inline-block;
+      }
+      &-num {
+        font-size: 12px;
+        color: #B2B2B2;
+        display: inline-block;
+        margin-left: 26px;
+      }
+    }
+  }
+}
+
+.box {
+  margin-top: 7px;
+  .red-money {
+    color: #E23F34;
+  }
+  .returnInfo{
+    background: white;
+    padding: 20rpx 30rpx;
+    .title {
+      font-size: 26rpx;
+      line-height: 50rpx;
+      font-weight: 600;
+    }
+    .des {
+      font-size: 24rpx;
+      line-height: 35rpx;
+    }
+  }
+}
+
+
+.fixed-footer-handle {
+  display: flex;
+
+  &-btn {
+    flex: 1;
+    width: 100%;
+    margin-left: 16px;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+@modal-z-index: 9999999;
+@title-font-size: 32rpx;
+@modal-title-color: #222;
+.bg-mask {
+  position: fixed;
+  z-index: @modal-z-index;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+.modal {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: @modal-z-index + 1;
+  left: 0;
+  right: 0;
+  &-content {
+    width: 88vw;
+    padding: 35rpx 0;
+    background: #fff;
+    text-align: center;
+    &-title {
+      font-size: @title-font-size;
+      color: @modal-title-color;
+    }
+    &-text {
+      padding-top: 30rpx;
+      color: @modal-title-color;
+      line-height: 1.5;
+    }
+    &-button-group {
+      padding-top: 20rpx;
+      display: flex;
+      justify-content: center;
+      .button-style {
+        font-size: 24rpx;
+        height: 75rpx;
+        width: 284rpx;
+        color: #fff;
+        text-align: center;
+        line-height: 70rpx;
+      }
+      .cancel-button {
+        margin-right: 20rpx;
+        background: #777;
+      }
+      .certain-button {
+        background: @modal-title-color;
+      }
+    }
+  }
+}

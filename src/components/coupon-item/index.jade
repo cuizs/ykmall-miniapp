@@ -1,0 +1,69 @@
+wxs(
+  src="./_tools.wxs"
+  module="tools"
+)
+wxs(
+  src="../../wxs/coupon.wxs"
+  module="couponTools"
+)
+
+view.container
+  view.coupon-cell(
+    style="{{tools.contentFlexStyle(reverseSuffix)}}"
+  )
+    view.coupon-cell-suffix(
+      wx:if="{{reverseSuffix}}"
+    )
+      slot
+    //- 左侧内容
+    view.coupon-cell-left
+      view.coupon-cell-left-name {{data.couponName}}
+      view.coupon-cell-left-scope(
+        bindtap="onDescClick"
+      ) {{couponTools.scope.getScopeName(data.productScope)}}
+      view.coupon-cell-left-type
+        view.type-tag(
+          wx:if="{{data.type}}"
+        ) {{couponTools.type.getTypeName(data.type)}}
+        view.type-tag(
+          class="ml"
+          wx:if="{{data.isOverlay}}"
+        ) 可叠加
+      view.coupon-cell-left-time 有效日期：{{tools.returnExpireTime(data.expireTime)}}
+    
+    //- 右侧内容
+    view.coupon-cell-right(
+      class="{{reverseSuffix ? 'coupon-cell-right-reverse' : 'coupon-cell-right-positive'}}"
+    )
+      view(
+        class="{{reverseSuffix ? 'reverse-bg' : 'positive-bg'}}"
+      )
+      view.inner(
+        class="{{reverseSuffix ? 'inner-reverse' : 'inner-positive'}}"
+      )
+        view.inner-content
+          view.amount
+            text.amount-text {{data.extAmountText.amount}}
+            text.amount-unit {{data.extAmountText.unit}}
+          view.desc(
+            wx:if="{{data.extAmountText.desc}}"
+          ) {{data.extAmountText.desc}}
+          view.btn(
+            wx:if!="{{hasBtn && btnText}}"
+            bindtap="onCouponClick"
+          ) {{btnText}}
+          view.btn(
+            bindtap="onCouponClick"
+            wx:if!="{{hasBtn && ((!btnText && type == 'pending') || (!btnText && type == 'exchanged'))}}"
+          ) {{type === 'pending' ? '立即领取' : '立即使用'}}
+
+    //- 状态图片
+    image.coupon-cell-status(
+      wx:if="{{type == 'redeemed'}}"
+      src="../../assets/icon/coupon/yishiyong.png"
+    )
+    image.coupon-cell-status(
+      wx:if="{{type == 'expired'}}"
+      src="../../assets/icon/coupon/yiguoqi.png"
+    )
+      

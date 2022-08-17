@@ -1,0 +1,117 @@
+z-register(
+  show="{{show}}"
+)
+view.container
+  z-adapter-view
+    view.group-content(
+      wx:if="{{type}}"
+    )
+      //- 正常药物
+      view.group-content-opers
+        view.group-content-opers-content
+          //- 首页
+          view.oper(
+            bindtap="onNavigateClick"
+            data-type="home"
+          )
+            image(
+              class="oper-img"
+              mode="widthFix"
+              src="../../../assets/image/good-detail/home.png"
+            )
+            view.oper-label 首页
+          //- 购物车
+          z-badge(
+            wx:if="{{type === 'cart'}}"
+            content="{{number}}"
+          )
+            view.oper(
+              bindtap="onNavigateClick"
+              data-type="cart"
+            )
+              image(
+                class="oper-img"
+                mode="widthFix"
+                src="../../../assets/image/good-detail/cart.png"
+              )
+              view.oper-label 购物车
+          //- 需求清单
+          z-badge(
+            wx:if="{{type == 'prescription'}}"
+            content="{{number}}"
+          )
+            view.oper(
+              bindtap="onNavigateClick"
+              data-type="bill"
+            )
+              image(
+                class="oper-img"
+                mode="widthFix"
+                src="../../../assets/image/good-detail/list.png"
+              )
+              view.oper-label 需求清单
+          //- 客服
+          button(
+            class="oper"
+            plain
+            bindtap="onDoctorClick"
+          )
+            image(
+              class="oper-img"
+              mode="widthFix"
+              src="../../../assets/image/good-detail/doctor.png"
+            )
+            view.oper-label 问客服
+      //- OTC 购买
+      view.group-content-buttons(
+        wx:if!="{{!soldOutStatus && type == 'cart'}}"
+      )
+        z-form-button.button(
+          text="加入购物车"
+          color="#fff"
+          class="button-cart-background"
+          bindcustomTap="onAddCartClick"
+        )
+        z-form-button.button(
+          text="立即购买"
+          color="#fff"
+          class="button-buy-background"
+          bindcustomTap="onBuyClick"
+        )
+        view.content-add-number( 
+            class="{{move ? 'move' : ''}}"
+          ) +1
+      //- 处方药购买
+      view.group-content-buttons(
+        wx:if!="{{!soldOutStatus && type == 'prescription'}}"
+      )
+        z-form-button.button(
+          text="加入需求清单"
+          color="#fff"
+          class="button-list-background"
+          bindcustomTap="onAddCartClick"
+        )
+        z-form-button.button(
+          wx:if="{{currentChannel=='hkk'}}"
+          text="立即预约药品"
+          color="#fff"
+          class="button-appointment-background"
+          bindcustomTap="onAppointmentClick"
+        )
+        view.content-add-number( 
+            class="{{move ? 'move' : ''}}"
+          ) +1
+      //- 售罄
+      view.group-content-buttons(
+        wx:if!="{{!!soldOutStatus}}"
+      )
+        z-form-button.button(
+          text="已售罄"
+          color="#fff"
+          class="button-disable-background"
+          bindcustomTap="onSoldOutClick"
+        )
+        //- view.sold-out-button(
+        //-   class="button-disable-background"
+        //- ) 已售罄
+      

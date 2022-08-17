@@ -1,0 +1,39 @@
+view(
+  class!="z-class xy-input-number {{isBorder ? 'xy-input-number-border' : ''}}"
+  style="width: {{width}}rpx"
+)
+  view.xy-input-number-desc(
+    data-val="{{val}}"
+    bindtap="onDescClick"
+  ) 
+    view.common-border(
+      wx:if="{{!custom}}"
+    ) -
+    view(
+      wx:else
+    )
+      slot(name="desc")
+  input(
+    class!="xy-input-number-value {{isBorder ? 'xy-input-number-border-value' : ''}}"
+    type="xyt"
+    value="{{val}}"
+    bindinput="onInput"
+    bindblur="onBlur"
+    min="{{min}}"
+    max="{{max}}"
+    disabled="{{disabled}}"
+  )
+  view.xy-input-number-plus(
+    class="{{plusDisable ? 'oper-disable' : ''}}"
+    data-val="{{val}}"
+    bindtap="onPlusClick"
+  ) 
+    view.common-border(
+      wx:if="{{!custom}}"
+    ) +
+    view(
+      wx:else
+    )
+      slot(name="add")
+    
+    

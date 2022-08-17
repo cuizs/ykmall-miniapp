@@ -1,0 +1,150 @@
+@import '../../style/page.common.css/common.variable.less';
+@import '../../style/page.common.css/common.mixins.less';
+
+page {
+  background: #f4f5f6;
+}
+.container {
+  padding-bottom: 200rpx;
+  margin: 0 10rpx;
+}
+.patient-content{
+  background: #ffffff;
+  padding: 24rpx 36rpx;
+  margin-top: 18rpx;
+  align-items: center;
+  border-radius: 20rpx;
+  &-title {
+    width: 100%;
+    font-size: 28rpx;
+    color: #353535;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 18rpx;
+  }
+  &-message {
+    width: 100%;
+    font-size: 28rpx;
+    color: #353535;
+    line-height: 18px;
+    &-name {
+      display: flex;
+      margin: 8rpx 0;
+      &-certification {
+        color: #E23F34;
+        border: 1px solid #E23F34;
+        font-size: 20rpx;
+        margin-left: 20rpx;
+        padding: 0 5rpx;
+      }
+    }
+    &-details{
+      display: flex;
+      &-item {
+        font-size: 26rpx;
+        margin-right: 20rpx;
+        color: #898888;
+      }
+    }
+
+  }
+
+}
+.illness-content{
+  background: #ffffff;
+  padding: 24rpx 36rpx;
+  margin-top: 18rpx;
+  align-items: center;
+  border-radius: 20rpx;
+  &-title {
+    width: 100%;
+    font-size: 28rpx;
+    color: #353535;
+    line-height: 18px;
+    font-weight: 500;
+    margin-bottom: 18rpx;
+  }
+  &-describe {
+    width: 100%;
+    font-size: 28rpx;
+    color: #898888;
+    line-height: 18px;
+    height: 200rpx;
+    padding-bottom: 20rpx;
+  }
+  &-btn {
+    width: 168rpx;
+    height: 56rpx;
+    border-radius: 28rpx;
+    font-size: 28rpx;
+    border: 1px solid #B2B2B2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #522CCC;
+    color: #fff;
+    margin-left: 222rpx;
+    margin-top: 20rpx;
+  }
+}
+
+
+.info-box {
+  margin-top: 14rpx;
+  padding: 24rpx 36rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  &-cell {
+    font-size: 24rpx;
+    line-height: 42rpx;
+    height: 42rpx;
+    margin-bottom: 20rpx;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &-label {
+      width: 130rpx;
+      text-align: justify;
+      vertical-align: top;
+
+      &::after {
+        display: inline-block;
+        width: 100%;
+        content: '';
+        height: 0;
+      }
+    }
+    &-value {
+      color: #353535;
+      font-weight: 400;
+    }
+    &-money {
+      color: #E23F34;
+      font-size: 14px;
+      font-weight: 400;
+    }
+  }
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-top: 100rpx;
+  padding: 27rpx 32rpx;
+  border-radius: 20rpx;
+  .btns {
+    display: flex;
+    justify-content: flex-end;
+    flex-flow: row nowrap;
+    .btn {
+      flex: 0 1 auto;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  z-adapter-view
+    view.content-wrapper
+      view.coupon-cell(
+        wx:for="{{couponList}}"
+        wx:key="item"
+      )
+        z-coupon-item(
+          type="{{item.status}}"
+          data="{{item}}"
+          bindcouponclick="onCouponClick"
+        )
+      view.xy-text-center(
+        class="container-empty"
+        wx:if="{{!couponList.length}}"
+      ) — 暂无优惠券 —
+      view.xy-text-center(
+        class="container-tipword"
+        wx:if!="{{couponList.length}}"
+      ) — 没有更多了 —

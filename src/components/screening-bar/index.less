@@ -1,0 +1,82 @@
+@import '../mixin.less';
+@import '../../style/page.common.css/common.variable.less';
+@import './iconfont.less';
+@screening-bar-height: 98rpx;
+@screening-cell-width: 160rpx;
+
+.container {
+  position: fixed;
+  z-index: 99;
+  top: @nomal-bar-height;
+  top: 0;
+  left: 0;
+  right: 0;
+  white-space: nowrap;
+  border-bottom: 1px solid @border-color-gray;
+  background: #fff;
+  .list {
+    width: 100%;
+    height: @screening-bar-height;
+    .cell {
+      height: 100%;
+      display: inline-block;
+      width: @screening-cell-width;
+      &-content {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: @sub-title-color;
+        &-icon {
+          font-size: 29rpx;
+          margin-right: 6rpx;
+        }
+        &-suffix {
+          padding-left: 8rpx;
+          .icon-up {
+            width: 0;
+            height: 0;
+            transform: rotate(180deg);
+            border-left: 8rpx solid transparent;
+            border-right: 8rpx solid transparent;
+          }
+          .icon-down {
+            margin-top: 5rpx;
+            width: 0;
+            height: 0;
+            border-left: 8rpx solid transparent;
+            border-right: 8rpx solid transparent;
+          }
+        }
+      }
+      &-select-font-ed {
+        color: #000;
+      }
+      &-icon-bg {
+        border-top: 8rpx solid @sub-title-color;
+      }
+      &-icon-bg-ed {
+        border-top: 8rpx solid #000;
+      }
+    }
+  }
+  &-input {
+    width: 90%;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    height: 70rpx;
+    border-radius: 36rpx;
+    padding-left: 20rpx;
+    box-sizing: border-box;
+    margin-top: 20rpx;
+    .search-input {
+      width: 85%;
+      height: 100%;
+      margin-left: 15rpx;
+      line-height: 70rpx;
+    }
+  }
+}

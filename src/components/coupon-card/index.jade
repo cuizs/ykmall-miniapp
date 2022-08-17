@@ -1,0 +1,24 @@
+wxs(
+  src="./_tool.wxs"
+  module="tool"
+)
+
+view.coupon-card(
+  class="{{type ? 'coupon-card-pink' : 'coupon-card-blue'}}"
+)
+  view.coupon-card-left
+    view.coupon-card-name {{tool.getName(item)}}
+    view.coupon-card-desc(
+      wx:if!="{{item.type === 'Full' || item.type === 'FullDiscount'}}"
+    ) {{tool.getDesc(item)}}
+  view.coupon-card-center 
+    text.coupon-card-center-text(
+      wx:for="{{9}}"
+      wx:key="index"
+    )
+  view.coupon-card-right(
+    data-item="{{item}}"
+    bindtap="onClickCard"
+  ) 领取
+
+  

@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "推广订单",
+  "usingComponents": {
+    "z-tab": "../../components/tab/index",
+    "z-icon": "../../components/common/icon/index",
+    "z-modal": "../../components/modal/index",
+    "z-tab-group": "../../components/tab-group/index",
+    "z-order-item": "../../components/order-item-promoter/index",
+    "z-form-button": "../../components/form-button/index",
+    "van-dialog": "@vant/weapp/dialog/index",
+    "z-inquiry-item": "../../components/inquiry-item/index"
+  }
+}

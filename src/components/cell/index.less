@@ -1,0 +1,55 @@
+@import '../../style/xy.css.library/variable.less';
+@import '../../style/xy.css.library/index.less';
+.xy-cell {
+  background: #fff;
+  clear: both;
+  &-border {
+    border-bottom: 1rpx solid @border-color-base;
+  }
+  &-last {
+    border: 0;
+  }
+  &-box {
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    padding-left: 40rpx;
+    padding-right: 8rpx;
+  }
+  &-short {
+    border: 0;
+    padding-left: 30rpx;
+    .xy-cell-box {
+      padding-left: 0;
+      border-bottom: 1rpx solid @border-color-base;
+    }
+  }
+  &-content {
+    align-items: center;
+    &-title {
+      padding-left: 10rpx;
+      font-size: 32rpx;
+      width: 150rpx;
+      text-align-last: justify;
+    }
+    &-desc {
+      font-size: 24rpx;
+      padding-top: 5rpx;
+      color: @subsidiary-color;
+    }
+    &-icon {
+      margin-left: 362rpx;
+      color: #DADADF;
+    }
+  }
+  &-footer {
+    align-items: center;
+    &-ft {
+      display: flex;
+      align-items: center;
+      padding-left: 10rpx;
+      font-weight: bold;
+      color: @subsidiary-color;
+    }
+  }
+}

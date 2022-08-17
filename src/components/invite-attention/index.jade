@@ -1,0 +1,18 @@
+view.container
+  van-dialog(
+    width="259"
+    use-slot
+    show="{{ show }}"
+    showConfirmButton="{{ false }}"
+  )
+    view.close 
+      van-icon(
+        name="cross"
+        size="22px"
+        color="#B2B2B2"
+        catchtap="onClose"
+      )
+    image.resgin-img( 
+      src="{{ inviteSrc }} "
+    )
+    view.resgin-tip 欢迎关注“{{channelName}}”

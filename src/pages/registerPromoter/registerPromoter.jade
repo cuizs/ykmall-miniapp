@@ -1,0 +1,52 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.binding
+  image.binding-customer(
+    mode="widthFix"
+    src="../../assets/icon/customer/customer.png"
+  )
+  view.binding-nav
+    image(
+      src='../../assets/icon/home/name-left.png'
+    )
+    text 填写申请信息
+    image(
+      src='../../assets/icon/home/name-right.png'
+    )
+  view.binding-all
+    view.binding-cell 
+      view.binding-cell-label 姓名
+      view.binding-cell-input
+        input(
+          placeholder-style="color:#cccccc"
+          placeholder="请填写"
+          data-key="name"
+          bindinput="onInput"
+        )
+    view.binding-cell 
+      view.binding-cell-label 手机号
+      view.binding-cell-input
+        input(
+          type="number"
+          placeholder-style="color:#cccccc"
+          placeholder="请填写"
+          data-key="mobile"
+          bindinput="onInput"
+        )
+    view.binding-cell 
+      view.binding-cell-label 验证码
+      view.binding-cell-input
+        input(
+          type="number"
+          placeholder-style="color:#cccccc"
+          placeholder="请填写"
+          data-key="smsCode"
+          bindinput="onInput"
+        )
+        text.binding-cell-input-text(
+          bindtap="onSendCode"
+        ) {{countDown}}
+  view.binding-submit(
+    bindtap="onSubmitClick"
+  ) 提交申请

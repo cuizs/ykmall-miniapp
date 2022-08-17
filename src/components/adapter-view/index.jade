@@ -1,0 +1,10 @@
+wxs(
+  src="./_tool.wxs"
+  module="tool"
+)
+
+view.adaper-content(
+  style="{{tool.adapterNaviBarStyle(adapterNaviBar, barHeight)}}"
+  class!="z-class {{isIpx && adapterBottom ? 'ipx-padding-bottom' : ''}}"
+)
+  slot

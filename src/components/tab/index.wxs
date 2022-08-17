@@ -1,0 +1,11 @@
+var getDomStyles = function(current, key, color) {
+  if (current === key) {
+    return 'color:' + color + ';border-bottom-color:' + color
+  } else {
+    return 'border-bottom-color:rgba(0,0,0,0)'
+  }
+}
+
+module.exports = {
+  getDomStyles: getDomStyles
+}

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "会员权益",
+  "usingComponents": {
+    "z-coupon-card": "../../components/coupon-card/index"
+  }
+}

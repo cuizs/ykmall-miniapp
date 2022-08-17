@@ -1,0 +1,101 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="cue">声明：以下信息平台仅用于开具处方，并作严格保密。</view>
+  <view class="form-box">
+    <view class="form-box-cell">
+      <view class="form-box-cell-label">用药人姓名</view>
+      <view class="form-box-cell-value">
+        <input class="form-box-cell-value-input" model:value="{{ name }}"  disabled="{{id}}" type="text" placeholder="用药人真实姓名" placeholder-class="input-placeholder" maxlength="140" bindinput="userNameChange"></input>
+      </view>
+    </view>
+    <view class="form-box-cell">
+      <view class="form-box-cell-label">身份证号码</view>
+      <view class="form-box-cell-value">
+        <input class="form-box-cell-value-input" model:value="{{ cardId }}" disabled="{{id}}" bindinput='onIDCardChange' type="idcard" placeholder="用药人身份证号码" placeholder-class="input-placeholder" maxlength="18"></input>
+      </view>
+    </view>
+    <view class="form-box-cell">
+      <view class="form-box-cell-label">手机号码</view>
+      <view class="form-box-cell-value">
+        <input class="form-box-cell-value-input" model:value="{{ mobile }}" type="number" placeholder="用于医生电话回拨或短信提醒" placeholder-class="input-placeholder" maxlength="11" bindinput="phoneChange"></input>
+      </view>
+    </view>
+    <view class="form-box-cell">
+      <view class="form-box-cell-label">所在地区</view>
+      <view class="form-box-cell-value">
+        <picker mode="multiSelector" 
+          bindchange="bindMultiPickerChange"
+          bindcolumnchange="bindMultiPickerColumnChange" 
+          value="{{multiIndex}}" 
+          range="{{multiArray}}">
+          <view class="picker" wx:if="{{province && city && area}}">
+            {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+          </view>
+          <view class="form-box-cell-value-picker" wx:else>请选择</view>
+          <z-icon class="right-icon" type="arrow-right" size="14" color="#333333"></z-icon>
+        </picker>
+      </view>
+    </view>
+    <view class="form-box-cell" wx:if="{{age < 6 && age != null}}">
+      <view class="form-box-cell-label">监护人姓名</view>
+      <view class="form-box-cell-value">
+        <input class="form-box-cell-value-input" model:value="{{ guardianName }}" type="text" placeholder="监护人姓名" placeholder-class="input-placeholder" minlength="1" maxlength="10" bindinput="guardianNameChange"></input>
+      </view>
+    </view>
+    <view class="form-box-cell" wx:if="{{age < 6 && age != null}}">
+      <view class="form-box-cell-label-guardian">监护人身份证号码</view>
+      <view class="form-box-cell-value">
+        <input class="form-box-cell-value-input" model:value="{{ guardianIdCard }}" bindinput='onGuardianCardChange' type="idcard" placeholder="监护人身份证号码" placeholder-class="input-placeholder" maxlength="18"></input>
+      </view>
+    </view>
+    <view class="form-box-cell">
+      <view class="form-box-cell-label">疾病史</view>
+      <view class="form-box-cell-value">
+        <view class="{{medicalHistories ? 'form-box-cell-value-detail' : 'form-box-cell-value-placeholder'}}" bindtap="showMedicalHistoriesPopup">
+          {{medicalHistoriesText}}
+          <z-icon class="right-icon" type="arrow-right" size="14" color="#333333"></z-icon>
+        </view>
+      </view>
+    </view>
+  </view>
+  <van-popup class="history-popup" show="{{ showMedicalHistories }}" position="bottom" round z-index="200" custom-style="height: 80%;overflow-y: scroll;">
+    <view class="history-popup-title">
+      <text>疾病史</text>
+      <z-icon class="history-popup-title-close" type="delete-filling" size="20" color="#B2B2B2" bindtap="hideMedicalHistoriesPopup"></z-icon>
+    </view>
+    <view class="form-box">
+      <view class="form-box-row" wx:for="{{medicalHistoriesConfig}}" wx:key="index">
+        <view class="form-box-cell">
+          <view class="form-box-cell-label form-box-cell-label-left">{{item.name}}</view>
+          <view class="form-box-cell-value">
+            <van-radio-group class="form-box-cell-value-group-right" value="{{ item.isNormal }}" data-type="{{item.type}}" bind:change="onMedicalNameChange">
+              <van-radio class="form-box-cell-value-group-item" wx:for="{{item.extraAttributes}}" wx:for-item="extraItem" wx:key="label" name="{{extraItem.value}}">
+                {{extraItem.label}}
+              </van-radio>
+            </van-radio-group>
+          </view>
+        </view>
+        <van-field wx:if="{{item.isNormal === 1 && !item.contents.length && item.type != 'LIVER_FUNCTION' && item.type != 'KIDNEY_FUNCTION'}}" value="{{ item.diseaseNameNew }}" clearable placeholder="请填写病史" use-button-slot data-type="{{item.type}}" bind:blur="onDiseaseNameNewBlur">
+          <van-button slot="button" size="small" round type="info" data-type="{{item.type}}" catchtap="onDiseaseNameNewClick">
+            添加
+          </van-button>
+        </van-field>
+        <view class="form-box-cell-history" wx:if="{{item.isNormal === 1 && item.type != 'LIVER_FUNCTION' && item.type != 'KIDNEY_FUNCTION'}}">
+          <view class="form-box-cell-history-tags">
+            <view wx:for="{{item.diseaseNameList}}" wx:key="*this" wx:for-item="diseaseItem" class="form-box-cell-history-tags-item {{diseaseItem.isSelect ? 'tag-active' : ''}}" data-type="{{item.type}}" data-disease="{{diseaseItem}}" bindtap="onDiseaseItemClick">
+              {{diseaseItem.name}}
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="popup-btns">
+      <van-button type="info" round block bindtap="saveMedicalHistories">完成</van-button>
+    </view>
+  </van-popup>
+  <z-fixed-footer class="fixed-footer-handle">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="saveDragUser">
+      保存并使用
+    </van-button>
+  </z-fixed-footer>
+</view>

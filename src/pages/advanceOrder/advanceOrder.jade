@@ -1,0 +1,127 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.advance-order(
+  wx:if="{{detail.recipeNumber}}"
+)
+  z-adapter-view
+    view.advance-header
+      view.advance-header-nav
+        text 我的处方
+        text 处方有效期为1天，擅自下载打印无效
+      view.advance-header-img
+        image(
+          bindtap="onImageClick"
+          data-img="{{detail.presImageUrl}}"
+          mode="widthFix"
+          src='{{detail.presImageUrl}}'
+        )
+    view.advance-list
+      view.advance-content-list
+        view.cell(
+          wx:for="{{detail.sku}}"
+          wx:key="advance"
+          data-id="{{item.serialNumber}}"
+          bindtap="onCellClick"
+        ) 
+          view.cell-img
+            z-spin-image(
+              z-class="cell-img"
+              mode="aspectFit"
+              data-id="{{item.goodsId}}"
+              src="{{item.imageUrl}}"
+            )
+          view.cell-desc
+            view.cell-desc-name {{item.name}}
+            view.cell-desc-spec(
+              wx:if="{{item.specValueArr}}"
+            )
+              view.cell-desc-spec-color(
+                class="sub-title-color"
+                wx:for="{{item.specValueArr}}"
+                wx:for-item="sku"
+                wx:for-index="skuIndex"
+                wx:key="skuIndex"
+              ) {{sku.name}}: {{sku.value}}
+            view.cell-desc-add(
+              class="sub-title-color"
+            )
+            view.cell-desc-spec-color(
+              class="sub-title-color xy-mt-15"
+              ) 数量: {{item.quantity}}
+            view.cell-desc-price
+              z-currency(
+                font-size="28"
+                unit="¥ "
+                value="{{item.memberPrice || item.actualPrice}}"
+              )
+      //- view.advance-list-other
+      //-   view.advance-list-other-item 商品合计: 
+      //-     text.advance-list-other-item-text  ¥{{moneyTotal || 0}}
+      //-   view.advance-list-other-item
+      //-     view.advance-list-other-item-view(
+      //-       bindtap="onClickpropt"
+      //-     ) 运费
+      //-       z-icon(
+      //-         color="#e3675e"
+      //-         type="prompt-fill"
+      //-         size="18"
+      //-       )
+      //-       text :
+      //-     text.advance-list-other-item-text  ¥{{freightAmount || 0}}
+      view.advance-list-money 总计：
+        text ¥{{moneyTotal}}
+    view.advance-address
+      z-icon(
+        type="coordinates-fill"
+        color="#cccccc"
+        size="28"
+      )
+      view.advance-address-content(
+        bindtap="onClickAddress"
+      )
+        view.advance-address-content-propt(
+          wx:if="{{!address}}"
+        ) 暂无收货地址，立即添加
+        view.advance-address-content-detail(
+          wx:else
+        )
+          view.advance-address-content-detail-item
+            text 收件人：{{address.userName}}
+            text.telephone {{address.telephone}}
+          view.advance-address-content-detail-item
+            text 收货地址：
+            view.address {{ address.province }}{{ address.city }}{{ address.area }}{{ address.address }}
+      z-icon(
+        type="right"
+        color="#cccccc"
+        size="22"
+      )
+  view.advance-order-bottom
+    z-adapter-view
+      //- 订单有效并有失效时间
+      view.advance-order-bottom-content(
+        wx:if!="{{ step == 0 }}"
+      )
+        view.advance-order-bottom-time 距离失效： 
+          z-countDown(
+            id="countDown"
+            class="z-countdown"
+            time="{{interval}}"
+            format= "{{format}}"
+            bindendTimeFn="endTime"
+          )
+        view.advance-order-bottom-button(
+          bindtap="onSubmitClick"
+        ) 支付配送
+      view.advance-order-bottom-view(
+        bindtap="onViewClick"
+        wx:if!="{{step === 1}}"
+      ) 查看订单详情
+      view.advance-order-bottom-view(
+        wx:if!="{{step === 2}}"
+      ) 该处方单已经失效
+      view.advance-order-bottom-view(
+        bindtap="onSubmitClick"
+        wx:if!="{{step === 0 && detail.recipeType == 'OTC'}}"
+      ) 支付配送

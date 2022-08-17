@@ -1,0 +1,14 @@
+/**
+ * 项目样式公共混合器
+ **/
+
+// 字数超过 n 行 省略号
+.word-line-ellipsis(@lineNumber: 2) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  white-space: pre-wrap;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @lineNumber;
+}

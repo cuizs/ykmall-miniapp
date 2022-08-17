@@ -1,0 +1,172 @@
+view.order-item
+  view.order-status 
+    text 订单号：{{item.orderNumber}}
+    text.order-status-text(
+      style="color:{{statusColor}}"
+    )  {{statusText}}
+  view.order-item-express-time(
+    wx:if!="{{ item.formatExpireTime && item.status === 'ToBePaid'}}"
+  )
+    view(class="order-item-express-time-title") 等待付款
+    view(class="order-item-express-time-text") 剩余
+      van-count-down(
+        time="{{ item.formatExpireTime }}"
+        format="HH时mm分"
+      )
+      订单自动关闭
+  view.item-goods(
+    class="xy-row xy-item-center"
+    data-id="{{item.id}}"
+    data-type='order'
+    bindtap="onBtnClick"
+  )
+    
+    view.item-goods-cell(
+      wx:for="{{item.orderLines}}"
+      wx:key="index"
+      wx:for-item="child"
+    )
+      image(       
+        class="item-goods-cell-img"
+        mode="aspectFit" 
+        lazy-load="false"
+        src="{{child.distributorImgUrl || child.imageUrl || '../../assets/image/defaultImg.png'}}"
+        wx:if!="{{index < 4}}"
+        binderror="onImageError"
+        data-index="{{index}}"
+      )
+      view.item-goods-cell-text(
+        wx:else
+      ) ...
+    view.item-goods-more(
+    ) 共{{item.goodsNum || 0}}件
+      z-icon(
+        type="arrow-right"
+        size="14"
+      )  
+  view.item-total 实付款：  
+    z-currency(
+        unit="¥"
+        value="{{item.amountPayable}}"
+      )
+  view.operate(
+    style="display: flex"
+  )
+    view.more(
+      wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed')}}"
+    ) 
+      text(
+        catchtap="onMoreClick"
+        data-item="{{item}}"
+      ) 更多
+      van-transition(
+        show="{{ showMoreKey === item.id }}"
+      )
+        view.tooltip(
+          wx:if="{{showMoreKey === item.id}}"
+        )
+          view.tooltip-content
+            view.btn(
+              wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && !item.invoice}}"
+              data-detail="{{item}}"
+              data-type='apply-invoice'
+              catchtap="onBtnClick"
+            )
+              text 申请发票
+            view.btn(
+              wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && (item.invoice ? item.invoice.status === 1 : false)}}"
+              data-detail="{{item}}"
+              data-type='apply-invoice'
+              catchtap="onBtnClick"
+            )
+              text 申请发票
+            view.btn(
+              wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && item.invoice && item.invoice.status === 2}}"
+              data-detail="{{item}}"
+              data-type='view-invoice'
+              catchtap="onBtnClick"
+            )
+              text 查看发票
+
+    view.btn-content(
+      wx:if="{{optShow}}"
+      class="xy-row item-center"
+    )
+    
+      //- 再次购买 
+      view.btn(
+        wx:if!="{{item.status !== 'ToBePaid'}}"
+        class="btn-pay"
+        data-detail="{{item}}"
+        data-type='buy-again'
+        bindtap="onBtnClick"
+      )
+        text 再次购买
+      //- 立即支付
+      view.btn(
+        wx:if="{{item.status === 'ToBePaid'}}"
+        class="btn-pay"
+        data-id="{{item.id}}"
+        data-type='pay'
+        bindtap="onBtnClick"
+      )
+        text 付款
+      view.btn(
+        wx:if="{{item.status === 'Paid' || item.status === 'ToBePaid'}}"
+        data-id="{{item.id}}"
+        data-type='cancel'
+        data-status="{{item.status}}"
+        bindtap="onBtnClick"
+      ) 
+        text 取消订单
+      //- 查看物流
+      view.btn(
+        wx:if="{{item.status === 'Delivered'}}"
+        data-id="{{item.id}}"
+        data-type='logistics'
+        data-number="{{item.orderNumber}}"
+        bindtap="onBtnClick"
+      ) 
+        text 查看物流
+      //- 去评价（确认收货，已部分退货、已评价）
+      view.btn(
+        wx:if!="{{(item.status === 'Completed' || item.status === 'PartialRefund') && !item.commented}}"
+        class="btn-evaluate"
+        data-id="{{item.id}}"
+        data-type='evaluate'
+        bindtap="onBtnClick"
+      ) 
+        text 去评价
+      view.btn(
+        wx:if!="{{item.status === 'Delivered'}}"
+        class="btn-evaluate"
+        data-id="{{item.id}}"
+        data-type='confirmation'
+        bindtap="onBtnClick"
+      ) 
+        text 确认收货
+      //- view.btn(
+      //-     wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && !item.invoice}}"
+      //-     data-detail="{{item}}"
+      //-     data-type='apply-invoice'
+      //-     bindtap="onBtnClick"
+      //-   )
+      //-     text 申请发票
+      //- view.btn(
+      //-     wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && (item.invoice ? item.invoice.status === 1 : false)}}"
+      //-     data-detail="{{item}}"
+      //-     data-type='apply-invoice'
+      //-     bindtap="onBtnClick"
+      //-   )
+      //-     text 申请发票
+      //- view.btn(
+      //-   wx:if!="{{item.distributorDto.id == 1 && !item.isSupportValue && (item.status === 'Paid' || item.status === 'Delivered' || item.status === 'Completed') && item.invoice && item.invoice.status === 2}}"
+      //-   data-detail="{{item}}"
+      //-   data-type='view-invoice'
+      //-   bindtap="onBtnClick"
+      //- )
+      //-   text 查看发票
+    
+
+
+  

@@ -1,0 +1,25 @@
+
+view.cell
+  view.cell-pic
+    z-spin-image(
+      z-class="pic"
+      mode="widthFix"
+      src!="{{item.imageUrl}}"
+    )
+  view.cell-info
+    view.cell-info-item 
+      text.cell-info-item-name {{item.name}}
+      z-currency(
+        style="font-weight:bold;"
+        unit="¥"
+        value="{{item.isMemberPrice ? item.memberPrice : item.actualPrice}}"
+      )
+    view.cell-info-item(
+      class="desc"
+    )  
+      text {{item.specValueText}}
+      text x{{item.quantity}}
+      
+
+
+  

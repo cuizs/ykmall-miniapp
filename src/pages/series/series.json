@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "药事云服务",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "z-form-button": "../../components/form-button/index",
+    "z-adapter-view": "../../components/adapter-view/index"
+  }
+}

@@ -1,0 +1,29 @@
+view.container
+  view.nav 宝贝评价（{{commentTotal}}）
+    text(
+      wx:if="{{commentTotal}}"
+      catchtap="onShow"
+    ) 查看全部>
+  view.content(
+    wx:if="{{commentTotal}}"
+  )
+    view.content-header 
+      image.content-header-img(
+        src="../../../assets/image/user_avatar_default.png"
+      )
+      view.content-header-main
+        view.content-header-main-top
+          text 匿名
+          van-rate.content-header-main-top-rate(
+            value="{{commentList[0].starLevel}}" 
+            icon="{{likeIcon}}" 
+            void-icon="{{noLikeIcon}}"  
+            size="22rpx" 
+            gutter="2rpx" 
+            disabled
+          )
+        view.content-header-main-bottom {{commentList[0].createTime}}
+    view.content-desc {{commentList[0].content}}
+  view.content-none(
+    wx:else
+  ) 暂无评价

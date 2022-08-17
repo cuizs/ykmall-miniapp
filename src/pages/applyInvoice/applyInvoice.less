@@ -1,0 +1,46 @@
+@import '../../style/page.common.css/common.variable.less';
+@import '../../style/page.common.css/common.mixins.less';
+
+
+@screening-height: 185rpx;
+@goods-view-space: 18rpx;
+@goods-view-width: (750rpx - @goods-view-space * 3) / 2;
+
+@input-number-size: 24rpx;
+@view-padding-x: 38rpx;
+@cart-button-height: 95rpx;
+@cart-button-padding-bottom: 50rpx;
+@view-padding-bottom: @cart-button-height + @cart-button-padding-bottom + 90rpx;
+
+page {
+  height: 100%;
+  background: #F6F6F6;
+  box-sizing: border-box;
+}
+.container {
+  min-height: 100vh;
+  padding-bottom:150rpx;
+  box-sizing: border-box;
+}
+.searchContent{
+  // width: 400rpx;
+  text-align: right;
+  .word-line-ellipsis(1);
+}
+.submit-btn-group{
+    // position: sticky;
+    // left: 0;
+    // bottom: 0;
+    width: calc(~'100% - 40rpx');
+    margin: 0 20rpx;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+    z-index: 110;
+    margin-top: 100rpx;
+    &-tip{
+      margin-bottom: 20rpx;
+      color: #999;
+      padding: 0 30rpx;
+      font-size: 24rpx;
+    }
+}

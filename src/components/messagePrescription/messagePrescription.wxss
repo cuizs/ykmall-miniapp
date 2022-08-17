@@ -1,0 +1,113 @@
+/* components/messageText.wxss */
+
+.scrollView {
+  /* padding-top: 20rpx; */
+}
+.msgItemLeft {
+  padding: 2vw 11vw 2vw 2vw;
+  display: flex;
+  justify-content: flex-start;
+}
+.msgItemRight {
+  padding: 2vw 2vw 2vw 11vw;
+  display: flex;
+  justify-content: flex-end;
+}
+/* 头像相关 */
+.userAvatar {
+  width: 11vw;
+  height: 11vw;
+}
+.userAvatarRight {
+  margin-left: 5vw;
+}
+.userAvatarLeft {
+  margin-right: 5vw;
+}
+.userAvatar image {
+  width: 11vw;
+  height: 11vw;
+  border-radius: 50%;
+}
+
+/* 文字消息 */
+.msgText {
+  font-size: 32rpx;
+  color: #444;
+  line-height: 7vw;
+  padding: 2vw 2.5vw;
+  background-color: #fff;
+  margin-left: -1.6vw;
+  border-radius: 20rpx;
+  z-index: 10;
+  --cell-group-inset-padding: 0 0;
+  --cell-background-color: transparent !important;
+}
+.serverMsgText {
+  background-color: #f7f4ff;
+}
+.serverMsgText-reject {
+  background-color: #f3f3f3;
+}
+.prescriptionCard {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #333333;
+  line-height: 1.5;
+  position: relative;
+}
+.prescriptionCard-title {
+  font-size: 30rpx;
+  font-weight: bold;
+  line-height: 74rpx;
+  border-bottom: 1px solid #f0e9ff;
+}
+.prescriptionCard-info-item {
+  display: flex;
+  padding: 15rpx 0;
+}
+.prescriptionCard-info-item-label {
+  width: 70rpx;
+  color: #999999;
+  text-align: right;
+  margin-right: 30rpx;
+}
+.prescriptionCard-info-item-value {
+  flex: 1;
+}
+.drugList-item {
+  display: flex;
+  margin-bottom: 25rpx;
+}
+.drugList-item:last-child {
+  margin-bottom: 0;
+}
+.drugList-item-left {
+  width: 350rpx;
+}
+.drugList-item-left-spec {
+  font-size: 20rpx;
+  font-weight: 400;
+  color: #999999;
+  padding: 14rpx 0;
+}
+
+.prescriptionCard-btn-wrapper {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: #999999;
+  text-align: right;
+  margin: 30rpx 0;
+}
+
+.prescriptStatus {
+  position: absolute;
+  height: 105rpx;
+  width: 105rpx;
+  top: 22rpx;
+  right: 0rpx;
+}
+.prescriptStatus image {
+  height: 105rpx;
+  width: 105rpx;
+}

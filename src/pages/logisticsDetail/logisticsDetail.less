@@ -1,0 +1,70 @@
+@import "../../style/xy.css.library/variable.less";
+page {
+  background: #f4f5f6;
+}
+
+.status-box {
+  background: #ffffff;
+  padding: 32rpx 36rpx 24rpx 124rpx;
+  // height: 128rpx;
+  position: relative;
+  margin-top: 14rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  &-img {
+    position: absolute;
+    top: 36rpx;
+    left: 36rpx;
+    width: 66rpx;
+    height: 66rpx;
+  }
+
+  &-content {
+    width: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    &-label {
+      color: #A1A1A1;
+      display: inline-block;
+      word-wrap:break-all;
+    }
+    &-value {
+      color: #3B3B3B;
+      display: inline-block;
+      word-wrap:break-all;
+    }
+  }
+}
+
+.logistics-box {
+  margin-top: 18rpx;
+  background-color: #fff;
+  &-title {
+    font-size: 14px;
+    line-height: 20px;
+    color: #353535;
+    padding: 24rpx 36rpx;
+    border-bottom: 1px solid #e5e5e5;
+    box-sizing: border-box;
+  }
+  &-content-none {
+    width: 100%;
+    font-size: 28rpx;
+    color: #353535;
+    line-height: 36rpx;
+    margin-top: 30%;
+    padding-bottom: 100px;
+    text-align: center;
+  }
+}
+
+.van-step__wrapper {
+  .van-step--process {
+    .van-step__circle-container {
+      display: none !important;
+    }
+  }
+}

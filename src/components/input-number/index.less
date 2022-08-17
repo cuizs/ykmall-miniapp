@@ -1,0 +1,60 @@
+@import '../../style/page.common.css/common.variable.less';
+@input-number-size: 28rpx;
+.xy-input-number {
+  padding: 5rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8rpx;
+  &-desc,
+  &-plus {
+    .common-border {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: @input-number-size;
+      height: @input-number-size;
+      line-height: @input-number-size;
+      padding-bottom: 4rpx;
+      padding-left: 2rpx;
+      padding-right: 2rpx;
+      border: 1px solid @primary-color;
+      text-align: center;
+      border-radius: 8rpx;
+      font-size: 30rpx;
+      color: @primary-color;
+    }
+    font-size: 24rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &-plus {
+    .common-border {
+      color: #fff;
+      font-weight: 700;
+      background: @primary-color;
+    }
+  }
+  &-value {
+    min-width: 40rpx;
+    text-align: center;
+    margin: 0 10rpx;
+  }
+  &-border {
+    border: 1px solid #eee;
+    &-value {
+      border: none;
+      border-left: 1px solid #eee;
+      border-right: 1px solid #eee;
+    }
+  }
+  .oper-disable {
+    .common-border {
+      color: #999;
+      background: #eee;
+      border: 1px solid #eee;
+      border-radius: 4rpx;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+z-register(
+  show="{{show}}"
+  bind:updateUserInfo="updateUserInfo"
+)
+view.container(
+  wx:if!="{{currentStatus == 'PENDING'}}"
+)
+  //- 优惠券列表
+  view.coupon-list(
+  )
+    view.coupon-list-item(
+    )
+      image(
+        class="coupon-list-item-bg"
+        mode="heightFix"
+        src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/OwgdNj1659060242782.png"
+      )
+      view.coupon-list-item-price-box 
+        view.coupon-list-item-price-box-money {{currentCoupon.extAmountText.unit}}
+        view.coupon-list-item-price-box-num {{currentCoupon.extAmountText.amount}}
+      view.coupon-list-item-content 
+        view.coupon-list-item-content-title {{currentCoupon.couponName}}
+        view.coupon-list-item-content-detail {{currentCoupon.extAmountText.desc}}
+        view.coupon-list-item-content-end 到期日期：{{currentCoupon.formatExpireTime}}
+      view.coupon-list-item-btn
+        view.coupon-list-item-btn-text(
+          data-id="{{currentCoupon.couponRuleId}}"
+          bindtap="onCouponClick"
+        ) {{currentCoupon.limitNumber > currentCoupon.couponList.length ? '领取' : '立即使用'}}
+
+view.end(
+  wx:if!="{{currentStatus == 'END'}}"
+)
+  image.nullImg(
+    src="http://ykyao-mall.oss-cn-shanghai.aliyuncs.com/dev/GdXwaq1648890561208.png"
+  )
+  view.text1 很抱歉，您来晚了
+  view.text2 活动已结束
+  view.btn(
+    bindtap="onMyCouponClick"
+  ) 我的优惠券

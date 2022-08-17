@@ -1,0 +1,13 @@
+<!--components/messageText.wxml-->
+	<view>
+	<view class="msgItem {{data.role == '1' ? 'msgItemLeft' : 'msgItemRight'}}" id='msg-{{data.id}}'>
+		<view class="userAvatar userAvatarLeft" wx:if="{{data.role == '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+		<view class="msgText {{data.role == '1' ? 'serverMsgText':''}}">{{data.content}}</view>
+		<view class="userAvatar userAvatarRight" wx:if="{{data.role != '1'}}">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+	</view>
+	</view>
+

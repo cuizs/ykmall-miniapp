@@ -1,0 +1,10 @@
+var getFixedStyle = function (isFixed) {
+  if (isFixed) {
+    return 'position: fixed; top: 45vh; left: 50%; margin-left: -15px;'
+  }
+  return ''
+}
+
+module.exports = {
+  getFixedStyle: getFixedStyle
+}

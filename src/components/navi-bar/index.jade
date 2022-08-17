@@ -1,0 +1,23 @@
+view.container
+  view.navi-bar(
+    style="height: {{height}}px;"
+  )
+    view.navi-bar-title(
+      style="{{naviTitleStyle}}"
+    )
+      view.text {{title}}
+    z-icon.navi-bar-back(
+      wx:if="{{!hiddenBackButton}}"
+      style="{{naviBackStyle}}"
+      size="{{naviBackSize}}"
+      type="left"
+      bindtap="onBackClick"
+    )
+    z-icon.navi-bar-oper(
+      wx:if="{{hasOperButton}}"
+      style="{{naviOperStyle}}"
+      size="{{naviBackSize}}"
+      type="homepage"
+      bindtap="onOperClick"
+    )
+    

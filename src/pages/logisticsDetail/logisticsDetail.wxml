@@ -1,0 +1,21 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="status-box">
+    <image class="status-box-img" src="../../assets/icon/logistics_icon.png" mode="aspectFit" lazy-load="false" />
+    <view class="status-box-content">
+      <view class="status-box-content-label">承运公司：</view>
+      <view class="status-box-content-value">{{expressCompany || '暂无'}}</view>
+    </view>
+    <view class="status-box-content">
+      <view class="status-box-content-label">快递单号：</view>
+      <view class="status-box-content-value">{{expressNumber || '暂无'}}</view>
+    </view>
+  </view>
+  <view class="logistics-box">
+    <view class="logistics-box-title">订单跟踪</view>
+    <view class="logistics-box-content" wx:if="{{logisticsSteps.length > 0}}">
+      <van-steps steps="{{ logisticsSteps }}" active="{{ logisticsActive }}" direction="vertical" active-color="#F16724" />
+    </view>
+    <view wx:else class="logistics-box-content-none">物流轨迹正在上传中...</view>
+  </view>
+</view>

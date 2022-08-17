@@ -1,0 +1,13 @@
+{
+  "navigationBarTitleText": "购物车",
+  "usingComponents": {
+    "z-form-button": "../../components/form-button/index",
+    "z-input-number": "../../components/input-number/index",
+    "z-goods-suit-show":"../../components/business/goods-suit-show",
+    "van-checkbox": "@vant/weapp/checkbox/index",
+    "van-divider": "@vant/weapp/divider/index",
+    "van-submit-bar": "@vant/weapp/submit-bar/index",
+    "van-icon": "@vant/weapp/icon/index",
+    "van-tag": "@vant/weapp/tag/index"
+  }
+}

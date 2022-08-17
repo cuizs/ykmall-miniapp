@@ -1,0 +1,24 @@
+<!--components/messageText.wxml-->
+<view class="msgItem msgItemRight" id='msg-{{data.id}}'>
+	<view class="msgText" style="width: 495rpx; padding: 10rpx 40rpx">
+		<view class="prescriptionCard">
+			<view class="prescriptionCard-title">
+				问诊单
+			</view>
+			<view class="prescriptionCard-info-item">
+				<view class="prescriptionCard-info-item-label">患者信息</view>
+				<view class="prescriptionCard-info-item-value">{{patientInfo}}</view>
+			</view>
+			<view class="prescriptionCard-info-item">
+				<view class="prescriptionCard-info-item-label">病情描述</view>
+				<view wx:if="{{inquiryContent.illnessDescription.length < 70}}" class="prescriptionCard-info-item-value">{{inquiryContent.illnessDescription}}</view>
+				<scroll-view wx:else class="prescriptionCard-info-item-value" scroll-y="{{true}}" style="height: 200rpx">{{inquiryContent.illnessDescription}}</scroll-view>
+			</view>
+		</view>
+		<view style="border-top: 1rpx solid #F8F6FB;font-size: 24rpx;font-weight: 400;color: #999999;text-align: center; line-height: 74rpx">互联网医院将保证您的信息安全</view>
+	</view>
+	<view class="userAvatar userAvatarRight">
+		<image src='{{data.fromHeadImageUrl}}' />
+	</view>
+</view>
+

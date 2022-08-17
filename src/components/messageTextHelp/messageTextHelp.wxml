@@ -1,0 +1,10 @@
+<!--components/messageText.wxml-->
+	<view>
+	<view class="msgItem msgItemLeft}}" id='msg-{{data.id}}'>
+		<view class="userAvatar userAvatarLeft">
+			<image src='{{data.fromHeadImageUrl}}' />
+		</view>
+		<view class="msgText serverMsgText}}">{{data.content}}</view>
+	</view>
+	</view>
+

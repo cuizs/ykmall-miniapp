@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "问诊",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "message-text": "../../components/messageText/messageText",
+    "message-audio": "../../components/messageAudio/messageAudio",
+    "message-image": "../../components/messageImage/messageImage",
+    "message-text-help": "../../components/messageTextHelp/messageTextHelp",
+    "message-inquity-detail": "../../components/messageInquityDetail/messageInquityDetail",
+    "message-prescription": "../../components/messagePrescription/messagePrescription",
+    "message-advise": "../../components/messagePrescription/messagePrescription",
+    "van-button": "@vant/weapp/button/index",
+    "van-field": "@vant/weapp/field/index",
+    "van-cell": "@vant/weapp/cell/index",
+    "van-divider": "@vant/weapp/divider/index"
+  }
+}

@@ -1,0 +1,106 @@
+/* components/messageText.wxss */
+
+.scrollView {
+  /* padding-top: 20rpx; */
+}
+.msgItemLeft {
+  padding: 2vw 11vw 2vw 2vw;
+  display: flex;
+  justify-content: flex-start;
+}
+.msgItemRight {
+  padding: 2vw 2vw 2vw 11vw;
+  display: flex;
+  justify-content: flex-end;
+}
+/* 头像相关 */
+.userAvatar {
+  width: 11vw;
+  height: 11vw;
+}
+.userAvatarRight {
+  margin-left: 5vw;
+}
+.userAvatarLeft {
+  margin-right: 5vw;
+}
+.userAvatar image {
+  width: 11vw;
+  height: 11vw;
+  border-radius: 50%;
+}
+
+/* 文字消息 */
+.msgText {
+  font-size: 32rpx;
+  color: #444;
+  line-height: 7vw;
+  padding: 2vw 2.5vw;
+  background-color: #fff;
+  margin-left: -1.6vw;
+  border-radius: 20rpx;
+  z-index: 10;
+}
+.msgText image,
+.msgText video {
+  width: 300rpx;
+  height: 300rpx;
+}
+.serverMsgText {
+  background-color: #f7f4ff;
+}
+/* 占位底部菜单 */
+.blanck {
+  width: 100%;
+  /* 必须大于inputRoom高度 */
+  height: 20vw;
+}
+
+/* 底部菜单栏 */
+.bottomInputRoom {
+  width: 100vw;
+  height: 19vw;
+  border-top: 1px solid #cdcdcd;
+  background-color: #f1f1f1;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 20;
+}
+.choosePhoto {
+  width: 7vw;
+  margin-left: 3.2vw;
+  background: red;
+  height: 7vw;
+  margin-top: -4vw;
+}
+.chatInput {
+  margin-top: -4vw;
+  width: 76vw;
+  height: 9.33vw;
+  background-color: #fff;
+  border-radius: 40rpx;
+  margin-left: 2vw;
+  padding: 0 3vw;
+  font-size: 28rpx;
+  color: #444;
+}
+.statusContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 28rpx 0;
+}
+.statusBlock {
+  width: 152rpx;
+  height: 48rpx;
+  background: #eeeeee;
+  border-radius: 6rpx;
+  color: #8e8d8d;
+  font-size: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,26 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="container">
+  <view class="cue" wx:if="{{invoiceList.length > 0 && selectPage}}">选择开票信息</view>
+  <view class="invoice-list" wx:if="{{invoiceList.length > 0}}">
+    <view class="invoice-list-item" wx:for="{{invoiceList}}" wx:key="index">
+      <view catchtap="onSelect" data-item="{{item}}">
+        <view class="invoice-list-item-title">发票抬头： {{item.title}}</view>
+        <view class="invoice-list-item-value">发票内容： {{item.remark}}</view>
+      </view>
+      <view class="invoice-list-item-type">电子发票</view>
+      <van-radio-group class="invoice-list-item-radio" value="{{ item.isDefault }}" data-id="{{item.id}}" bind:change="onDefaultChange">
+        <van-radio name="{{true}}">设为默认</van-radio>
+      </van-radio-group>
+      <view class="invoice-list-item-btn">
+        <van-icon class="icon" name="edit" size="24px" color="#008DF9" data-id="{{item.id}}" catchtap="editInvoice" />
+        <van-icon class="icon" name="delete-o" size="24px" color="#008DF9" data-id="{{item.id}}" catchtap="delInvoice" />
+      </view>
+    </view>
+  </view>
+  <view class="invoice-list-none" wx:else>- 暂无发票信息，请添加 -</view>
+  <z-fixed-footer class="fixed-footer-handle">
+    <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="addNewInvoice">
+      添加发票
+    </van-button>
+  </z-fixed-footer>
+</view>

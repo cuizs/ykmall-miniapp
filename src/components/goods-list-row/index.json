@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "z-countDown-business": "../count-down-business/index"
+  }
+}

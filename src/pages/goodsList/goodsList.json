@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "",
+  "usingComponents": {
+    "z-icon": "../../components/common/icon/index",
+    "z-screening-bar": "../../components/screening-bar/index"
+  }
+}

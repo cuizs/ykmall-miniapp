@@ -1,0 +1,60 @@
+<!--components/messageText.wxml-->
+<view class="msgItem msgItemLeft" id='msg-{{data.id}}'>
+	<view class="userAvatar userAvatarLeft">
+		<image src='{{data.fromHeadImageUrl}}' />
+	</view>
+	<view class="msgText serverMsgText {{status === 0 ? 'serverMsgText-reject' : ''}}" style="width: 495rpx;padding: 10rpx 40rpx">
+		<view class="prescriptionCard">
+			<view class="prescriptStatus">
+				<image wx:if="{{status === 0}}" src="../../pages_hkk/static/prescribe-02.png" />
+				<image wx:if="{{status === 1}}" src="../../pages_hkk/static/prescribe-01.png" />
+
+			</view>
+			<view class="prescriptionCard-title">
+				{{cardName}}
+			</view>
+			<view class="prescriptionCard-info-item">
+				<view class="prescriptionCard-info-item-label">患者</view>
+				<view class="prescriptionCard-info-item-value">{{patientInfo}}</view>
+			</view>
+			<view class="prescriptionCard-info-item">
+				<view class="prescriptionCard-info-item-label">诊断</view>
+				<view class="prescriptionCard-info-item-value">{{diseaseName}}</view>
+			</view>
+			<view class="prescriptionCard-info-item">
+				<view class="prescriptionCard-info-item-label">Rp</view>
+				<view class="prescriptionCard-info-item-value">
+					<view>共{{prescriptionDrugList.length}}种</view>
+					<view class="drugList-item" wx:for="{{prescriptionDrugList}}">
+						<view class="drugList-item-left">
+							<view>{{item.drugName}}</view>
+							<!--<view class="drugList-item-left-spec">规格：{{item.drugStandard}}</view> -->
+						</view>
+						<!-- <view>*{{item.drugNumber}}</view> -->
+					</view>
+					
+				</view>
+			</view>
+		</view>
+		<view class="prescriptionCard-btn-wrapper">
+			<van-button
+			 wx:if="{{status === 1}}"
+			 color="linear-gradient(90deg, #583cc1, #6f2fd4)"
+			 type="info"
+			 round
+			 size="small"
+				bindtap="btnClick"
+			>查看订单
+			</van-button>
+			<van-button
+			 wx:if="{{status === 0}}"
+			 color="#D0D0D0"
+			 type="info"
+			 round
+			 size="small"
+			>查看订单
+			</van-button>
+		</view>
+	</view>
+</view>
+

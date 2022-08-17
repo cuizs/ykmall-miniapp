@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "公益低价药",
+  "usingComponents": {
+    "z-goods-list-row": "../../components/goods-list-row/index"
+  }
+}

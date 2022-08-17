@@ -1,0 +1,37 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  z-adapter-view.content
+    view.list
+      view.cell(
+        wx:for="{{list}}"
+        wx:key="cell"
+        class="{{(index + 1) % 2 === 0 ? 'cell-margin-left' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCellClick"
+      ) 
+        view.cell-img-box
+          z-spin-image(
+            z-class="cell-img"
+            mode="aspectFit"
+            item="{{item}}"
+            src="{{item.distributorImgUrl || item.imgUrl || '../../assets/image/defaultImg.png'}}{{imgThumConfig.product_list_img}}"
+          )
+        view.cell-sales(
+           wx:if="{{storeChannel != 'hkk'}}"
+        )
+         销量：{{item.saleTotalStr}}
+        view.cell-name {{item.distributorProductName || item.name}}
+        view.cell-price
+          view.cell-price
+            z-member-price(
+              value="{{item}}"
+            )
+            view.coupon-tag(
+              wx:if="{{item.existCoupon}}"
+            ) 券
+    view.list-empty(
+      wx:if!="{{pageShow && list.length === 0}}"
+    )
+      text  暂无收藏 

@@ -1,0 +1,38 @@
+@import '../../style/page.common.css/_page.series.less';
+@import '../../style/page.common.css/common.variable.less';
+@button-height: 98rpx;
+
+.container {
+  width: 100vw;
+  .series-scroll {
+    padding-bottom: 100rpx;
+  }
+  .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    button {
+      color: #fff;
+      font-size: 28rpx;
+      border-radius: 0;
+      height: @button-height;
+      line-height: @button-height;
+      &:after {
+        border: none;
+      }
+      image {
+        width: 48rpx;
+        height: 48rpx;
+        margin: 0 8rpx 2rpx 0;
+      }
+    }
+    &-home {
+      background-color: @button-bg-black;
+    }
+    &-category {
+      background-color: @button-bg-gray;
+    }
+  }
+}

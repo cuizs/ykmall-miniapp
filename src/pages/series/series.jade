@@ -1,0 +1,67 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  z-adapter-view
+    //- 系列
+    view.series-scroll(
+      class="common-series"
+    )
+      view.common-series-item(
+        wx:for="{{list}}"
+        wx:key="series"
+        wx:if!="{{item.products && item.products.length}}"
+      )
+        image.common-series-item-category(
+          lazy-load
+          mode="aspectFill"
+          src="{{item.imageUrl}}"
+          data-item="{{item}}"
+          bindtap="onSeriesClick"
+        )
+        scroll-view.common-scroll(
+          class="products"
+          scroll-x="true"
+        )
+          view.common-scroll-item(
+            wx:for="{{item.products}}"
+            wx:key="product"
+            bindtap="openProductDetail"
+            data-id="{{item.id}}"
+          )
+            view.common-scroll-item-pic
+              image(
+                class="common-scroll-item-pic-loading"
+                lazy-load
+                mode="widthFix"
+                src="{{item.imgUrl}}{{imgThumConfig.product_list_img}}"
+              )
+            view.common-scroll-item-title
+              text.common-scroll-item-title-text {{item.name}}
+  //- 底部按钮
+  view.footer
+    z-adapter-view
+      view(
+        class="xy-row"
+      )
+        z-form-button.footer-home(
+          class="xy-row xy-justify-center xy-item-center xy-w-50"
+          bindcustomTap="onJumpClick"
+          data-type="home"
+        ) 
+          image(
+            mode="widthFix"
+            src="../../assets/icon/home-white.png"
+          ) 
+          text 首页
+        z-form-button.footer-category(
+          class="xy-row xy-justify-center xy-item-center xy-w-50"
+          bindcustomTap="onJumpClick"
+          data-type="category"
+        ) 
+          image(
+            mode="widthFix"
+            src="../../assets/icon/category-white.png"
+          ) 
+          text 查看所有分类
+   

@@ -1,0 +1,61 @@
+/**
+ * 时间戳转换日期 && 时间
+ */
+var getTime = function(value) {
+  var date = getDate(value)
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  var hour = date.getHours()
+  var minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+  return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes;
+}
+
+/**
+ * 时间戳转化星期
+ */
+var getWeek = function(value) {
+  var date = getDate(value)
+  var weeks = [
+    {
+      name: '周一',
+      value: 1
+    }, 
+    {
+      name: '周二', 
+      value: 2
+    }, 
+    {
+      name: '周三',
+      value: 3
+    }, 
+    {
+      name: '周四',
+      value: 4
+    }, {
+      name: '周五',
+      value: 5
+    },
+    {
+      name: '周六',
+      value: 6
+    },
+    {
+      name: '周日',
+      value: 0
+    }
+  ]
+  var weekStr = ''
+  var weekNum = date.getDay()
+  for (var i = 0; i < weeks.length; i++) {
+    if (weekNum === weeks[i].value) {
+      weekStr = weeks[i].name
+    }
+  }
+  return weekStr
+}
+
+module.exports = {
+  getTime: getTime,
+  getWeek: getWeek
+}

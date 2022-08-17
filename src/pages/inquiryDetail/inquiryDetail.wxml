@@ -1,0 +1,48 @@
+<z-customer-service pagePath="pages/inquiryDetail/inquiryDetail" pageName="问诊详情"></z-customer-service>
+<view class="container">
+  <view class="patient-content">
+    <view class="patient-content-title">用药人</view>
+    <view class="patient-content-message">
+      <view class="patient-content-message-name">
+        <view class="">{{detail.prescription.dragUser.name}}</view>
+        <view class="patient-content-message-name-certification">实名认证</view>
+      </view>
+      <view class="patient-content-message-details">
+        <view class="patient-content-message-details-item">{{detail.prescription.dragUser.gender == 1 ?"男":"女"}}</view>
+        <view class="patient-content-message-details-item">{{detail.prescription.dragUser.age}}岁</view>
+        <view class="patient-content-message-details-item">{{detail.prescription.dragUser.mobile}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="illness-content">
+    <view class="illness-content-title">病情描述</view>
+    <scroll-view class="VerticalNav nav" scroll-y scroll-with-animation  style="height:calc(100vh - ({{topHeight}}px + 50px))">
+      <view class="illness-content-describe">{{detail.prescription.diseasesInfo}}</view>
+    </scroll-view>
+    <view class="illness-content-btn" bindtap="onCheckClick">查看问诊</view>
+  </view>
+  <view class="info-box">
+    <view class="info-box-cell">
+      <view class="info-box-cell-label">问诊金额：</view>
+      <view class="info-box-cell-value">¥0.00</view>
+    </view>
+    <view class="info-box-cell">
+      <view class="info-box-cell-label">优惠金额：</view>
+      <view class="info-box-cell-value">¥0.00</view>
+    </view>
+    <view class="info-box-cell">
+      <view class="info-box-cell-label">实付金额：</view>
+      <view class="info-box-cell-money">¥0.00</view>
+    </view>
+  </view>
+  <view class="info-box">
+    <view class="info-box-cell">
+      <view class="info-box-cell-label">问诊单号：</view>
+      <view class="info-box-cell-value">{{detail.inquiryId}}</view>
+    </view>
+    <view class="info-box-cell">
+      <view class="info-box-cell-label">创建时间：</view>
+      <view class="info-box-cell-value">{{detail.createTime}}</view>
+    </view>
+  </view>
+</view>

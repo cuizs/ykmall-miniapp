@@ -1,0 +1,49 @@
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  z-screening-bar(
+    keyword="{{keyword}}"
+    inputFocus="{{inputFocus}}"
+    bindonClick="onTabClick"
+  )
+  z-adapter-view.content
+    view.list
+      view.cell(
+        wx:for="{{list}}"
+        wx:key="cell"
+        class="{{(index + 1) % 2 === 0 ? 'cell-margin-left' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCellClick"
+      ) 
+        view.cell-img-box
+          z-spin-image(
+            z-class="cell-img"
+            mode="aspectFit"
+            item="{{item}}"
+            hint-text="{{item.totalStock === 0 ? '补货中' : null }}"
+            src="{{item.distributorImgUrl || item.imgUrl || '../../assets/image/defaultImg.png'}}{{imgThumConfig.product_list_img}}"
+          )
+        image.cell-img-box-typepic(src="{{'../../assets/icon/goodsType/type_' + item.goodsType + '.png'}}", alt="") 
+        view.cell-sales(
+           wx:if="{{storeChannel != 'hkk'}}"
+        )
+         销量：{{item.saleTotalStr}}
+        view.cell-name {{item.distributorProductName || item.name}}
+        view.cell-price
+          z-member-price(
+            value="{{item}}"
+          )
+          view.coupon-tag(
+            wx:if="{{item.existCoupon}}"
+          ) 券
+    view.list-empty(
+      wx:if!="{{pageShow && list.length === 0}}"
+    )
+      z-icon( 
+        z-class="category-search-icon"
+        type="search"
+        size='{{20}}'
+        color='#000'
+      )
+      text  暂未找到相关商品 

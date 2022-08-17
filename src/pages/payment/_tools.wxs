@@ -1,0 +1,20 @@
+/**
+ * 返回过期时间
+ */
+
+var checkStatus = function (couponItem=[],item) {
+  if(!couponItem.length) return true
+  var type = couponItem[0].type
+  var itemType = item.type
+  if((type == 'Discount' || type == 'FullDiscount') && (itemType == 'CashVoucher' || itemType == 'Full') ){
+    return true
+  }
+  if((type == 'CashVoucher' || type == 'Full') && (itemType == 'itemType' || itemType == 'itemType')  ){
+    return true
+  }
+  return false
+}
+
+module.exports = {
+  checkStatus: checkStatus
+}

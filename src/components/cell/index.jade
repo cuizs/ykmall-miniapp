@@ -1,0 +1,57 @@
+view(
+  class="z-class xy-cell {{ hasBorder ? 'xy-cell-border' : ''}} {{ isLastCell ? 'xy-cell-last': '' }} {{ hasShortBorder ? 'xy-cell-short': '' }}"
+)
+  view(
+    class="xy-cell-box xy-row {{ isLastCell ? 'xy-cell-last': '' }}"
+    bindtap="onClick"
+  )
+    view(
+      class="xy-cell-content xy-row"
+    )
+      z-icon(
+        wx:if="{{suffixIcon}}"
+        type="{{suffixIcon}}"
+      )
+      view(
+        wx:else
+      )
+        slot(
+          name="icon"
+        )
+      view(
+        class="xy-cell-content-title"
+      ) {{title}}
+        view(
+          class="xy-cell-content-desc"
+          wx:if="{{subTitle}}"
+        ) {{subTitle}}
+        view(
+          wx:else
+        )
+          slot(
+            name="subTitle"
+          )
+      view.xy-cell-content-icon >
+    view(
+      class="xy-cell-footer xy-row"
+    )
+      view(
+        catchtap="navigateTo"          
+      )
+        view(
+          class="xy-cell-footer-ft"
+        )
+          slot(
+            name="desc"
+          )
+          z-icon( 
+            wx:if="{{prefixIcon!=''}}"
+            type="{{prefixIcon}}"
+            size="{{20}}"
+          )
+          view(
+            wx:else
+          )
+            slot(
+              name="footer"
+            )

@@ -1,0 +1,38 @@
+@import '../../style/xy.css.library/index.less';
+@import '../../style/page.common.css/common.variable.less';
+@content-py: 20rpx;
+@info-padding-l: 50rpx;
+@order-sub-title-color: #aaa;
+.order-item {
+  padding: 24rpx  36rpx;
+  background: #fff;
+  margin-bottom: 14rpx;
+  font-size: 28rpx;
+  color:#353535;
+  .order-status {
+    padding-bottom:20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-text{
+      color: #008DF9;
+      font-size: 28rpx;
+    }
+    &-item{
+      font-size: 25rpx;
+      color:#555454;
+      margin-bottom: 12rpx;
+    }
+  }
+  .item-total{
+    text-align: right;
+    padding:15rpx 0;
+    font-size: 28rpx;
+    color: #353535;
+    font-weight: 500;
+  }
+  .cancel{
+    color: #555454;
+    font-size: 28rpx;
+  }
+}

@@ -1,0 +1,13 @@
+@import './style/xy.css.library/index.wxss';
+@import './style/page.common.css/index.wxss';
+@import './style/common.plugin.css/index.wxss';
+@import './style/theme/index.wxss';
+
+page {
+  color: #353535;
+  height: 100%;
+  width: 100%;
+  font-size: 28rpx;
+  font-weight: 400;
+  letter-spacing: 1.5rpx;
+}

@@ -1,0 +1,51 @@
+z-register(
+  show="{{show}}"
+  bind:updateUserInfo="updateUserInfo"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container
+  view.coupon-title(
+    bindtap="onRegisterCouponClick"
+  )
+    image(
+      wx:if="{{registerCoupon.amount}}"
+      class="coupon-title-img"
+      mode="widthFix"
+      src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/aV4zl11659060075565.png"
+    )
+    view.coupon-title-content  
+      view.coupon-title-content-price 
+        text.icon {{registerCoupon.extAmountText.unit}}
+        text {{registerCoupon.extAmountText.amount}}
+      view.coupon-title-content-text 新人优惠券
+  //- 优惠券列表
+  view.coupon-list(
+    wx:if!="{{couponList.length > 0}}"
+  )
+    view.coupon-list-item(
+      wx:for="{{couponList}}"
+      wx:key="index"
+    )
+      image(
+        class="coupon-list-item-bg"
+        mode="heightFix"
+        src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/OwgdNj1659060242782.png"
+      )
+      view.coupon-list-item-price-box 
+        view.coupon-list-item-price-box-money {{item.extAmountText.unit}}
+        view.coupon-list-item-price-box-num {{item.extAmountText.amount}}
+      view.coupon-list-item-content 
+        view.coupon-list-item-content-title {{item.couponName}}
+        view.coupon-list-item-content-detail {{item.extAmountText.desc}}
+        view.coupon-list-item-content-end 到期日期：{{item.formatExpireTime}}
+      view.coupon-list-item-btn
+        view.coupon-list-item-btn-text(
+          data-id="{{item.couponRuleId}}"
+          bindtap="onCouponClick"
+        ) 领取
+  view.coupon-list-none(
+    wx:else
+  ) — 暂无优惠券 —
+  view.coupon-btn 分享给朋友

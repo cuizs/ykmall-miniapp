@@ -1,0 +1,349 @@
+@import '../../style/xy.css.library/variable.less';
+@mineCardWidth: 690rpx;
+@averSize: 140rpx;
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 50rpx;
+  box-sizing: border-box;
+  background: @page-bg;
+
+  &-header {
+    width: 100%;
+    height: 238rpx;
+    display: flex;
+    box-sizing: border-box;
+    border-radius: 0 0 15rpx 15rpx;
+
+    &-box {
+      width: 100%;
+      display: flex;
+      height: @averSize;
+      justify-content: space-between;
+
+      &-left {
+        display: flex;
+        height: @averSize;
+      }
+    }
+
+    &-aver {
+      width: @averSize;
+      height: @averSize;
+      margin-left: 29rpx;
+      margin-right: 65rpx;
+      border-radius: 8rpx;
+      // overflow: hidden;
+      border-radius: 50%;
+    }
+
+    &-contain {
+      display: flex;
+      flex-direction: column;
+      height: @averSize;
+      justify-content: center;
+      color: #fff;
+
+      &-name {
+        font-size: 42rpx;
+        font-weight: bold;
+        margin-bottom: 5rpx;
+        font-weight: 500;
+      }
+
+      &-level {
+        display: flex;
+        font-size: 25rpx;
+        justify-content: center;
+        align-items: center;
+
+        &-role {
+          width: 135rpx;
+          background-color: #D3AA77;
+          border-radius: 30rpx;
+          padding-bottom: 4rpx;
+          text-align: center;
+          margin-right: 11rpx;
+        }
+
+        &-reocomend {
+          // width: 122rpx;
+          background-color: #77D3AF;
+          border-radius: 30rpx;
+          text-align: center;
+          margin-right: 11rpx;
+          padding: 0 13rpx 4rpx 13rpx;
+        }
+
+        image {
+          width: 32rpx;
+          height: 28rpx;
+          margin-right: 10rpx;
+        }
+      }
+
+      &-recommend {
+        display: flex;
+        font-size: 28rpx;
+        align-items: center;
+        width: 150rpx;
+        background-color: #77D3AF;
+        border-radius: 30rpx;
+        justify-content: center;
+        margin: 4rpx 0;
+
+        image {
+          width: 32rpx;
+          height: 28rpx;
+          margin-right: 10rpx;
+        }
+      }
+    }
+
+    &-auth {
+      margin-right: 40rpx;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: @averSize;
+
+      &-phone {
+        color: #fff;
+        font-size: 26rpx;
+        font-weight: bold;
+        line-height: 36rpx;
+        margin: 0 0 10rpx 0;
+      }
+
+      &-btn {
+        color: #fff;
+        font-size: 32rpx;
+        font-weight: bold;
+        padding: 10rpx 20rpx;
+        border: 2rpx solid #fff;
+        border-radius: 23rpx;
+      }
+    }
+  }
+
+  &-normal {
+    height: 150rpx;
+
+    &-img {
+      width: @mineCardWidth;
+      height: 120rpx;
+      margin: 10rpx 30rpx;
+      position: relative;
+      top: -30rpx;
+      z-index: 99;
+      overflow: hidden;
+    }
+
+    &-btn {
+      position: relative;
+      background-color: #CDA16A;
+      color: #825928;
+      top: -130rpx;
+      left: 520rpx;
+      text-align: center;
+      z-index: 100;
+      width: 160rpx;
+      border-radius: 25rpx;
+      padding: 9rpx 0;
+    }
+  }
+
+  &-vip {
+    height: 150rpx;
+
+    &-img {
+      width: @mineCardWidth;
+      height: 120rpx;
+      margin: 10rpx 30rpx;
+      position: relative;
+      top: -30rpx;
+      z-index: 99;
+      overflow: hidden;
+    }
+
+    &-btn {
+      position: relative;
+      background-color: #CDA16A;
+      color: #704828;
+      top: -130rpx;
+      left: 520rpx;
+      text-align: center;
+      z-index: 100;
+      width: 160rpx;
+      border-radius: 25rpx;
+      padding: 9rpx 0;
+    }
+  }
+
+  // 订单显示
+  &-order {
+    width: @mineCardWidth;
+    overflow: hidden;
+    background: #fff;
+    border-radius: 16rpx;
+    height: 166rpx;
+    background: #ffffff;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+    margin: 10rpx auto;
+    position: relative;
+    top: -30rpx;
+    z-index: 99;
+
+    &-nav {
+      font-weight: bold;
+      height: 84rpx;
+      line-height: 84rpx;
+      font-size: 34rpx;
+      border-bottom: 1px solid #eeeeee;
+      padding-left: 20rpx;
+    }
+
+    &-contain {
+      width: 100%;
+      display: flex;
+
+      &-item {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 24rpx;
+        color: #999999;
+        margin: 30rpx 0;
+        position: relative;
+
+        image {
+          width: 64rpx;
+          height: 64rpx;
+          margin-bottom: 16rpx;
+        }
+
+        &-dot {
+          position: absolute;
+          width: 36rpx;
+          height: 36rpx;
+          line-height: 36rpx;
+          top: -5rpx;
+          right: 18rpx;
+          border-radius: 50%;
+          background: @error-color;
+          text-align: center;
+          font-size: 22rpx;
+          color: white;
+        }
+      }
+
+      &-all {
+        position: relative;
+
+        &::after {
+          position: absolute;
+          content: '';
+          left: 0;
+          top: 0;
+          width: 1px;
+          height: 60rpx;
+          background: #d8d8d8;
+        }
+      }
+    }
+  }
+
+  // 列表
+  &-list {
+    width: @mineCardWidth;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    margin: 0rpx auto;
+    border-radius: 16rpx 16rpx 0 0;
+
+    &-title {
+      height: 80rpx;
+      font-size: 36rpx;
+      line-height: 80rpx;
+      margin: 20rpx 20rpx 0 40rpx;
+      font-weight: 500;
+    }
+
+    &-customer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 1;
+      left: 0;
+      top: 0;
+    }
+
+    &-item {
+      height: 104rpx;
+      position: relative;
+
+      .digi-cell-content-title {
+        font-size: 34rpx;
+      }
+      &-image{
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    &-nomer {
+      &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        right: 20rpx;
+        width: 578rpx;
+        height: 1px;
+        background: #eeeeee;
+      }
+    }
+
+    image {
+      width: 48rpx;
+      height: 48rpx;
+      margin-right: 10rpx;
+      // margin-top: 13rpx;
+    }
+  }
+
+  .promoter-code {
+    position: absolute;
+    right: 30rpx;
+    top: 50%;
+    width: 100rpx;
+    height: 100rpx;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    image {
+      width: 60rpx;
+      height: 60rpx;
+    }
+  }
+
+  .privacy {
+    text-align: center;
+    color: #999999;
+    text-decoration: underline;
+    font-size: 30rpx;
+    width: @mineCardWidth;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    margin: 0rpx auto;
+    padding: 30rpx 0 50rpx 0;
+    border-radius: 0 0 16rpx 16rpx;
+  }
+}

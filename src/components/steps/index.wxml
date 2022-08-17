@@ -1,0 +1,44 @@
+<view class="entry-top">
+  <view class="order_process">
+    <view class="process_wrap" wx:for="{{iconList}}" wx:key="index" wx:for-index="childIndex" wx:for-item='item' style="width:{{(windowWidth/iconList.length)}}px;" data-child="{{childIndex}}">
+      <view class="process">
+        <view class="process_line_left {{childIndex==0?'line-no':''}}"></view>
+        <block wx:if="{{childIndex>iconIndex}}">
+          <view class="icon-noactive"></view>
+        </block>
+        <block wx:else>
+          <view class="process_icon" style="background:{{childIndex<=iconIndex?item.color:''}}"></view>
+        </block>
+        <view class="process_line_right {{childIndex==iconList.length-1?'line-no':''}}"></view>
+      </view>
+      <view class="process_name h4 font-b4 color-match {{childIndex<=iconIndex?'color-match':'color-gray1'}}" style="color:{{childIndex<=iconIndex?item.color:''}}">
+        {{item.text}}
+      </view>
+    </view>
+  </view>
+<view class="process_describe" wx:if="{{iconList[iconIndex].describe}}">
+    <view class="process_describe_content">
+      <view class="process_doctor" wx:if="{{iconList[iconIndex].doctor}}">
+        <view class="process_dot" wx:if="{{iconList[iconIndex].doctor}}" />
+        {{iconList[iconIndex].doctor}}
+      </view>
+      <!-- <view wx:if="{{iconList[iconIndex].buttonText == '重新问诊'}}" class="process_btn" bindtap="toCart">
+        {{iconList[iconIndex].buttonText}}>
+      </view> -->
+      <view wx:if="{{iconList[iconIndex].buttonText == '查看问诊'}}" class="process_btn" bindtap="onCheckClick">
+        {{iconList[iconIndex].buttonText}}>
+      </view>
+      <view wx:if="{{iconList[iconIndex].buttonText == '联系客服'}}" class="process_btn" bindtap="onCustomerServiceClick">
+        {{iconList[iconIndex].buttonText}}>
+      </view>
+    </view>
+    <view>{{iconList[iconIndex].describe}}</view>
+  </view>
+  <!-- <view class="process_logistics" wx:else>
+    <view class="process_logistics_detail">
+      <view style="margin-bottom:10rpx">承运公司：</view>
+      <view class="">快递单号：</view>
+    </view>
+    <view class="process_logistics_btn">查看物流</view>
+  </view> -->
+</view>

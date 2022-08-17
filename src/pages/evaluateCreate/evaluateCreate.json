@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品评价",
+  "usingComponents": {
+    "z-icon": "../../components/common/icon/index",
+    "van-rate": "@vant/weapp/rate/index",
+    "z-fixed-footer": "../../components/fixed-footer/index",
+    "van-button": "@vant/weapp/button/index"
+  }
+}

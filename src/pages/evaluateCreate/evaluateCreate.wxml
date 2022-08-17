@@ -1,0 +1,51 @@
+<z-customer-service  distinguishChannel="{{true}}"></z-customer-service>
+<view class="goods-container">
+  <block wx:if="{{editPage}}">
+    <view class="goods-box" wx:for="{{orderDetail.orderLines}}" wx:key="index" wx:for-item="goodDetail">
+      <view class="goods-box-content">
+        <image class="goods-box-content-img" src="{{goodDetail.imageUrl}}" mode="aspectFit" lazy-load="false" />
+        <view class="goods-box-content-title">
+          {{goodDetail.distributorProductName || goodDetail.name}}
+        </view>
+      </view>
+      <view class="goods-box-content-evaluation">
+        <view class="goods-box-content-evaluation-title">评价</view>
+        <van-rate value="{{ rateValue }}" icon="{{likeIcon}}" void-icon="{{noLikeIcon}}" data-id="{{goodDetail.id}}" bind:change="onRateChange" />
+        <view class="goods-box-content-evaluation-description">{{description}}</view>
+      </view>
+      <textarea class="goods-box-textarea" data-id="{{goodDetail.id}}" bindinput="bindTextAreaBlur" auto-height placeholder-class="input-placeholder" placeholder="请输入您的评价..." />
+      <block wx:for="{{postData}}" wx:key="index" wx:for-item="postItem">
+        <view class="goods-box-imgs" wx:if="{{postItem.id == goodDetail.id}}">
+          <view class="goods-box-imgs-item" wx:for="{{postItem.imgList}}" wx:key="index" wx:for-item="img">
+            <image class="image" src="{{img}}" mode="aspectFit" lazy-load="false" data-img="{{img}}" data-imgs="{{postItem.imgList}}" bindtap="previewImage" />
+            <z-icon class="del-icon" type="delete-filling" size="22" data-id="{{goodDetail.id}}" data-index="{{index}}" bindtap="delImage"></z-icon>
+          </view>
+          <view class="goods-box-imgs-item add-img" wx:if="{{postItem.imgList.length < 5}}" data-id="{{goodDetail.id}}" bindtap="chooseImage">
+            <!-- <z-icon class="add-icon" type="success" size="22"></z-icon> -->
+            <image src="../../assets/icon/evaluation/add-image.png" alt="" class="img" />
+            <view class="text">添加图片</view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <z-fixed-footer class="fixed-footer-handle">
+      <van-button class="fixed-footer-handle-btn" type="info" round block bindtap="submit">
+        发布
+      </van-button>
+    </z-fixed-footer>
+  </block>
+  <block wx:else>
+    <view class="success-box">
+      <image class="success-box-img" src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/89Fml31659319783459.png" mode="aspectFit" lazy-load="false" />
+      <view class="success-box-title">评价成功</view>
+      <view class="success-box-btns">
+        <van-button class="success-box-btns-btn" type="info" round block plain bindtap="goHome">
+          返回商城首页
+        </van-button>
+        <van-button class="success-box-btns-btn" type="info" round block plain bindtap="goEvaluateDetail">
+          查看评价
+        </van-button>
+      </view>
+    </view>
+  </block>
+</view>

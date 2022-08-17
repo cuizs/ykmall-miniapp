@@ -1,0 +1,223 @@
+
+z-register(
+  show="{{show}}"
+)
+z-customer-service(
+  distinguishChannel="{{true}}"
+)
+view.container(
+  style!="background:{{pageShow ? '#ffffff' : ''}}"
+)
+  view
+    view.cart-content(
+      wx:if!="{{!!cartList.length}}"
+    )
+      //- 商品列表
+      view.cart-content-list(
+        wx:if!="{{!!cartList.length}}"
+      )
+        //- 商店名称
+        view.store()
+          //- 商品列表
+          view.cell(
+            class!="{{(item.stock === 0 || item.status === 'Disable') ? 'sold-out' : ''}}"
+            wx:for="{{cartList}}"
+            wx:key="index"
+          )
+            view.cell-distributorGroupName(
+              wx:if="{{item.distributorGroupName}}"
+            )
+              view
+                van-checkbox(
+                  data-item="{{item}}"
+                  data-index="{{index}}"
+                  bind:change="onGoodsGroupCheckClick"
+                  shape="round"
+                  value!="{{ !!item.allChecked }}"
+                ) 商品仓{{item.distributorGroupIndex + 1}}
+            //- view.distributorGroupLine(
+            //-   style="background:#f6f6f6;height: 10rpx;margin-top: 20rpx;"
+            //-   wx:if="{{item.distributorGroupName}}"
+            //- )
+            //- 非组合商品
+            view.cell-item(
+              wx:if!="{{item.isGroup != 1}}"
+            )
+              view.cell-check
+                van-checkbox(
+                  disabled!="{{item.stock === 0 || item.status === 'Disable'}}"
+                  data-item="{{item}}"
+                  data-index="{{index}}"
+                  bind:change="onGoodsCheckClick"
+                  shape="round "
+                  value!="{{ !!item.checked }}"
+                )
+              image.sold-out-img(
+                wx:if!="{{item.stock === 0 || item.status === 'Disable'}}"
+                mode="widthFix"
+                src='../../assets/image/sold_out.png'
+              )
+              view.cell-img
+                image(
+                  bindtap='onCellClick'
+                  data-disabled="{{item.stock === 0 || item.status === 'Disable'}}"
+                  data-id="{{item.spuId}}"
+                  mode="widthFix"
+                  src="{{item.distributorImgUrl || item.imageUrl || '../../assets/image/defaultImg.png'}}"
+                )
+              view.cell-desc
+                view.cell-desc-name {{item.distributorProductName || item.name}}
+                view.cell-desc-spec(
+                  wx:if="{{item.specValueArr}}"
+                )
+                  view.cell-desc-spec-color(
+                    class="sub-title-color"
+                    wx:for="{{item.specValueArr}}"
+                    wx:for-item="sku"
+                    wx:key='sku'
+                  ) {{sku.name}}: {{sku.value}}
+                view.cell-desc-spec(
+                  wx:else
+                  class="sub-title-color"
+                ) {{item.specValue}}
+
+                view.cell-desc-price
+                  z-member-price(
+                    value="{{item}}"
+                  )
+                  view.cell-desc-add(
+                    class="sub-title-color"
+                  )
+                    z-input-number(
+                      z-class="cell-input-number"
+                      width="100"
+                      value="{{item.quantity}}"
+                      min="{{1}}"
+                      data-item="{{item}}"
+                      bindonChange="onNumberChange"
+                      disabled="{{item.stock===0 || item.status==='Disable'}}"
+                    )
+              view.cell-desc-price-trash-box(
+                data-id="{{item.id}}"
+                bindtap="onDeleteClick"
+                style="right:40rpx;top:{{item.top}}rpx"
+              )
+                van-icon(
+                  name="close"
+                  size="20px"
+                  color="#B2B2B2"
+                )
+            //- 组合商品
+            view.cell-group(
+              wx:else
+            ) 
+              view.cell-check
+                van-checkbox(
+                  disabled!="{{item.stock === 0 || item.status === 'Disable'}}"
+                  data-item="{{item}}"
+                  data-index="{{index}}"
+                  bind:change="onGoodsCheckClick"
+                  shape="round"
+                  value!="{{ !!item.checked }}"
+                )
+              view.cell-group-content
+                z-goods-suit-show(
+                  group="{{item.groupDetail}}"
+                  name="{{item.skuName}}"
+                  price="{{item.actualPrice}}"
+                  discounts="{{item.marketPrice}}"
+                )
+                view.cell-group-add(
+                  class="sub-title-color"
+                  style ="right:60rpx;"
+                )
+                  z-input-number(
+                    z-class="cell-input-number"
+                    width="100"
+                    value="{{item.quantity}}"
+                    min="1"
+                    max='{{item.maxNum}}'
+                    data-item="{{item}}"
+                    bindonChange="onNumberChange"
+                    disabled="{{item.stock===0 || item.status==='Disable'}}"
+                  )
+              view.cell-desc-price-trash-box(
+                data-id="{{item.id}}"
+                bindtap="onDeleteClick"
+                style ="right:40rpx;"
+              )
+                van-icon(
+                  name="close"
+                  size="20px"
+                  color="#B2B2B2"
+                )
+    view.cart-empty(
+      wx:if!="{{pageShow && !cartList.length}}"
+    )
+      image(
+        mode="widthFix"
+        src="https://ykyao-mall.oss-cn-shanghai.aliyuncs.com/prod/n0kbtp1659319694301.png"
+      )
+      view.empty-text 空空如也～
+      view.cart-empty-btn
+        view.cart-button(
+          class="xy-f-32"
+          bindtap="onGoBuyClick"
+        ) 马上去选
+        view.cart-button(
+          class="xy-f-32"
+          bindtap="onScClick"
+        ) 查看收藏
+      //- 商品推荐
+    view.commom(
+      wx:if!="{{!!carCommom.length}}"
+    ) 为您推荐
+    view.list(
+      wx:if!="{{!!carCommom.length}}"
+    )
+      view.cell(
+        wx:for="{{carCommom}}"
+        wx:key="cell"
+        class="{{(index + 1) % 2 === 0 ? 'cell-margin-left' : ''}}"
+        disabled!="{{true}}"
+        data-id="{{item.product.id}}"
+        bindtap="onCellClick"
+      ) 
+        view.cell-img-box
+          z-spin-image(
+            z-class="cell-img"
+            mode="aspectFit"
+            item="{{item.product.product}}"
+            hint-text="{{item.product.totalStock === 0 ? '补货中' : null }}"
+            src="{{item.product.distributorImgUrl || item.product.imgUrl || '../../assets/image/defaultImg.png'}}{{imgThumConfig.product_list_img}}"
+          )
+        view.cell-sales(
+                wx:if="{{storeChannel != 'hkk'}}"
+        )
+          销量：{{item.product.saleTotalStr}}
+        view.cell-name {{item.product.distributorProductName || item.product.name}}
+        view.cell-price
+          z-member-price(
+            value="{{item.product}}"
+          )
+          view.coupon-tag(
+            wx:if="{{item.product.existCoupon}}"
+          ) 券
+  van-submit-bar(
+    wx:if!="{{!!cartList.length}}"
+    button-class="submit-bar-btn"
+    safe-area-inset-bottom="{{false}}"
+    price="{{ totalPrice * 100 }}"
+    button-text="去结算"
+    bind:submit="onSubmitClick"
+  )
+    //- view(
+    //-   slot="tip"
+    //- ) 优惠减,
+    //-   text() 优惠明细
+
+    //- van-checkbox(
+    //-   bind:change="onSelectAllCheckClick"
+    //-   shape="round"
+    //-   value!="{{ allSelect }}"
+    //- ) 全选

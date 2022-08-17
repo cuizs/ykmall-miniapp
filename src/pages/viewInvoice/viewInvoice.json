@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "查看发票",
+  "usingComponents": {
+    "van-cell": "@vant/weapp/cell/index",
+    "van-cell-group": "@vant/weapp/cell-group/index",
+    "van-button": "@vant/weapp/button/index",
+    "z-fixed-footer": "../../components/fixed-footer/index"
+
+  }
+}
